@@ -56,12 +56,12 @@ Both tracks are designed to be followed independently. The bootcamp syllabus wea
 ### Tier 3: Professional Practices
 | Topic | Format | Status |
 |-------|--------|--------|
-| Build Pipelines | Markdown (concept focus, light on tooling) | Not started |
-| O11y: Understanding Your Code | Markdown (logs, metrics, Grafana basics) | Not started |
-| Iterative Design | Markdown + case studies | Not started |
-| Timeless Principles | Markdown (KISS, DRY, GIGO, YAGNI, etc.) | Not started |
-| Communication | Markdown (READMEs, comments, commit messages) | Not started |
-| Ethics in Software | Discussion guide | Not started |
+| Build Pipelines | Markdown (concept focus, light on tooling) | **Draft complete** |
+| O11y: Understanding Your Code | Markdown (logs, metrics, Grafana basics) | **Draft complete** |
+| Iterative Design | Markdown + case studies | **Draft complete** |
+| Timeless Principles | Markdown (KISS, DRY, GIGO, YAGNI, etc.) | **Draft complete** |
+| Communication | Markdown (READMEs, comments, commit messages) | **Draft complete** |
+| Ethics in Software | Discussion guide | **Draft complete** |
 
 ## Topic Details
 
@@ -123,10 +123,11 @@ These topics are deferred or handled through mentorship and inquiry-based learni
 ### Near-term
 - [x] Complete Tier 1 modules
 - [x] Draft Tier 2 content
+- [x] Draft Tier 3 content
 - [ ] Design hands-on exercises for each module
 
 ### Later
-- [ ] Interactive presentations (HTML/TS)
+- [x] Interactive presentations (diffs-demo.html, branches-demo.html)
 - [ ] Assessment/quiz materials
 - [ ] Instructor notes and facilitation guides
 
@@ -137,9 +138,9 @@ These topics are deferred or handled through mentorship and inquiry-based learni
    - Could use pseudocode or multiple languages
    - TypeScript aligns with web-focused projects
 
-2. **Ethics module approach?**
-   - Case study discussion vs. structured curriculum
-   - Topics: AI bias, environmental impact, privacy, accessibility
+2. ~~**Ethics module approach?**~~ ✓ Resolved
+   - Discussion guide format with case studies and role-play suggestions
+   - Covers: bias, privacy, accessibility, dark patterns, environment, AI attribution
 
 3. **Assessment strategy?**
    - Completion-based (did they do it?)

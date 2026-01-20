@@ -157,3 +157,9 @@ i committed that.  before we proceed, do we need anything in these sections rega
 ## 2026-01-20T23:17:57Z
 
 Sure I like the idea of a Module 0.  It also introduces 0-based indexing ;) 
+
+---
+
+## 2026-01-20T23:24:48Z
+
+that was really nice, let's advance to tier 3.
