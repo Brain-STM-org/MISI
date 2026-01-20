@@ -65,3 +65,39 @@ create an index.html page in docs/    . it is the main entry point for our GitHu
 ## 2026-01-20T16:18:34Z
 
 i am writing this again i see there was a "UserPromptSubmit hook error" can you help me understand that?  is it because there's quotes in the prompt?
+
+---
+
+## 2026-01-20T20:34:22Z
+
+we moving on to other work.  in the background, I am working the social angle with schools and seed students.  LLM and I now will develop some of the software engineering curriculum framework.  I have created a folder called course/swe (for SoftWare Engineering).  You can freely work in there making scoped markdown files  and live presentations with HTML and Typescript.
+
+as far as audience, these will be high school seniors, with strong STEM skills; i am not sure if we will require programming experience, our mentors will be skilled software engineers.   I think we are focusing on computing and data analysis oriented projects.  but even if it is for science or even business and marketing, we can establish and teach software engineering principles that can be applied to any project.   
+
+These include, high-level concepts of source code, diffs, revision control, continuous integration, debugging techniques, observability, testing, iterative design, reusability, ethics.   
+
+While it might seem weird for a marketer to need revision control, persistence and checkpointing are critical both for evolving projects with LLMs as well as humans; lawyers and others use revision control (red-line).   
+
+This coursework will be worked on over the first few days and will consistently include hands-on aspects, including introduction to GitHub and creating accounts, etc.
+
+create a plan in course/swe/PLAN.md and a folder scoped README.md and AGENTS.md.   one of the first items is reviewing the course inclusion list, which you may do now as well
+
+---
+
+## 2026-01-20T21:24:34Z
+
+That was a great review.  
+
+I agree reframing CI as build pipelines and that focus.   
+
+Keep observability section, but we will immediately hit your subtitle, o11ly is a cute short, maybe "o11y: understanding what the code is doing".  we can also cover logs and metrics; we will be running web services online.  LLMs can prepare grafana for us so easy now 
+
+Yeah Resuability is too abstract, but all the acronyms are great KISS DRY GIGO  etc  so maybe we spend time focusing all that and how those ideas transcend the underlying technology
+
+I want to cover LLMs and using them effectively as a parallel expansive curriculum.  In the bootcamp form,  that will be woven in with this in parallel appropriately and we will have a syllabus which balances that. (but different content tracks that can be followed independently, especially it will be useful for SWEs new to LLMs)
+
+We can ignore complicated Git and generally can get help or mentorship or even LLMs.  And design patterns will be teased out through inquiry-based learning
+
+Yes "communication" and "dependencies" are both very important.
+
+Update the PLAN.md
