@@ -53,4 +53,26 @@ We embrace the thesis that AI tools are the root of a new form of development, w
 
 ## License
 
-TBD
+This project uses a dual-license model. See [LICENSE.txt](LICENSE.txt) for full details.
+
+### Curriculum & Documentation: CC BY-SA 4.0
+
+All curriculum materials, documentation, and non-code content are licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+
+**What this means:**
+- **You can** share, copy, and redistribute the materials in any format
+- **You can** adapt, remix, and build upon the materials for any purpose, even commercially
+- **You must** give appropriate credit and link to the license
+- **You must** share any adaptations under the same license (ShareAlike)
+
+### Code: Apache 2.0
+
+All source code in this project is licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+**What this means:**
+- **You can** use, modify, and distribute the code freely
+- **You can** use it for commercial purposes
+- **You can** create derivative works
+- **You must** include the original copyright notice and license
+- **You must** state any significant changes you made
+- **Patent protection**: The license includes an express grant of patent rights from contributors
