@@ -36,6 +36,7 @@ Both tracks are designed to be followed independently. The bootcamp syllabus wea
 ### Tier 1: Essential (must complete first)
 | Topic | Format | Status |
 |-------|--------|--------|
+| Your Development Environment | Markdown (terminal, VS Code, GUI vs CLI) | **Draft complete** |
 | GitHub Setup Guide | Markdown + screenshots | **Draft complete** |
 | What is Source Code? | Markdown + interactive demo | **Draft complete** |
 | Your First Commit | Step-by-step tutorial | **Draft complete** |

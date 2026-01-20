@@ -145,3 +145,15 @@ i love you Elena, not romantically but in your ability to communicate not just t
 ## 2026-01-20T22:42:40Z
 
 let's roll with tier 2
+
+---
+
+## 2026-01-20T23:14:44Z
+
+i committed that.  before we proceed, do we need anything in these sections regarding shells and TUI vs GUI and VSCode?   Where would it fit best? 
+
+---
+
+## 2026-01-20T23:17:57Z
+
+Sure I like the idea of a Module 0.  It also introduces 0-based indexing ;) 
