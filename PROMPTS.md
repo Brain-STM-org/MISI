@@ -139,3 +139,9 @@ you have well understood the student cohort.  they are all "let's build" and hav
 ## 2026-01-20T21:46:15Z
 
 i love you Elena, not romantically but in your ability to communicate not just to students, but to me.   I have commited your drafts and please continue with "Your First Commit"
+
+---
+
+## 2026-01-20T22:42:40Z
+
+let's roll with tier 2

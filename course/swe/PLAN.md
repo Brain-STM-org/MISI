@@ -44,13 +44,13 @@ Both tracks are designed to be followed independently. The bootcamp syllabus wea
 ### Tier 2: Core Concepts
 | Topic | Format | Status |
 |-------|--------|--------|
-| Revision Control Concepts | Markdown | Not started |
-| Branches and Merging | Interactive visualization | Not started |
-| Pull Requests | Tutorial + exercise | Not started |
-| Dependencies & Packages | Markdown (npm, pip, why they exist) | Not started |
-| Testing Fundamentals | Markdown + examples | Not started |
-| Debugging Techniques | Markdown + exercises | Not started |
-| Reading Error Messages | Markdown + exercises | Not started |
+| Revision Control Concepts | *(covered in Tier 1 modules)* | **Complete** |
+| Branches and Merging | Interactive visualization | **Draft complete** |
+| Pull Requests | Tutorial + exercise | **Draft complete** |
+| Dependencies & Packages | Markdown (npm, pip, why they exist) | **Draft complete** |
+| Testing Fundamentals | Markdown + examples | **Draft complete** |
+| Debugging Techniques | Markdown + exercises | **Draft complete** |
+| Reading Error Messages | *(folded into Debugging)* | **Draft complete** |
 
 ### Tier 3: Professional Practices
 | Topic | Format | Status |
@@ -121,7 +121,7 @@ These topics are deferred or handled through mentorship and inquiry-based learni
 
 ### Near-term
 - [x] Complete Tier 1 modules
-- [ ] Draft Tier 2 content
+- [x] Draft Tier 2 content
 - [ ] Design hands-on exercises for each module
 
 ### Later

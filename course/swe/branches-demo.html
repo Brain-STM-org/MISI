@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branches - Interactive Visualization</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --main-color: #58a6ff;
+            --feature-color: #3fb950;
+            --hotfix-color: #f85149;
+            --merge-color: #a371f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 0.625rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            border-color: var(--main-color);
+            background: #1f2428;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        button .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        button .dot.main { background: var(--main-color); }
+        button .dot.feature { background: var(--feature-color); }
+        button .dot.hotfix { background: var(--hotfix-color); }
+
+        .canvas-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.main { background: var(--main-color); }
+        .legend-dot.feature { background: var(--feature-color); }
+        .legend-dot.hotfix { background: var(--hotfix-color); }
+        .legend-dot.merge { background: var(--merge-color); }
+
+        .info-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-panel h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--main-color);
+        }
+
+        .info-panel p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-panel code {
+            background: var(--bg);
+            padding: 0.125rem 0.375rem;
+            border-radius: 3px;
+            font-family: 'SF Mono', monospace;
+            font-size: 0.85em;
+        }
+
+        .commit-log {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'SF Mono', monospace;
+            font-size: 0.8rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .commit-log .entry {
+            padding: 0.25rem 0;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .commit-log .hash {
+            color: var(--text-muted);
+        }
+
+        .commit-log .branch {
+            padding: 0.125rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+        }
+
+        .commit-log .branch.main { background: var(--main-color); color: #000; }
+        .commit-log .branch.feature { background: var(--feature-color); color: #000; }
+        .commit-log .branch.hotfix { background: var(--hotfix-color); color: #000; }
+
+        .reset-btn {
+            background: transparent;
+            border-color: var(--hotfix-color);
+            color: var(--hotfix-color);
+        }
+
+        .reset-btn:hover {
+            background: rgba(248, 81, 73, 0.1);
+            border-color: var(--hotfix-color);
+        }
+
+        .scenario-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .scenario-btn.active {
+            background: var(--main-color);
+            border-color: var(--main-color);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Branches Visualized</h1>
+            <p class="subtitle">See how parallel timelines diverge and merge</p>
+        </header>
+
+        <div class="scenario-buttons">
+            <button class="scenario-btn active" onclick="loadScenario('interactive')">Interactive</button>
+            <button class="scenario-btn" onclick="loadScenario('feature')">Feature Branch</button>
+            <button class="scenario-btn" onclick="loadScenario('parallel')">Parallel Work</button>
+            <button class="scenario-btn" onclick="loadScenario('conflict')">Merge Conflict</button>
+        </div>
+
+        <div class="controls" id="controls">
+            <button onclick="commit('main')">
+                <span class="dot main"></span> Commit to main
+            </button>
+            <button onclick="createBranch('feature')" id="btn-create-feature">
+                <span class="dot feature"></span> Create feature branch
+            </button>
+            <button onclick="commit('feature')" id="btn-commit-feature" disabled>
+                <span class="dot feature"></span> Commit to feature
+            </button>
+            <button onclick="merge('feature', 'main')" id="btn-merge-feature" disabled>
+                Merge feature → main
+            </button>
+            <button class="reset-btn" onclick="reset()">Reset</button>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot main"></div>
+                <span>main branch</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot feature"></div>
+                <span>feature branch</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot merge"></div>
+                <span>merge commit</span>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="graph" width="900" height="200"></canvas>
+        </div>
+
+        <div class="info-panel" id="info">
+            <h3>Getting Started</h3>
+            <p>Click the buttons above to simulate Git operations. Watch how the branch graph changes with each action.</p>
+            <p>Try creating a feature branch, making commits on both branches, then merging.</p>
+        </div>
+
+        <div class="commit-log" id="log"></div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('graph');
+        const ctx = canvas.getContext('2d');
+
+        const colors = {
+            main: '#58a6ff',
+            feature: '#3fb950',
+            hotfix: '#f85149',
+            merge: '#a371f7',
+            line: '#30363d',
+            text: '#8b949e'
+        };
+
+        let state = {
+            commits: [],
+            branches: {
+                main: null,
+                feature: null
+            },
+            nextId: 1
+        };
+
+        function init() {
+            // Initial commit
+            const initial = createCommit('main', 'Initial commit', null);
+            state.branches.main = initial;
+            render();
+            log('Created initial commit on main');
+        }
+
+        function createCommit(branch, message, parent) {
+            const commit = {
+                id: state.nextId++,
+                hash: Math.random().toString(36).substr(2, 7),
+                branch: branch,
+                message: message,
+                parent: parent,
+                parents: parent ? [parent] : [],
+                x: 0,
+                y: 0,
+                isMerge: false
+            };
+            state.commits.push(commit);
+            return commit;
+        }
+
+        function commit(branch) {
+            if (branch === 'main') {
+                const parent = state.branches.main;
+                const newCommit = createCommit('main', `Update on main`, parent);
+                state.branches.main = newCommit;
+                log(`Committed to main: ${newCommit.hash}`);
+            } else if (branch === 'feature') {
+                const parent = state.branches.feature;
+                const newCommit = createCommit('feature', `Feature work`, parent);
+                state.branches.feature = newCommit;
+                log(`Committed to feature: ${newCommit.hash}`);
+            }
+            updateButtons();
+            render();
+        }
+
+        function createBranch(name) {
+            if (name === 'feature' && !state.branches.feature) {
+                state.branches.feature = state.branches.main;
+                log(`Created branch 'feature' from main at ${state.branches.main.hash}`);
+                updateButtons();
+                render();
+            }
+        }
+
+        function merge(from, to) {
+            if (from === 'feature' && to === 'main') {
+                const mergeCommit = createCommit('main', `Merge feature into main`, state.branches.main);
+                mergeCommit.parents = [state.branches.main, state.branches.feature];
+                mergeCommit.isMerge = true;
+                mergeCommit.mergeFrom = state.branches.feature;
+                state.branches.main = mergeCommit;
+                state.branches.feature = null; // Branch is "deleted" after merge
+                log(`Merged feature into main: ${mergeCommit.hash}`);
+                updateButtons();
+                render();
+                showInfo('merge');
+            }
+        }
+
+        function reset() {
+            state = {
+                commits: [],
+                branches: { main: null, feature: null },
+                nextId: 1
+            };
+            document.getElementById('log').innerHTML = '';
+            init();
+            updateButtons();
+        }
+
+        function updateButtons() {
+            document.getElementById('btn-create-feature').disabled = !!state.branches.feature;
+            document.getElementById('btn-commit-feature').disabled = !state.branches.feature;
+            document.getElementById('btn-merge-feature').disabled = !state.branches.feature ||
+                state.branches.feature === state.branches.main;
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Calculate positions
+            layoutCommits();
+
+            // Draw connections first (behind commits)
+            drawConnections();
+
+            // Draw commits
+            drawCommits();
+
+            // Draw branch labels
+            drawBranchLabels();
+        }
+
+        function layoutCommits() {
+            const mainY = 60;
+            const featureY = 140;
+            const startX = 60;
+            const spacing = 80;
+
+            // Find where feature branch starts
+            let featureBranchPoint = null;
+            for (const commit of state.commits) {
+                if (commit.branch === 'feature' && commit.parent && commit.parent.branch === 'main') {
+                    featureBranchPoint = commit.parent;
+                    break;
+                }
+            }
+
+            let mainX = startX;
+            let featureX = startX;
+
+            state.commits.forEach((commit, i) => {
+                if (commit.isMerge) {
+                    commit.x = Math.max(mainX, featureX) + spacing;
+                    commit.y = mainY;
+                    mainX = commit.x;
+                } else if (commit.branch === 'main') {
+                    commit.x = mainX;
+                    commit.y = mainY;
+                    mainX += spacing;
+                    if (commit === featureBranchPoint) {
+                        featureX = commit.x;
+                    }
+                } else if (commit.branch === 'feature') {
+                    if (commit.parent && commit.parent.branch === 'main') {
+                        // First commit on feature - align with branch point
+                        featureX = commit.parent.x + spacing;
+                    } else {
+                        featureX += spacing;
+                    }
+                    commit.x = featureX;
+                    commit.y = featureY;
+                }
+            });
+
+            // Resize canvas if needed
+            const maxX = Math.max(...state.commits.map(c => c.x)) + 100;
+            if (maxX > canvas.width) {
+                canvas.width = maxX;
+            }
+        }
+
+        function drawConnections() {
+            ctx.lineWidth = 3;
+
+            state.commits.forEach(commit => {
+                commit.parents.forEach(parent => {
+                    if (commit.isMerge && parent.branch === 'feature') {
+                        // Merge line from feature
+                        ctx.strokeStyle = colors.feature;
+                        ctx.beginPath();
+                        ctx.moveTo(parent.x, parent.y);
+                        ctx.bezierCurveTo(
+                            parent.x + 40, parent.y,
+                            commit.x - 40, commit.y,
+                            commit.x, commit.y
+                        );
+                        ctx.stroke();
+                    } else {
+                        // Regular connection
+                        const color = parent.branch === 'feature' ? colors.feature : colors.main;
+                        ctx.strokeStyle = color;
+                        ctx.beginPath();
+                        ctx.moveTo(parent.x, parent.y);
+
+                        if (parent.y !== commit.y) {
+                            // Branch point
+                            ctx.bezierCurveTo(
+                                parent.x + 40, parent.y,
+                                commit.x - 40, commit.y,
+                                commit.x, commit.y
+                            );
+                        } else {
+                            ctx.lineTo(commit.x, commit.y);
+                        }
+                        ctx.stroke();
+                    }
+                });
+            });
+        }
+
+        function drawCommits() {
+            state.commits.forEach(commit => {
+                const color = commit.isMerge ? colors.merge :
+                             commit.branch === 'feature' ? colors.feature : colors.main;
+
+                // Outer ring
+                ctx.beginPath();
+                ctx.arc(commit.x, commit.y, 14, 0, Math.PI * 2);
+                ctx.fillStyle = colors.line;
+                ctx.fill();
+
+                // Inner circle
+                ctx.beginPath();
+                ctx.arc(commit.x, commit.y, 10, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+
+                // Hash label
+                ctx.fillStyle = colors.text;
+                ctx.font = '11px SF Mono, monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText(commit.hash, commit.x, commit.y + 30);
+            });
+        }
+
+        function drawBranchLabels() {
+            ctx.font = 'bold 12px -apple-system, sans-serif';
+
+            if (state.branches.main) {
+                const commit = state.branches.main;
+                ctx.fillStyle = colors.main;
+                ctx.textAlign = 'left';
+                ctx.fillText('← main', commit.x + 20, commit.y - 20);
+            }
+
+            if (state.branches.feature) {
+                const commit = state.branches.feature;
+                ctx.fillStyle = colors.feature;
+                ctx.textAlign = 'left';
+                ctx.fillText('← feature', commit.x + 20, commit.y - 20);
+            }
+        }
+
+        function log(message) {
+            const logEl = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = 'entry';
+            entry.innerHTML = `<span class="hash">${new Date().toLocaleTimeString()}</span> ${message}`;
+            logEl.insertBefore(entry, logEl.firstChild);
+        }
+
+        function showInfo(type) {
+            const info = document.getElementById('info');
+            if (type === 'merge') {
+                info.innerHTML = `
+                    <h3>Merge Complete!</h3>
+                    <p>The purple commit is a <strong>merge commit</strong> — it has two parents, combining both timelines.</p>
+                    <p>Notice how the feature branch line connects back to main. The feature work is now part of the main history.</p>
+                    <p>In real projects, you'd do this through a <strong>Pull Request</strong> for code review first.</p>
+                `;
+            }
+        }
+
+        function loadScenario(name) {
+            // Update button states
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase().includes(name) ||
+                    (name === 'interactive' && btn.textContent === 'Interactive'));
+            });
+
+            reset();
+
+            if (name === 'interactive') {
+                document.getElementById('controls').style.display = 'flex';
+                document.getElementById('info').innerHTML = `
+                    <h3>Interactive Mode</h3>
+                    <p>Click the buttons above to simulate Git operations. Watch how the branch graph changes.</p>
+                `;
+                return;
+            }
+
+            document.getElementById('controls').style.display = 'none';
+
+            if (name === 'feature') {
+                // Simulate a feature branch workflow
+                setTimeout(() => { commit('main'); }, 100);
+                setTimeout(() => { createBranch('feature'); }, 300);
+                setTimeout(() => { commit('feature'); }, 500);
+                setTimeout(() => { commit('feature'); }, 700);
+                setTimeout(() => { commit('main'); }, 900);
+                setTimeout(() => { merge('feature', 'main'); }, 1100);
+                setTimeout(() => {
+                    document.getElementById('info').innerHTML = `
+                        <h3>Feature Branch Workflow</h3>
+                        <p>This is the most common pattern:</p>
+                        <p>1. Create a branch from main<br>
+                        2. Make commits on your feature branch<br>
+                        3. Meanwhile, main may get other commits<br>
+                        4. When ready, merge your branch back to main</p>
+                        <p>The merge commit (purple) combines both lines of work.</p>
+                    `;
+                }, 1200);
+            }
+
+            if (name === 'parallel') {
+                // Show parallel work
+                setTimeout(() => { commit('main'); }, 100);
+                setTimeout(() => { createBranch('feature'); }, 200);
+                setTimeout(() => { commit('feature'); }, 400);
+                setTimeout(() => { commit('main'); }, 600);
+                setTimeout(() => { commit('feature'); }, 800);
+                setTimeout(() => { commit('main'); }, 1000);
+                setTimeout(() => {
+                    document.getElementById('info').innerHTML = `
+                        <h3>Parallel Development</h3>
+                        <p>Two developers working simultaneously:</p>
+                        <p>• One commits to main (maybe from their own merged branches)<br>
+                        • Another commits to their feature branch<br>
+                        • Both timelines progress independently</p>
+                        <p>This is how teams work without stepping on each other's toes.</p>
+                        <p><strong>Challenge:</strong> What happens when they eventually merge?</p>
+                    `;
+                }, 1100);
+            }
+
+            if (name === 'conflict') {
+                setTimeout(() => { commit('main'); }, 100);
+                setTimeout(() => { createBranch('feature'); }, 200);
+                setTimeout(() => {
+                    commit('feature');
+                    state.commits[state.commits.length - 1].message = 'Change line 10';
+                }, 400);
+                setTimeout(() => {
+                    commit('main');
+                    state.commits[state.commits.length - 1].message = 'Also change line 10';
+                }, 600);
+                setTimeout(() => {
+                    document.getElementById('info').innerHTML = `
+                        <h3>Merge Conflict Scenario</h3>
+                        <p>Both branches modified the same file (perhaps even the same line).</p>
+                        <p>When you try to merge, Git will say: <code>CONFLICT: Merge conflict in file.txt</code></p>
+                        <p>This isn't scary — it just means Git needs human judgment to decide which changes to keep.</p>
+                        <p>You'll open the file, see both versions marked with <code>&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;</code>,
+                        and manually combine them.</p>
+                        <p><strong>Pro tip:</strong> Small, frequent merges reduce conflict complexity.</p>
+                    `;
+                }, 700);
+            }
+        }
+
+        // Initialize
+        init();
+        updateButtons();
+    </script>
+</body>
+</html>
