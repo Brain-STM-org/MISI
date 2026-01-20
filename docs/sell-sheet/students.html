@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISI - Machine Intelligence Senior Internship</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .highlight {
+            color: var(--primary);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: var(--gray);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.45rem;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .timeline-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item p {
+            color: var(--gray);
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item h3::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .faq-item.open h3::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+            color: var(--gray);
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer a {
+            color: var(--secondary);
+        }
+
+        .top-nav {
+            background: var(--dark);
+            padding: 0.75rem 2rem;
+            text-align: right;
+        }
+
+        .top-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .top-nav a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .program-name {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="stakeholders.html">Information for Parents &amp; Educators</a>
+    </nav>
+
+    <header class="hero">
+        <p class="program-name">Machine Intelligence Senior Internship</p>
+        <h1>MISI</h1>
+        <p class="tagline">Build Real Software with AI in 5 Weeks</p>
+        <a href="#apply" class="cta">I'm Interested</a>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>What if you could build <span class="highlight">anything</span>?</h2>
+            <p>Software development has changed. With AI tools like Claude Code, you can go from idea to working app in hours, not months. The catch? You need to know how to direct the AI, think like an engineer, and build something people actually want.</p>
+            <p style="margin-top: 1rem;">That's what MISI teaches you—in 5 intensive weeks with a team of your peers and real software engineers as mentors.</p>
+        </section>
+
+        <section>
+            <h2>What You'll <span class="highlight">Build</span></h2>
+            <p>You and your team pick a real project. Not a tutorial. Not a toy. Something you actually care about.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Your Idea</h3>
+                    <p>Pitch a project you're passionate about, or join a team working on something that excites you.</p>
+                </div>
+                <div class="card">
+                    <h3>Real Users</h3>
+                    <p>Ship software that people outside your team actually use and give feedback on.</p>
+                </div>
+                <div class="card">
+                    <h3>Your Portfolio</h3>
+                    <p>Walk away with deployed code, a GitHub profile, and something real to show colleges or employers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>What You'll <span class="highlight">Learn</span></h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>AI-Assisted Development</h3>
+                    <p>Use Claude Code and other AI tools to write, debug, and ship code faster than ever before.</p>
+                </div>
+                <div class="card">
+                    <h3>Software Engineering</h3>
+                    <p>Version control, testing, code review, and the principles that separate good code from garbage.</p>
+                </div>
+                <div class="card">
+                    <h3>Team Collaboration</h3>
+                    <p>Work in small teams, run daily standups, review each other's code, and ship together.</p>
+                </div>
+                <div class="card">
+                    <h3>Product Thinking</h3>
+                    <p>Learn to build what users need, gather feedback, and iterate quickly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>The <span class="highlight">5 Weeks</span></h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Week 1: Launch</h3>
+                    <p>Form teams, pick projects, learn the tools, and push your first code.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Week 2: Build</h3>
+                    <p>Rapid iteration to a working MVP. By Friday, you have something that runs.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Week 3: Expand</h3>
+                    <p>Add features, get feedback from other teams, refine your product.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Week 4: Polish</h3>
+                    <p>Feature freeze. Focus on stability, user testing, and getting ready to ship.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Week 5: Ship</h3>
+                    <p>Deploy your project, present to the cohort, and reflect on what you built.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="quote-box">
+            "Garbage In, Garbage Out is more relevant than ever. AI can write code fast—but only you can make it good."
+        </div>
+
+        <section>
+            <h2>Is This <span class="highlight">For You?</span></h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>You're curious about tech</h3>
+                    <p>You don't need to know how to code (yet). You need to want to learn.</p>
+                </div>
+                <div class="card">
+                    <h3>You want to build, not just learn</h3>
+                    <p>This isn't a lecture series. You'll be writing code from day one.</p>
+                </div>
+                <div class="card">
+                    <h3>You work well with others</h3>
+                    <p>Solo geniuses need not apply. This is about teams shipping together.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>Questions?</h2>
+            <div class="faq-item">
+                <h3>Do I need to know how to code?</h3>
+                <div class="faq-answer">No prior coding experience required. You'll learn alongside AI tools that help you write code. What matters is curiosity and willingness to learn.</div>
+            </div>
+            <div class="faq-item">
+                <h3>How much time does it take?</h3>
+                <div class="faq-answer">The program runs for 5 weeks with regular in-person meetings. Expect to spend significant time on your project—this is an internship, not a club.</div>
+            </div>
+            <div class="faq-item">
+                <h3>What do I get at the end?</h3>
+                <div class="faq-answer">A deployed project you can show off, experience working on a real team, skills in AI-assisted development, and a network of peers who build things.</div>
+            </div>
+            <div class="faq-item">
+                <h3>Does this count for my senior project?</h3>
+                <div class="faq-answer">We're working with schools to ensure MISI can fulfill senior project or internship requirements. Talk to your counselor.</div>
+            </div>
+        </section>
+
+        <section id="apply" style="text-align: center;">
+            <h2>Ready to <span class="highlight">Build</span>?</h2>
+            <p style="margin-bottom: 2rem; color: var(--gray);">Spots are limited. Express your interest now.</p>
+            <a href="#" class="cta" style="background: var(--primary);">Apply Now</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>MISI - Machine Intelligence Senior Internship</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">Questions? <a href="#">Contact us</a></p>
+    </footer>
+
+    <script>
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', () => {
+                item.parentElement.classList.toggle('open');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -12,6 +12,7 @@
 - [ ] Set up collaboration infrastructure (repos, communication tools)
 - [ ] Create assessment rubrics and milestone definitions
 - [ ] Coordinate schedules and secure meeting space
+- [ ] Write code of conduct for participants and facilitators
 
 #### Curriculum Development
 

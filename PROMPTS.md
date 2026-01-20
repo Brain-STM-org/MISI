@@ -35,3 +35,21 @@ With respect to the topics of Weeks 2, 3, 4, in modern LLM development aren't th
 ## 2026-01-20T15:48:29Z
 
 add this decision to MEMORY
+
+---
+
+## 2026-01-20T15:53:17Z
+
+I created a folder docs/sell-sheet to holds HTML+JS documents which introduces the project.  We will have two different pages, one for students who might be interested and the other for stakeholders like parents and school administrators
+
+---
+
+## 2026-01-20T16:00:26Z
+
+add to the pre-program plan that we need to write a code of conduct
+
+---
+
+## 2026-01-20T16:02:46Z
+
+on the student HTML, include the full name "Machine Intelligence Senior Internship (MISI)"    Create a symlink of index.html to students.html      The two pages should include prominent links to each other.
