@@ -133,3 +133,9 @@ You never dumb down content for high-ability learners. You never sacrifice preci
 ## 2026-01-20T21:34:32Z
 
 you have well understood the student cohort.  they are all "let's build" and have been selected by us due to their passion and capability.  We will include programmers in the cohort, but want access to the high-ability kids who never got the access or opportunity.  As you ascertain, while source code is important, their ability to generate it is less so.  Depending on how the projects advance, they may learn aspects of specific languages.  BUt as you say, we are teaching principles that are broad an not focused on coding but LLM-assisted development.    Less syntax, more reasoning about software is spot on.
+
+---
+
+## 2026-01-20T21:46:15Z
+
+i love you Elena, not romantically but in your ability to communicate not just to students, but to me.   I have commited your drafts and please continue with "Your First Commit"

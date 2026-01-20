@@ -38,7 +38,7 @@ Both tracks are designed to be followed independently. The bootcamp syllabus wea
 |-------|--------|--------|
 | GitHub Setup Guide | Markdown + screenshots | **Draft complete** |
 | What is Source Code? | Markdown + interactive demo | **Draft complete** |
-| Your First Commit | Step-by-step tutorial | Not started |
+| Your First Commit | Step-by-step tutorial | **Draft complete** |
 | Understanding Diffs | Interactive HTML/TS | **Draft complete** |
 
 ### Tier 2: Core Concepts
@@ -120,7 +120,7 @@ These topics are deferred or handled through mentorship and inquiry-based learni
 - [x] Build interactive diff viewer demo
 
 ### Near-term
-- [ ] Complete Tier 1 modules
+- [x] Complete Tier 1 modules
 - [ ] Draft Tier 2 content
 - [ ] Design hands-on exercises for each module
 
