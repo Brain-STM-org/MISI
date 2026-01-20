@@ -25,6 +25,7 @@ We will openly document our progress so that others may learn from us.
 | Date | Decision | Rationale |
 |------|----------|-----------|
 | 2026-01-20 | Initial documentation structure established | Created README, PLAN, AGENTS, MEMORY, PROMPTS as core docs |
+| 2026-01-20 | Weekly plan structured around product maturity, not sequential phases | In LLM-assisted development, design-code-test cycles happen in minutes, not weeks. Traditional waterfall phases (design week → dev week → test week) don't reflect reality. Testing, code review, and iteration happen daily from Week 1. Weekly themes now reflect where the product should be (MVP → expanded features → polish), not what activity dominates. |
 
 ---
 

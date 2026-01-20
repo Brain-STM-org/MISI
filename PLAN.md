@@ -4,72 +4,92 @@
 
 ### Pre-Program (Weeks -4 to -1)
 
+#### Logistics
+
 - [ ] Finalize partnership with target high school(s)
 - [ ] Recruit and onboard facilitating software engineers
 - [ ] Define project portfolio and selection criteria
 - [ ] Set up collaboration infrastructure (repos, communication tools)
-- [ ] Prepare onboarding materials for AI-assisted development tools
 - [ ] Create assessment rubrics and milestone definitions
+- [ ] Coordinate schedules and secure meeting space
+
+#### Curriculum Development
+
+- [ ] Prepare onboarding materials for AI-assisted development tools
+- [ ] Develop software engineering principles curriculum (version control, testing, code review)
+- [ ] Create project scaffolding templates with CI/CD pre-configured
+- [ ] Design workshop materials for Claude Code and AntiGravity
+- [ ] Prepare examples of effective AI prompting and iteration patterns
 
 ### Week 1: Foundation & Team Formation
 
-**Theme**: Orientation, team building, and project selection
+**Theme**: Orientation, team building, project selection, and first code
 
 - [ ] Cohort orientation and introductions
+- [ ] Core software engineering principles: version control, testing mindset, code review, iterative development
 - [ ] Introduction to AI-assisted development principles
 - [ ] Hands-on workshop: Claude Code and AntiGravity basics
 - [ ] Project pitches and team formation
 - [ ] Initial project scoping and requirements gathering
+- [ ] Teams begin coding with scaffolded templates (CI/CD, tests from day one)
 
 **Deliverables**:
 - Team assignments finalized
 - Project charters drafted
 - Development environments set up
+- First commits pushed (scaffolding + initial features)
 
-### Week 2: Design & Architecture
+### Week 2: First Working Versions
 
-**Theme**: Planning, design, and foundational development
+**Theme**: Rapid iteration to MVP
 
-- [ ] Software engineering principles workshop
-- [ ] Architecture design sessions
-- [ ] Begin initial implementation sprints
-- [ ] Daily standups established
-- [ ] Code review practices introduced
+In LLM-assisted development, design-code-test cycles happen in minutes, not weeks. By the end of Week 2, teams should have working software that demonstrates core functionality.
 
-**Deliverables**:
-- Technical design documents
-- Initial codebase scaffolding
-- CI/CD pipelines configured
-
-### Week 3: Core Development
-
-**Theme**: Primary feature implementation
-
-- [ ] Intensive development sprints
-- [ ] Mid-point project reviews
-- [ ] Cross-team knowledge sharing sessions
-- [ ] Documentation practices emphasized
-- [ ] Quality assurance introduction
+- [ ] Daily iteration cycles: prompt → generate → test → refine
+- [ ] Daily standups and blockers review
+- [ ] Continuous code review practices (peer + facilitator)
+- [ ] First user feedback sessions (dogfooding within cohort)
+- [ ] Cross-team knowledge sharing: what prompts work, what doesn't
 
 **Deliverables**:
-- Core features implemented
-- Unit test coverage established
-- Progress documentation updated
+- Working MVP for each project
+- Test suites running in CI
+- Initial user feedback collected
 
-### Week 4: Integration & Testing
+### Week 3: Feature Expansion & Refinement
 
-**Theme**: Polish, integration, and quality assurance
+**Theme**: Broadening scope while maintaining quality
 
-- [ ] Feature completion push
-- [ ] Integration testing
-- [ ] Bug fixing and refinement
-- [ ] User acceptance testing preparation
+With working MVPs in hand, teams expand functionality while continuously integrating and testing. Quality is not a phase—it's constant.
+
+- [ ] Feature prioritization based on Week 2 feedback
+- [ ] Continued rapid iteration cycles
+- [ ] Mid-point project reviews with facilitators
+- [ ] Documentation as you go (not deferred)
+- [ ] Cross-team demos and feedback exchange
+- [ ] Address technical debt before it accumulates
+
+**Deliverables**:
+- Expanded feature set
+- Updated documentation
+- Refined UI/UX based on feedback
+
+### Week 4: Polish & User Validation
+
+**Theme**: Production readiness and external feedback
+
+Teams shift focus from building new features to hardening what exists. External users (beyond the cohort) provide feedback.
+
+- [ ] Feature freeze: focus on stability and polish
+- [ ] User acceptance testing with external testers
+- [ ] Performance and edge case refinement
 - [ ] Presentation preparation begins
+- [ ] Final documentation pass
 
 **Deliverables**:
-- Feature-complete products
-- Test suites passing
-- Draft presentations
+- Feature-complete, stable products
+- External user feedback incorporated
+- Draft presentations ready
 
 ### Week 5: Launch & Reflection
 

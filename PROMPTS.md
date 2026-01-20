@@ -22,3 +22,16 @@ the curriculum and documentation of the project will be licensed with CC BY SA 4
 ## 2026-01-20T15:26:13Z
 
 please add the license.txt file
+
+---
+
+## 2026-01-20T15:44:55Z
+
+let's amend the plan slightly ... In  "Pre-Program", break out Logistics and Curriculum Development.    To Week 1, add a bullet point related to learning core software engineering principles that will carry us through the project.  
+With respect to the topics of Weeks 2, 3, 4, in modern LLM development aren't those cycles much tighter?  To the point of within an hour even, especially if the projects are properly scaffolded?  If you agree with this, update the PLAN.  If not, please suggest another perspective
+
+---
+
+## 2026-01-20T15:48:29Z
+
+add this decision to MEMORY
