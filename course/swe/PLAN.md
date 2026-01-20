@@ -36,10 +36,10 @@ Both tracks are designed to be followed independently. The bootcamp syllabus wea
 ### Tier 1: Essential (must complete first)
 | Topic | Format | Status |
 |-------|--------|--------|
-| GitHub Setup Guide | Markdown + screenshots | Not started |
-| What is Source Code? | Markdown + interactive demo | Not started |
+| GitHub Setup Guide | Markdown + screenshots | **Draft complete** |
+| What is Source Code? | Markdown + interactive demo | **Draft complete** |
 | Your First Commit | Step-by-step tutorial | Not started |
-| Understanding Diffs | Interactive HTML/TS | Not started |
+| Understanding Diffs | Interactive HTML/TS | **Draft complete** |
 
 ### Tier 2: Core Concepts
 | Topic | Format | Status |
@@ -115,9 +115,9 @@ These topics are deferred or handled through mentorship and inquiry-based learni
 
 ### Immediate
 - [x] Review and finalize topic inclusion list
-- [ ] Create GitHub setup guide (highest priority for Day 1)
-- [ ] Develop "What is Source Code?" module
-- [ ] Build interactive diff viewer demo
+- [x] Create GitHub setup guide (highest priority for Day 1)
+- [x] Develop "What is Source Code?" module
+- [x] Build interactive diff viewer demo
 
 ### Near-term
 - [ ] Complete Tier 1 modules

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Diffs - Interactive Demo</title>
+    <style>
+        :root {
+            --bg: #1e1e1e;
+            --surface: #252526;
+            --border: #3c3c3c;
+            --text: #d4d4d4;
+            --text-muted: #808080;
+            --added-bg: #1e3a1e;
+            --added-line: #2ea043;
+            --removed-bg: #3d1e1e;
+            --removed-line: #f85149;
+            --unchanged-bg: transparent;
+            --accent: #569cd6;
+            --highlight: #264f78;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .example-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .example-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.15s;
+        }
+
+        .example-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .example-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .view-toggle label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .panels {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-header .label {
+            color: var(--text-muted);
+        }
+
+        .code-container {
+            padding: 1rem;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .diff-view {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .diff-view .panel-header {
+            background: var(--bg);
+        }
+
+        .diff-line {
+            display: flex;
+            min-height: 1.5em;
+        }
+
+        .diff-line-number {
+            width: 3rem;
+            padding: 0 0.5rem;
+            text-align: right;
+            color: var(--text-muted);
+            user-select: none;
+            flex-shrink: 0;
+            background: var(--bg);
+        }
+
+        .diff-line-content {
+            flex: 1;
+            padding: 0 0.5rem;
+            white-space: pre;
+        }
+
+        .diff-line.added {
+            background: var(--added-bg);
+        }
+
+        .diff-line.added .diff-line-content::before {
+            content: '+';
+            color: var(--added-line);
+            margin-right: 0.5rem;
+        }
+
+        .diff-line.removed {
+            background: var(--removed-bg);
+        }
+
+        .diff-line.removed .diff-line-content::before {
+            content: '-';
+            color: var(--removed-line);
+            margin-right: 0.5rem;
+        }
+
+        .diff-line.context .diff-line-content::before {
+            content: ' ';
+            margin-right: 0.5rem;
+        }
+
+        .diff-line.hunk-header {
+            background: var(--highlight);
+            color: var(--text-muted);
+        }
+
+        .diff-line.hunk-header .diff-line-content {
+            font-style: italic;
+        }
+
+        .side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .side-by-side .side {
+            border-right: 1px solid var(--border);
+        }
+
+        .side-by-side .side:last-child {
+            border-right: none;
+        }
+
+        .side-by-side .side-header {
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .explanation {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .explanation h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .explanation p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .explanation ul {
+            margin-top: 0.75rem;
+            padding-left: 1.5rem;
+        }
+
+        .explanation li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 3px;
+        }
+
+        .legend-color.added {
+            background: var(--added-bg);
+            border-left: 3px solid var(--added-line);
+        }
+
+        .legend-color.removed {
+            background: var(--removed-bg);
+            border-left: 3px solid var(--removed-line);
+        }
+
+        .legend-color.context {
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        code {
+            background: var(--bg);
+            padding: 0.125rem 0.375rem;
+            border-radius: 3px;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Understanding Diffs</h1>
+            <p class="subtitle">Interactive demo: see exactly what changed between versions</p>
+        </header>
+
+        <div class="example-selector" id="examples">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color added"></div>
+                <span>Added</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color removed"></div>
+                <span>Removed</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color context"></div>
+                <span>Unchanged (context)</span>
+            </div>
+        </div>
+
+        <div class="view-toggle">
+            <label>
+                <input type="radio" name="view" value="unified" checked>
+                Unified view
+            </label>
+            <label>
+                <input type="radio" name="view" value="split">
+                Side-by-side
+            </label>
+        </div>
+
+        <div class="panels">
+            <div class="panel">
+                <div class="panel-header">
+                    <span>Before</span>
+                    <span class="label">Original version</span>
+                </div>
+                <div class="code-container" id="before"></div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span>After</span>
+                    <span class="label">Modified version</span>
+                </div>
+                <div class="code-container" id="after"></div>
+            </div>
+        </div>
+
+        <div class="diff-view">
+            <div class="panel-header">
+                <span>The Diff</span>
+                <span class="label">What Git shows you</span>
+            </div>
+            <div id="diff-output"></div>
+        </div>
+
+        <div class="explanation" id="explanation">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Example diffs to explore
+        const examples = [
+            {
+                name: "Simple Change",
+                before: `def greet(name):
+    print("Hello, " + name)
+
+greet("World")`,
+                after: `def greet(name):
+    print("Hello, " + name + "!")
+
+greet("World")`,
+                explanation: {
+                    title: "A Single Character Change",
+                    description: "This diff shows the smallest possible meaningful change: adding an exclamation mark.",
+                    points: [
+                        "One line removed (the old print statement)",
+                        "One line added (the new print statement with '!')",
+                        "The diff makes it obvious: only the greeting punctuation changed",
+                        "Nothing else was touched — the function signature and call are unchanged"
+                    ]
+                }
+            },
+            {
+                name: "Add Feature",
+                before: `def calculate_total(items):
+    total = 0
+    for item in items:
+        total += item.price
+    return total`,
+                after: `def calculate_total(items, tax_rate=0):
+    subtotal = 0
+    for item in items:
+        subtotal += item.price
+    tax = subtotal * tax_rate
+    total = subtotal + tax
+    return total`,
+                explanation: {
+                    title: "Adding a Feature (Tax Calculation)",
+                    description: "This diff shows a feature addition: optional tax calculation.",
+                    points: [
+                        "Function signature changed to accept <code>tax_rate</code> parameter",
+                        "Variable renamed from <code>total</code> to <code>subtotal</code> (clarity)",
+                        "Two new lines added for tax calculation",
+                        "The original behavior is preserved when <code>tax_rate=0</code> (default)"
+                    ]
+                }
+            },
+            {
+                name: "Bug Fix",
+                before: `def divide(a, b):
+    return a / b
+
+result = divide(10, 0)
+print(result)`,
+                after: `def divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+
+result = divide(10, 0)
+if result is not None:
+    print(result)
+else:
+    print("Cannot divide by zero")`,
+                explanation: {
+                    title: "Fixing a Bug (Division by Zero)",
+                    description: "This diff shows defensive programming: handling an edge case that would crash.",
+                    points: [
+                        "Added a guard clause to check for zero divisor",
+                        "Function now returns <code>None</code> instead of crashing",
+                        "Caller updated to handle the <code>None</code> case",
+                        "More lines added than removed — defensive code has a cost"
+                    ]
+                }
+            },
+            {
+                name: "Refactor",
+                before: `# Process user data
+name = input("Name: ")
+age = input("Age: ")
+email = input("Email: ")
+print("Processing...")
+save_to_database(name, age, email)
+print("Done!")`,
+                after: `def get_user_input():
+    return {
+        "name": input("Name: "),
+        "age": input("Age: "),
+        "email": input("Email: ")
+    }
+
+def process_user(user_data):
+    print("Processing...")
+    save_to_database(**user_data)
+    print("Done!")
+
+# Main
+user = get_user_input()
+process_user(user)`,
+                explanation: {
+                    title: "Refactoring for Reusability",
+                    description: "This diff shows restructuring code without changing behavior.",
+                    points: [
+                        "Procedural code transformed into functions",
+                        "Data grouped into a dictionary structure",
+                        "Functions can now be reused and tested independently",
+                        "Large diff (many +/- lines) but behavior is identical",
+                        "This is why review matters: refactors can accidentally change behavior"
+                    ]
+                }
+            },
+            {
+                name: "AI Edit",
+                before: `def send_email(to, subject, body):
+    # TODO: add validation
+    email_service.send(to, subject, body)
+    return True`,
+                after: `import re
+
+def validate_email(email):
+    pattern = r'^[\\w\\.-]+@[\\w\\.-]+\\.\\w+$'
+    return bool(re.match(pattern, email))
+
+def send_email(to, subject, body):
+    if not validate_email(to):
+        raise ValueError(f"Invalid email: {to}")
+    if not subject or len(subject) > 200:
+        raise ValueError("Subject must be 1-200 characters")
+    if not body:
+        raise ValueError("Body cannot be empty")
+
+    email_service.send(to, subject, body)
+    return True`,
+                explanation: {
+                    title: "AI-Generated Validation",
+                    description: "You asked an AI to 'add validation' — this is what it produced.",
+                    points: [
+                        "New import added (<code>re</code> for regex)",
+                        "New helper function for email validation",
+                        "Three validation checks added to main function",
+                        "Is this what you wanted? The diff lets you evaluate",
+                        "Questions to consider: Is the regex correct? Are the limits appropriate?"
+                    ]
+                }
+            }
+        ];
+
+        let currentExample = 0;
+        let currentView = 'unified';
+
+        // Initialize
+        function init() {
+            renderExampleButtons();
+            setupViewToggle();
+            showExample(0);
+        }
+
+        function renderExampleButtons() {
+            const container = document.getElementById('examples');
+            examples.forEach((ex, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'example-btn' + (i === 0 ? ' active' : '');
+                btn.textContent = ex.name;
+                btn.onclick = () => showExample(i);
+                container.appendChild(btn);
+            });
+        }
+
+        function setupViewToggle() {
+            document.querySelectorAll('input[name="view"]').forEach(radio => {
+                radio.onchange = (e) => {
+                    currentView = e.target.value;
+                    renderDiff(examples[currentExample]);
+                };
+            });
+        }
+
+        function showExample(index) {
+            currentExample = index;
+            const ex = examples[index];
+
+            // Update buttons
+            document.querySelectorAll('.example-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+
+            // Render before/after
+            document.getElementById('before').innerHTML = escapeHtml(ex.before);
+            document.getElementById('after').innerHTML = escapeHtml(ex.after);
+
+            // Render diff
+            renderDiff(ex);
+
+            // Render explanation
+            renderExplanation(ex.explanation);
+        }
+
+        function renderDiff(ex) {
+            const diffLines = computeDiff(ex.before, ex.after);
+            const container = document.getElementById('diff-output');
+
+            if (currentView === 'unified') {
+                container.innerHTML = renderUnifiedDiff(diffLines);
+            } else {
+                container.innerHTML = renderSplitDiff(diffLines);
+            }
+        }
+
+        function computeDiff(before, after) {
+            const beforeLines = before.split('\n');
+            const afterLines = after.split('\n');
+            const result = [];
+
+            // Simple LCS-based diff
+            const lcs = longestCommonSubsequence(beforeLines, afterLines);
+            let bi = 0, ai = 0, li = 0;
+
+            while (bi < beforeLines.length || ai < afterLines.length) {
+                if (li < lcs.length && bi < beforeLines.length && beforeLines[bi] === lcs[li]) {
+                    if (ai < afterLines.length && afterLines[ai] === lcs[li]) {
+                        result.push({ type: 'context', content: lcs[li], oldLine: bi + 1, newLine: ai + 1 });
+                        bi++; ai++; li++;
+                    } else {
+                        result.push({ type: 'added', content: afterLines[ai], newLine: ai + 1 });
+                        ai++;
+                    }
+                } else if (bi < beforeLines.length) {
+                    result.push({ type: 'removed', content: beforeLines[bi], oldLine: bi + 1 });
+                    bi++;
+                } else if (ai < afterLines.length) {
+                    result.push({ type: 'added', content: afterLines[ai], newLine: ai + 1 });
+                    ai++;
+                }
+            }
+
+            return result;
+        }
+
+        function longestCommonSubsequence(a, b) {
+            const m = a.length, n = b.length;
+            const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    if (a[i-1] === b[j-1]) {
+                        dp[i][j] = dp[i-1][j-1] + 1;
+                    } else {
+                        dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                    }
+                }
+            }
+
+            const result = [];
+            let i = m, j = n;
+            while (i > 0 && j > 0) {
+                if (a[i-1] === b[j-1]) {
+                    result.unshift(a[i-1]);
+                    i--; j--;
+                } else if (dp[i-1][j] > dp[i][j-1]) {
+                    i--;
+                } else {
+                    j--;
+                }
+            }
+
+            return result;
+        }
+
+        function renderUnifiedDiff(diffLines) {
+            let html = '';
+            diffLines.forEach(line => {
+                const lineNum = line.type === 'removed' ? line.oldLine : (line.newLine || '');
+                html += `<div class="diff-line ${line.type}">
+                    <span class="diff-line-number">${lineNum}</span>
+                    <span class="diff-line-content">${escapeHtml(line.content)}</span>
+                </div>`;
+            });
+            return html;
+        }
+
+        function renderSplitDiff(diffLines) {
+            let leftHtml = '';
+            let rightHtml = '';
+
+            diffLines.forEach(line => {
+                if (line.type === 'context') {
+                    leftHtml += `<div class="diff-line context">
+                        <span class="diff-line-number">${line.oldLine}</span>
+                        <span class="diff-line-content">${escapeHtml(line.content)}</span>
+                    </div>`;
+                    rightHtml += `<div class="diff-line context">
+                        <span class="diff-line-number">${line.newLine}</span>
+                        <span class="diff-line-content">${escapeHtml(line.content)}</span>
+                    </div>`;
+                } else if (line.type === 'removed') {
+                    leftHtml += `<div class="diff-line removed">
+                        <span class="diff-line-number">${line.oldLine}</span>
+                        <span class="diff-line-content">${escapeHtml(line.content)}</span>
+                    </div>`;
+                    rightHtml += `<div class="diff-line" style="opacity: 0.3">
+                        <span class="diff-line-number"></span>
+                        <span class="diff-line-content"></span>
+                    </div>`;
+                } else if (line.type === 'added') {
+                    leftHtml += `<div class="diff-line" style="opacity: 0.3">
+                        <span class="diff-line-number"></span>
+                        <span class="diff-line-content"></span>
+                    </div>`;
+                    rightHtml += `<div class="diff-line added">
+                        <span class="diff-line-number">${line.newLine}</span>
+                        <span class="diff-line-content">${escapeHtml(line.content)}</span>
+                    </div>`;
+                }
+            });
+
+            return `<div class="side-by-side">
+                <div class="side">
+                    <div class="side-header">Before (removed lines in red)</div>
+                    ${leftHtml}
+                </div>
+                <div class="side">
+                    <div class="side-header">After (added lines in green)</div>
+                    ${rightHtml}
+                </div>
+            </div>`;
+        }
+
+        function renderExplanation(exp) {
+            const container = document.getElementById('explanation');
+            const points = exp.points.map(p => `<li>${p}</li>`).join('');
+            container.innerHTML = `
+                <h3>${exp.title}</h3>
+                <p>${exp.description}</p>
+                <ul>${points}</ul>
+            `;
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // Run on load
+        init();
+    </script>
+</body>
+</html>
