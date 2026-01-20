@@ -10,8 +10,8 @@ PROMPTS_FILE="${PROJECT_DIR}/PROMPTS.md"
 # Read JSON input from stdin
 input=$(cat)
 
-# Extract the prompt using jq
-prompt=$(echo "$input" | jq -r '.prompt // empty')
+# Extract the prompt using jq (use printf to safely handle special characters)
+prompt=$(printf '%s' "$input" | jq -r '.prompt // empty')
 
 # Validate that we got a prompt
 if [ -z "$prompt" ]; then
@@ -21,14 +21,10 @@ fi
 # Get current ISO 8601 timestamp
 timestamp=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
-# Append to PROMPTS.md
+# Append to PROMPTS.md (use printf to safely handle special characters in prompt)
 {
-  echo ""
-  echo "---"
-  echo ""
-  echo "## $timestamp"
-  echo ""
-  echo "$prompt"
+  printf '\n---\n\n## %s\n\n' "$timestamp"
+  printf '%s\n' "$prompt"
 } >> "$PROMPTS_FILE"
 
 # Exit successfully without blocking the prompt

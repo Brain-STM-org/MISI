@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISI - Machine Intelligence Senior Internship</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --secondary: #059669;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            width: 100%;
+        }
+
+        .synopsis {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .synopsis h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .synopsis p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .synopsis p:last-child {
+            margin-bottom: 0;
+        }
+
+        .synopsis strong {
+            color: var(--dark);
+        }
+
+        .links-section h2 {
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .card.students {
+            border-top: 4px solid #6366f1;
+        }
+
+        .card.stakeholders {
+            border-top: 4px solid #1e40af;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .card .audience {
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--gray);
+            flex: 1;
+        }
+
+        .card .arrow {
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .repo-link {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .repo-link a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .repo-link a:hover {
+            background: white;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .repo-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+            header .subtitle {
+                font-size: 1rem;
+            }
+            main {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Machine Intelligence Senior Internship</h1>
+        <p class="subtitle">MISI</p>
+    </header>
+
+    <main>
+        <section class="synopsis">
+            <h2>About the Program</h2>
+            <p>
+                <strong>MISI</strong> is a 5-week internship program for graduating high school seniors to explore new models of software development. Software engineering is in an LLM-assisted renaissance, where ideas become working code faster than ever before.
+            </p>
+            <p>
+                Students work in teams of 2-4, guided by experienced software engineers, to build real software projects using AI-assisted development tools like Claude Code. The program combines <strong>inquiry-based learning</strong> with <strong>proven software engineering principles</strong>—because while AI can write code fast, only humans can make it good.
+            </p>
+            <p>
+                From team formation to deployed product in 5 weeks. No prior coding experience required—just curiosity and a willingness to build.
+            </p>
+        </section>
+
+        <section class="links-section">
+            <h2>Learn More</h2>
+            <div class="card-grid">
+                <a href="sell-sheet/students.html" class="card students">
+                    <p class="audience">For Students</p>
+                    <h3>Ready to Build Something Real?</h3>
+                    <p>Learn what you'll build, what you'll learn, and how the 5 weeks unfold. Find out if MISI is right for you.</p>
+                    <span class="arrow">Explore the program &rarr;</span>
+                </a>
+                <a href="sell-sheet/stakeholders.html" class="card stakeholders">
+                    <p class="audience">For Parents &amp; Educators</p>
+                    <h3>Program Details &amp; Structure</h3>
+                    <p>Detailed information about curriculum, supervision, outcomes, and how MISI can fulfill senior project requirements.</p>
+                    <span class="arrow">View full details &rarr;</span>
+                </a>
+            </div>
+
+            <div class="repo-link">
+                <a href="https://github.com/Brain-STM-org/MISI/blob/main/README.md">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    View Project on GitHub
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Machine Intelligence Senior Internship (MISI)</p>
+        <p style="margin-top: 0.5rem;">An open-source program for the future of software education</p>
+        <p style="margin-top: 1.5rem; font-size: 0.8rem;">Copyright (c) 2026 Evan Wies</p>
+    </footer>
+</body>
+</html>

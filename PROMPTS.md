@@ -53,3 +53,15 @@ add to the pre-program plan that we need to write a code of conduct
 ## 2026-01-20T16:02:46Z
 
 on the student HTML, include the full name "Machine Intelligence Senior Internship (MISI)"    Create a symlink of index.html to students.html      The two pages should include prominent links to each other.
+
+---
+
+## 2026-01-20T16:17:59Z
+
+create an index.html page in docs/    . it is the main entry point for our GitHub pages online presence for this.   Include a synopsis of the project, prominent links to the two sell sheets, and a link to the repository README (https://github.com/Brain-STM-org/MISI/blob/main/README.md) .
+
+---
+
+## 2026-01-20T16:18:34Z
+
+i am writing this again i see there was a "UserPromptSubmit hook error" can you help me understand that?  is it because there's quotes in the prompt?
