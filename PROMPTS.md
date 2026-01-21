@@ -175,3 +175,34 @@ please write your persona prompt to the file personas/CURRICULUM_DESIGNER.md
 ## 2026-01-21T00:09:07Z
 
 please review the modules and update the README.md to reference them.  make an estimated amount of time for each module 
+
+---
+
+## 2026-01-21T01:54:58Z
+
+i just discovered that for the GHS internship program, the duration is 4 weeks, not 5 weeks.  Generally, they are required to work 25 hours per week.  Given the nature of the program, we might be able to be more flexible.   One month might be better structure anyway.  
+Review the current curriculum and consider 4 weeks.  How will we need to modify the scope?  We will work toward a solution.
+
+---
+
+## 2026-01-21T02:44:12Z
+
+Elena, I love that as your inferences flow and I interpret them, my thinking gravitated towards what would be your Hybrid Approach and then presented it so well!
+
+To start any project, they need to know the basics of the tools and the capabilities of the LLMs.  That scopes the projects (and given their power the scope can be larger than traditional).  We get the social and idea aspects flowing and ideate towards projects.  We can collectively use LLMs for that -- this explores LLMS interaction in larger scale settings (we need to research this first?)  Then we get to work.   As our work evolves and crystalizes, more of the concerns in both SWE and LLMs will become important.  We will introduce these as part of the days.  Then we wrap it up.
+
+In regards to your questions:
+1.  we can be intense the first week.  We actually have the weekend before, which we could try to tap as a kick-off, especially if we treat them well.  We can also defer some aspect to homework.  This is not a traditional internship anyway, so can stretch.
+
+2. i would like to have a place where we can collaborate colocated.  For Greenwich High School, the student requirement is that they actually work *minimum* 25 hours and we must validate that.  There is a timesheet system called SchoolLinks to log hours.  So I think we can stretch committment but we also must be flexible.  Despite the bootcamp name, this balances intensity and joyfullness.  5 x 5 does make sense for on-site.  
+
+3. I think the presentations can manifest quick with LLM perparation tools -- we just want a show and tell.   For the school, they must provide a reflection, but that is out of scope for us.   The demo day will be a nice wrap up for the program.  We will also ask for some follow-up reflection, but this doesn't count in the hours.
+
+4. I want colocation and on-site for significant portions.
+
+---
+
+## 2026-01-21T02:59:42Z
+
+do 1 and 2.  i love the tables you made.  we will eventuall incorporate them into other content besides the curriculum.   
+regarding the multi-user aspect, it's more of a social issue than a technology issue.  we'd leave that part KISS.  you can add aspects of that to MEMORY.

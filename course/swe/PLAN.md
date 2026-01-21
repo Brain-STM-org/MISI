@@ -2,7 +2,7 @@
 
 ## Overview
 
-Develop software engineering fundamentals curriculum for MISI's first days. Materials should establish shared vocabulary and practices that teams use throughout their 5-week projects.
+Software engineering fundamentals curriculum for MISI's bootcamp week and embedded throughout the 4-week program. Materials establish shared vocabulary and practices that teams use throughout their projects.
 
 This is one of two parallel content tracks:
 - **SWE Fundamentals** (this track) - Core engineering principles, tools, and practices
@@ -10,126 +10,154 @@ This is one of two parallel content tracks:
 
 Both tracks are designed to be followed independently. The bootcamp syllabus weaves them together appropriately, but the SWE track is valuable for anyone (including experienced SWEs new to LLM-assisted workflows).
 
-## Delivery Timeline (Program Days 1-3)
+---
 
-### Day 1: Foundations
-- What is software? What is source code?
-- GitHub account creation and configuration
-- First repository: clone, edit, commit, push
-- Understanding diffs and change tracking
+## 4-Week Program Structure
 
-### Day 2: Collaboration & Quality
-- Branches and pull requests
-- Code review basics
-- Introduction to testing concepts
-- Debugging mindset and techniques
+| Week | Theme | SWE Curriculum Role |
+|------|-------|---------------------|
+| **Weekend Before** | Kick-off | Prep homework (Module 00) |
+| **Week 1** | Bootcamp + Team Formation | Core training (Tiers 1-2), Iterative Design |
+| **Weeks 2-3** | Build | Just-in-time professional practices |
+| **Week 4** | Polish + Present | Ethics discussion, demo prep |
 
-### Day 3: Professional Practices
-- Build pipelines and automated checks
-- O11y: understanding what your code is doing
-- Iterative design principles
-- Communication: writing for future humans
-- Ethics in software development
+### Module Delivery Classification
 
-## Topic Modules to Develop
+| Delivery | Modules | When |
+|----------|---------|------|
+| **Front-loaded** (Days 1-2) | 00, 01, 02, 03, 04, 05, 06, 08, 12 | Before project work begins |
+| **Just-in-time** (Weeks 2-3) | 07, 09, 10, 11, 13, 14 | When teams encounter relevant needs |
+| **Capstone** (Week 4) | 15 | Reflection before Demo Day |
 
-### Tier 1: Essential (must complete first)
-| Topic | Format | Status |
-|-------|--------|--------|
-| Your Development Environment | Markdown (terminal, VS Code, GUI vs CLI) | **Draft complete** |
-| GitHub Setup Guide | Markdown + screenshots | **Draft complete** |
-| What is Source Code? | Markdown + interactive demo | **Draft complete** |
-| Your First Commit | Step-by-step tutorial | **Draft complete** |
-| Understanding Diffs | Interactive HTML/TS | **Draft complete** |
+---
 
-### Tier 2: Core Concepts
-| Topic | Format | Status |
-|-------|--------|--------|
-| Revision Control Concepts | *(covered in Tier 1 modules)* | **Complete** |
-| Branches and Merging | Interactive visualization | **Draft complete** |
-| Pull Requests | Tutorial + exercise | **Draft complete** |
-| Dependencies & Packages | Markdown (npm, pip, why they exist) | **Draft complete** |
-| Testing Fundamentals | Markdown + examples | **Draft complete** |
-| Debugging Techniques | Markdown + exercises | **Draft complete** |
-| Reading Error Messages | *(folded into Debugging)* | **Draft complete** |
+## Detailed Delivery Timeline
 
-### Tier 3: Professional Practices
-| Topic | Format | Status |
-|-------|--------|--------|
-| Build Pipelines | Markdown (concept focus, light on tooling) | **Draft complete** |
-| O11y: Understanding Your Code | Markdown (logs, metrics, Grafana basics) | **Draft complete** |
-| Iterative Design | Markdown + case studies | **Draft complete** |
-| Timeless Principles | Markdown (KISS, DRY, GIGO, YAGNI, etc.) | **Draft complete** |
-| Communication | Markdown (READMEs, comments, commit messages) | **Draft complete** |
-| Ethics in Software | Discussion guide | **Draft complete** |
+### Pre-Program: Kick-off Weekend
 
-## Topic Details
+Light-touch welcome event:
+- Introductions and tone-setting
+- **Homework assigned**: Module 00 (Development Environment setup)
+- Ensure everyone arrives Day 1 ready to work
 
-### Build Pipelines (formerly CI)
-Focus on the concept: computers automatically verify your work. Students should understand:
-- What happens when you push code
-- Why automated checks catch problems early
-- Basic awareness of GitHub Actions (mentors help with configuration)
+### Week 1, Days 1-2: Core Skills Bootcamp
 
-### O11y: Understanding What Your Code Is Doing
-Observability for beginners. Cover:
-- Print debugging and logging
-- Reading and understanding error messages
-- Introduction to metrics and dashboards
-- Grafana basics (LLMs make setup accessible now)
-- Applies to web services students will deploy
+**Day 1: Foundations** (~5 hours)
 
-### Timeless Principles
-Engineering wisdom that transcends any specific technology:
-- **KISS** - Keep It Simple, Stupid
-- **DRY** - Don't Repeat Yourself
-- **GIGO** - Garbage In, Garbage Out
-- **YAGNI** - You Aren't Gonna Need It
-- **Separation of Concerns**
-- **Fail Fast**
+| Time | Content | Module |
+|------|---------|--------|
+| Morning | Development environment check | 00 (verify homework) |
+| | What is source code? | 01 |
+| | GitHub account setup | 02 |
+| Afternoon | Understanding diffs | 03 + demo |
+| | Your first commit | 04 |
 
-These principles predate and will outlast any framework or language.
+**Day 2: Collaboration** (~5 hours)
 
-### Communication
-Writing for humans (including your future self):
-- README files that actually help
-- Commit messages that explain "why"
-- Comments: when to write them, when not to
-- Documentation as a form of respect
+| Time | Content | Module |
+|------|---------|--------|
+| Morning | Branches and merging | 05 + demo |
+| | Pull requests & code review | 06 |
+| Afternoon | Debugging techniques | 08 |
+| | Iterative design mindset | 12 |
 
-### Dependencies & Packages
-Nearly every project uses external code:
-- What `npm install` / `pip install` actually does
-- Why dependencies exist (don't reinvent wheels)
-- Risks: security, maintenance, bloat
-- Lock files and reproducibility
+### Week 1, Days 3-5: Ideation & Project Launch
 
-## Explicitly Out of Scope
+- Days 3-4: Project ideation, team formation, scoping
+- Day 5: Projects begin — first commits, initial structure
 
-These topics are deferred or handled through mentorship and inquiry-based learning:
+### Weeks 2-3: Just-in-Time Learning
 
-- **Advanced Git** (rebasing, cherry-picking, complex merges) - mentors or LLMs assist as needed
-- **Design Patterns** - emerge naturally through project work and guided inquiry
-- **Language-specific deep dives** - covered in project context, not abstractly
+Embed 30-45 minute sessions when teams encounter relevant needs:
+
+| Trigger | Module | Topic |
+|---------|--------|-------|
+| First test written | 07 | Testing Fundamentals |
+| First `npm install` / `pip install` | 09 | Dependencies & Packages |
+| First deployment or CI setup | 10 | Build Pipelines |
+| Debugging production issues | 11 | O11y: Understanding Your Code |
+| Code complexity growing | 13 | Timeless Principles |
+| Before major PR review | 14 | Communication |
+
+### Week 4: Polish & Present
+
+| Day | Focus |
+|-----|-------|
+| Days 1-3 | Final development, bug fixes, polish |
+| Day 4 | Ethics discussion (Module 15) + demo prep |
+| Day 5 | **Demo Day** |
+
+---
+
+## Module Inventory
+
+### Tier 1: Foundations (Front-loaded)
+
+| # | Module | Time | Status |
+|---|--------|------|--------|
+| 00 | Your Development Environment | 20 min | **Complete** |
+| 01 | What is Source Code? | 20 min | **Complete** |
+| 02 | GitHub Setup Guide | 30 min | **Complete** |
+| 03 | Understanding Diffs | 25 min | **Complete** |
+| 04 | Your First Commit | 30 min | **Complete** |
+
+### Tier 2: Collaboration & Quality (Mixed delivery)
+
+| # | Module | Time | Delivery | Status |
+|---|--------|------|----------|--------|
+| 05 | Branches and Merging | 30 min | Front-loaded | **Complete** |
+| 06 | Pull Requests | 30 min | Front-loaded | **Complete** |
+| 07 | Testing Fundamentals | 25 min | Just-in-time | **Complete** |
+| 08 | Debugging Techniques | 25 min | Front-loaded | **Complete** |
+| 09 | Dependencies & Packages | 20 min | Just-in-time | **Complete** |
+
+### Tier 3: Professional Practices (Just-in-time + Capstone)
+
+| # | Module | Time | Delivery | Status |
+|---|--------|------|----------|--------|
+| 10 | Build Pipelines | 20 min | Just-in-time | **Complete** |
+| 11 | O11y: Understanding Your Code | 25 min | Just-in-time | **Complete** |
+| 12 | Iterative Design | 20 min | Front-loaded | **Complete** |
+| 13 | Timeless Principles | 25 min | Just-in-time | **Complete** |
+| 14 | Communication | 20 min | Just-in-time | **Complete** |
+| 15 | Ethics in Software | 45 min | Capstone | **Complete** |
+
+### Interactive Demos
+
+| File | Accompanies |
+|------|-------------|
+| diffs-demo.html | Module 03 |
+| branches-demo.html | Module 05 |
+
+---
+
+## Time Budget Summary
+
+| Phase | SWE Content | Notes |
+|-------|-------------|-------|
+| Pre-program homework | ~30 min | Module 00 |
+| Days 1-2 bootcamp | ~5-6 hours | Core skills |
+| Weeks 2-3 embedded | ~2-3 hours | As-needed mini-sessions |
+| Week 4 capstone | ~45 min | Ethics discussion |
+| **Total** | **~8-10 hours** | Distributed across 4 weeks |
+
+---
 
 ## Development Tasks
 
-### Immediate
+### Completed
 - [x] Review and finalize topic inclusion list
-- [x] Create GitHub setup guide (highest priority for Day 1)
-- [x] Develop "What is Source Code?" module
-- [x] Build interactive diff viewer demo
+- [x] Complete all 16 modules (Tiers 1-3)
+- [x] Build interactive demos (diffs, branches)
+- [x] Restructure for 4-week program
 
-### Near-term
-- [x] Complete Tier 1 modules
-- [x] Draft Tier 2 content
-- [x] Draft Tier 3 content
+### Remaining
 - [ ] Design hands-on exercises for each module
-
-### Later
-- [x] Interactive presentations (diffs-demo.html, branches-demo.html)
 - [ ] Assessment/quiz materials
 - [ ] Instructor notes and facilitation guides
+- [ ] Integrate with LLM track syllabus
+
+---
 
 ## Open Questions
 
@@ -138,18 +166,17 @@ These topics are deferred or handled through mentorship and inquiry-based learni
    - Could use pseudocode or multiple languages
    - TypeScript aligns with web-focused projects
 
-2. ~~**Ethics module approach?**~~ ✓ Resolved
-   - Discussion guide format with case studies and role-play suggestions
-   - Covers: bias, privacy, accessibility, dark patterns, environment, AI attribution
-
-3. **Assessment strategy?**
+2. **Assessment strategy?**
    - Completion-based (did they do it?)
    - Competency-based (can they explain it?)
    - Portfolio evidence (apply it to their project)
 
+---
+
 ## Notes
 
-- All materials should work for students with zero programming background
-- Skilled mentor support assumed; materials support, not replace, human guidance
-- Principles apply beyond coding: marketing, science, business projects all benefit
-- LLM curriculum is a parallel track; bootcamp syllabus integrates both appropriately
+- All materials work for students with zero programming background
+- Skilled mentor support assumed; materials support, not replace, guidance
+- Principles apply beyond coding: marketing, science, business projects
+- LLM curriculum is a parallel track; bootcamp syllabus integrates both
+- 4-week duration (GHS requirement: minimum 25 hours/week, logged via SchoolLinks)
