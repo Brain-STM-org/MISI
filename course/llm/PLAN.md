@@ -99,7 +99,7 @@ Embed 30-45 minute sessions as teams encounter relevant needs:
 
 | # | Module | Time | Status |
 |---|--------|------|--------|
-| 00 | What Is Machine Intelligence? | 25 min | Not started |
+| 00 | What Is Machine Intelligence? | 25 min | **Complete** |
 | 01 | How LLMs Work (Conceptually) | 30 min | Not started |
 | 02 | The Capability Inflection Point | 20 min | Not started |
 | 03 | Capabilities & Limitations | 25 min | Not started |
@@ -184,7 +184,7 @@ Referenced in Module 14.
 - [x] Record stakeholder decisions (security depth, tool choices, etc.)
 
 ### In Progress
-- [ ] Develop Module 00: What Is Machine Intelligence?
+- [x] Develop Module 00: What Is Machine Intelligence? — **Complete**
 - [ ] Develop Module 01: How LLMs Work (Conceptually)
 
 ### Remaining
