@@ -206,3 +206,9 @@ In regards to your questions:
 
 do 1 and 2.  i love the tables you made.  we will eventuall incorporate them into other content besides the curriculum.   
 regarding the multi-user aspect, it's more of a social issue than a technology issue.  we'd leave that part KISS.  you can add aspects of that to MEMORY.
+
+---
+
+## 2026-01-21T03:08:27Z
+
+work through the course/swe modules and review how they must change per the 4-week update

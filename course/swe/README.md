@@ -20,15 +20,23 @@ Software engineering principles are universal. Whether building a data pipeline,
 
 ## Curriculum Overview
 
-**Total estimated time: 9-10 hours** (delivered across Days 1-3)
+**Total estimated time: ~8-10 hours** (distributed across 4-week program)
 
 This is one of two parallel content tracks:
 - **SWE Fundamentals** (this track) — Core engineering principles, tools, and practices
 - **LLM-Assisted Development** (separate track) — Effective use of AI coding assistants
 
+### Delivery Model
+
+| Phase | Modules | When |
+|-------|---------|------|
+| **Front-loaded** | 00, 01, 02, 03, 04, 05, 06, 08, 12 | Week 1, Days 1-2 |
+| **Just-in-time** | 07, 09, 10, 11, 13, 14 | Weeks 2-3, as needed |
+| **Capstone** | 15 | Week 4, Day 4 |
+
 ---
 
-## Tier 1: Foundations (Day 1)
+## Tier 1: Foundations (Week 1, Day 1)
 
 *Estimated time: 2.5-3 hours*
 
@@ -45,35 +53,35 @@ This is one of two parallel content tracks:
 
 ---
 
-## Tier 2: Collaboration & Quality (Day 2)
+## Tier 2: Collaboration & Quality (Week 1, Day 2 + Just-in-time)
 
 *Estimated time: 2.5-3 hours*
 
-| # | Module | Time | Description |
-|---|--------|------|-------------|
-| 05 | [Branches and Merging](05-branches-and-merging.md) | 30 min | Parallel timelines, isolation, merging |
-| 06 | [Pull Requests](06-pull-requests.md) | 30 min | The collaboration workflow, code review |
-| 07 | [Testing Fundamentals](07-testing-fundamentals.md) | 25 min | Why test, types of tests, the testing mindset |
-| 08 | [Debugging Techniques](08-debugging-techniques.md) | 25 min | Reading errors, systematic debugging, using AI to help |
-| 09 | [Dependencies & Packages](09-dependencies-packages.md) | 20 min | npm, pip, evaluating when to add dependencies |
+| # | Module | Time | Delivery | Description |
+|---|--------|------|----------|-------------|
+| 05 | [Branches and Merging](05-branches-and-merging.md) | 30 min | Day 2 | Parallel timelines, isolation, merging |
+| 06 | [Pull Requests](06-pull-requests.md) | 30 min | Day 2 | The collaboration workflow, code review |
+| 07 | [Testing Fundamentals](07-testing-fundamentals.md) | 25 min | Just-in-time | Why test, types of tests, the testing mindset |
+| 08 | [Debugging Techniques](08-debugging-techniques.md) | 25 min | Day 2 | Reading errors, systematic debugging, using AI to help |
+| 09 | [Dependencies & Packages](09-dependencies-packages.md) | 20 min | Just-in-time | npm, pip, evaluating when to add dependencies |
 
 **Interactive demos:**
 - [branches-demo.html](branches-demo.html) — Visualize branch creation, commits, and merging
 
 ---
 
-## Tier 3: Professional Practices (Day 3)
+## Tier 3: Professional Practices (Just-in-time + Capstone)
 
 *Estimated time: 2.5-3 hours*
 
-| # | Module | Time | Description |
-|---|--------|------|-------------|
-| 10 | [Build Pipelines](10-build-pipelines.md) | 20 min | Automated verification, CI/CD concepts |
-| 11 | [O11y: Understanding Your Code](11-o11y-understanding-your-code.md) | 25 min | Logs, metrics, dashboards, Grafana basics |
-| 12 | [Iterative Design](12-iterative-design.md) | 20 min | MVPs, shipping early, fighting perfectionism |
-| 13 | [Timeless Principles](13-timeless-principles.md) | 25 min | KISS, DRY, GIGO, YAGNI, Fail Fast |
-| 14 | [Communication](14-communication.md) | 20 min | READMEs, commit messages, comments |
-| 15 | [Ethics in Software](15-ethics-in-software.md) | 45 min | Discussion guide: bias, privacy, accessibility, dark patterns |
+| # | Module | Time | Delivery | Description |
+|---|--------|------|----------|-------------|
+| 10 | [Build Pipelines](10-build-pipelines.md) | 20 min | Just-in-time | Automated verification, CI/CD concepts |
+| 11 | [O11y: Understanding Your Code](11-o11y-understanding-your-code.md) | 25 min | Just-in-time | Logs, metrics, dashboards, Grafana basics |
+| 12 | [Iterative Design](12-iterative-design.md) | 20 min | Day 2 | MVPs, shipping early, fighting perfectionism |
+| 13 | [Timeless Principles](13-timeless-principles.md) | 25 min | Just-in-time | KISS, DRY, GIGO, YAGNI, Fail Fast |
+| 14 | [Communication](14-communication.md) | 20 min | Just-in-time | READMEs, commit messages, comments |
+| 15 | [Ethics in Software](15-ethics-in-software.md) | 45 min | Capstone | Discussion guide: bias, privacy, accessibility, dark patterns |
 
 ---
 

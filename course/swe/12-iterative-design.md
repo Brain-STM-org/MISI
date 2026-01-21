@@ -36,10 +36,9 @@ Six weeks later: you've built half of one feature. It's not quite right. You kee
 What if, instead:
 
 **Week 1:** Build the simplest possible version. It works but it's ugly.
-**Week 2:** Show it to someone. They have feedback. Incorporate it.
-**Week 3:** Add one more feature. The most important one.
-**Week 4:** More feedback. More improvements.
-**Week 5:** Polish what exists. Ship.
+**Week 2:** Show it to someone. They have feedback. Add the most important feature.
+**Week 3:** More feedback. More improvements. Core features complete.
+**Week 4:** Polish what exists. Ship.
 
 You end up with something:
 - Actually working
@@ -177,7 +176,7 @@ Each cycle is short — days or a week, not months.
 
 ## Iteration in Your Projects
 
-For MISI projects, iteration is essential. You have five weeks. Here's a framework:
+For MISI projects, iteration is essential. You have four weeks. Here's a framework:
 
 ### Week 1: Define and Build MVP
 
@@ -189,15 +188,16 @@ For MISI projects, iteration is essential. You have five weeks. Here's a framewo
 
 - Show the MVP to mentors, teammates, potential users
 - Gather reactions: What works? What's confusing? What's missing?
-- Prioritize: What's the one thing to improve?
+- Add the highest-priority improvement
 
-### Week 3-4: Expand and Refine
+### Week 3: Expand and Refine
 
 - Add features based on feedback
 - Each addition: build, show, learn
 - Resist the urge to add everything — prioritize ruthlessly
+- Feature freeze by end of week
 
-### Week 5: Polish and Ship
+### Week 4: Polish and Ship
 
 - No new features
 - Fix bugs
@@ -244,15 +244,15 @@ This mindset is actually braver. Shipping requires vulnerability.
 
 ---
 
-## Case Study: The Five-Week Project
+## Case Study: The Four-Week Project
 
 **The Vision:** A web app that helps students find study partners based on their courses and schedules.
 
 **The Perfection Trap Approach:**
-- Week 1-2: Design everything — all screens, all features, database schema
-- Week 3: Start building, realize design doesn't work
-- Week 4: Redesign while building, falling behind
-- Week 5: Frantically trying to finish, ship broken product
+- Week 1: Design everything — all screens, all features, database schema
+- Week 2: Start building, realize design doesn't work
+- Week 3: Redesign while building, falling behind
+- Week 4: Frantically trying to finish, ship broken product
 
 **The Iterative Approach:**
 
@@ -264,21 +264,16 @@ This mindset is actually braver. Shipping requires vulnerability.
 Ship Friday.
 
 *Week 2:*
-Feedback: "I want to contact people."
-Add: Email or contact link for each person.
+Feedback: "I want to contact people" and "Hard to find my course."
+Add: Contact links + filter/search by course.
 Ship Friday.
 
 *Week 3:*
-Feedback: "It's hard to find people in my specific course."
-Add: Filter/search by course.
-Ship Friday.
-
-*Week 4:*
 Feedback: "It looks rough."
 Add: Better styling, clearer layout.
-Ship Friday.
+Ship Friday. Feature freeze.
 
-*Week 5:*
+*Week 4:*
 Polish, test, fix bugs, prepare presentation.
 Ship final.
 

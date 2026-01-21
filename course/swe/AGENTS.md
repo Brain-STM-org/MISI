@@ -29,25 +29,27 @@ This folder contains software engineering curriculum for MISI (Machine Intellige
 
 This is the SWE Fundamentals track. A parallel LLM-Assisted Development track exists separately. Both can be followed independently; the bootcamp syllabus weaves them together.
 
-### Tier 1: Foundations
-1. **Source Code & Text Files** - What code actually is, why plain text matters
-2. **Diffs & Changes** - Understanding what changed and why
-3. **Revision Control** - Git basics, commits, branches, history
-4. **GitHub Workflows** - Repos, pull requests, issues, collaboration
+### Tier 1: Foundations (Week 1, Day 1)
+- **00 Development Environment** - Terminal basics, VS Code, GUI vs CLI
+- **01 Source Code** - What code is, plain text, transformation to execution
+- **02 GitHub Setup** - Account creation, 2FA, tools installation
+- **03 Understanding Diffs** - Reading changes, essential for AI-assisted work
+- **04 Your First Commit** - The edit → stage → commit → push cycle
 
-### Tier 2: Core Concepts
-5. **Dependencies & Packages** - npm, pip, why external code matters, risks
-6. **Testing** - Why test, types of tests, writing effective tests
-7. **Debugging Techniques** - Systematic approaches to finding problems
-8. **Reading Error Messages** - Practical skill, often undertaught
+### Tier 2: Collaboration & Quality (Week 1, Day 2 + Just-in-time)
+- **05 Branches and Merging** - Parallel timelines, isolation, merging
+- **06 Pull Requests** - Collaboration workflow, code review
+- **07 Testing Fundamentals** - Why test, types of tests, testing mindset (just-in-time)
+- **08 Debugging Techniques** - Reading errors, systematic debugging, AI assistance
+- **09 Dependencies & Packages** - npm, pip, evaluating dependencies (just-in-time)
 
-### Tier 3: Professional Practices
-9. **Build Pipelines** - Automated checks (concept focus, light on tooling)
-10. **O11y: Understanding Your Code** - Logs, metrics, Grafana basics for web services
-11. **Iterative Design** - Ship early, learn, improve
-12. **Timeless Principles** - KISS, DRY, GIGO, YAGNI, Fail Fast, Separation of Concerns
-13. **Communication** - READMEs, commit messages, comments, writing for future humans
-14. **Ethics** - Responsibility, bias, privacy, environmental impact
+### Tier 3: Professional Practices (Just-in-time + Capstone)
+- **10 Build Pipelines** - Automated verification, CI/CD concepts
+- **11 O11y** - Logs, metrics, dashboards, Grafana basics
+- **12 Iterative Design** - MVPs, shipping early, fighting perfectionism
+- **13 Timeless Principles** - KISS, DRY, GIGO, YAGNI, Fail Fast, Separation of Concerns
+- **14 Communication** - READMEs, commit messages, comments
+- **15 Ethics** - Bias, privacy, accessibility, dark patterns (Week 4 capstone)
 
 ### Out of Scope
 - Advanced Git (rebasing, cherry-picking) - mentors/LLMs assist as needed
