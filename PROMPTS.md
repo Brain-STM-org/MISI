@@ -312,3 +312,18 @@ Create a README.md in course/ which presents the two tracks and describes how th
 I want you to continue in this dual-persona agent loop, but we are going to convert the markdown into slide presentations that are in HTML+Typescript built with Vite and deployed with the GitHub actions.  You will create course/PLAN.md for this covering both tracks.  The slidedeck-oriented scaffolding might be shared between the two so we want to ensure commonality is lifted to the course folder. 
 
 Update this documentation, ask any questions, then we might proceed
+
+---
+
+## 2026-01-21T14:37:07Z
+
+1. slidev looks great.  i like the flexibility of HTML+Typescript for custom features in presentations, but I also recognize separating content from function, which was missing in my previous attempts.  Vue is fine and we don't have to use Vite if something else is better.   
+2. there might be some dynamic content, but demos can be launch in a seperate browser window and not a direct concern of the slideshow (we migth develop them in parallel and they support each other)
+3. I found slide notes useful to give extra context for those who were not present live.  So let's include that.  But otherwise, KISS.
+4. Certainly, we want it to work offline
+5. I defer to Dr Vasquez to decide the density given the slide's context, but I do lean toward lighter slides with more speaker notes and vocal exposition.
+6. reveals only if appropraite, Dr Vasquez understands that we use dynamicism to communicate, not just for show.
+7. start with SWE.
+8. deep dive in one track
+
+to start you can use the folder course/swe/deck to hold the presentation and all the tracks can go in there.  there can be a master module selector page for the track, but also each module should be able to work in isolation.

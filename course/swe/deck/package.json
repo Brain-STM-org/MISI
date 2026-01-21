@@ -1,0 +1,46 @@
+{
+  "name": "misi-swe-slides",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "slidev -p 8080",
+    "dev:00": "slidev -p 8080 modules/00-environment.md",
+    "dev:01": "slidev -p 8080 modules/01-source-code.md",
+    "dev:02": "slidev -p 8080 modules/02-github-setup.md",
+    "dev:03": "slidev -p 8080 modules/03-understanding-diffs.md",
+    "dev:04": "slidev -p 8080 modules/04-first-commit.md",
+    "dev:05": "slidev -p 8080 modules/05-branches-merging.md",
+    "dev:06": "slidev -p 8080 modules/06-pull-requests.md",
+    "dev:07": "slidev -p 8080 modules/07-testing.md",
+    "dev:08": "slidev -p 8080 modules/08-debugging.md",
+    "dev:09": "slidev -p 8080 modules/09-dependencies.md",
+    "dev:10": "slidev -p 8080 modules/10-build-pipelines.md",
+    "dev:11": "slidev -p 8080 modules/11-o11y.md",
+    "dev:12": "slidev -p 8080 modules/12-iterative-design.md",
+    "dev:13": "slidev -p 8080 modules/13-timeless-principles.md",
+    "dev:14": "slidev -p 8080 modules/14-communication.md",
+    "dev:15": "slidev -p 8080 modules/15-ethics.md",
+    "build": "npm run build:index && npm run build:00",
+    "build:index": "slidev build --base /course/swe/deck/ --out dist",
+    "build:00": "slidev build modules/00-environment.md --base /course/swe/deck/00/ --out ../dist/00",
+    "build:01": "slidev build modules/01-source-code.md --base /course/swe/deck/01/ --out ../dist/01",
+    "build:02": "slidev build modules/02-github-setup.md --base /course/swe/deck/02/ --out ../dist/02",
+    "build:03": "slidev build modules/03-understanding-diffs.md --base /course/swe/deck/03/ --out ../dist/03",
+    "build:04": "slidev build modules/04-first-commit.md --base /course/swe/deck/04/ --out ../dist/04",
+    "build:05": "slidev build modules/05-branches-merging.md --base /course/swe/deck/05/ --out ../dist/05",
+    "build:06": "slidev build modules/06-pull-requests.md --base /course/swe/deck/06/ --out ../dist/06",
+    "build:07": "slidev build modules/07-testing.md --base /course/swe/deck/07/ --out dist/07",
+    "build:08": "slidev build modules/08-debugging.md --base /course/swe/deck/08/ --out dist/08",
+    "build:modules": "npm run build:00 && npm run build:01 && npm run build:02 && npm run build:03 && npm run build:04 && npm run build:05 && npm run build:06 && npm run build:07 && npm run build:08",
+    "build:all": "npm run build:index && npm run build:modules",
+    "serve": "npx vite serve dist --port 8080",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.50.0",
+    "@slidev/theme-default": "latest"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.40.0"
+  }
+}

@@ -134,11 +134,39 @@ The combination is more powerful than either alone.
 
 ---
 
-## Development Status
+## Development
+
+### Build Instructions
+
+The slide presentations use [Slidev](https://sli.dev/), a markdown-based presentation framework.
+
+**Prerequisites:**
+- Node.js 18+
+- npm
+
+**SWE Track Slides:**
+
+```bash
+cd swe/deck
+npm install
+
+# Development (live reload)
+npm run dev              # Module selector
+npm run dev:00           # Specific module
+
+# Build for production
+npm run build:index      # Build module selector
+npm run build:00         # Build specific module
+npm run build:all        # Build all modules
+```
+
+Built slides output to `swe/deck/dist/` and are configured for deployment at `/misi/course/swe/deck/`.
+
+### Development Status
 
 | Track | Modules | Content Status | Slides |
 |-------|---------|----------------|--------|
-| SWE | 16/16 | Complete | Pending |
+| SWE | 16/16 | Complete | In progress (9/16) |
 | LLM | 18/18 | Complete (pending review) | Pending |
 
-**Next phase**: Convert markdown modules to HTML+TypeScript slide presentations. See `PLAN.md` for details.
+**Current work**: Converting SWE modules to Slidev presentations. See `PLAN.md` for details.

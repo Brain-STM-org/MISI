@@ -2,9 +2,15 @@
 
 ## Overview
 
-Convert markdown curriculum modules into interactive slide presentations built with HTML+TypeScript, bundled with Vite, and deployed via GitHub Actions.
+Convert markdown curriculum modules into interactive slide presentations using **Slidev** — a markdown-based presentation framework that separates content from presentation logic while allowing Vue/TypeScript customization when needed.
 
-Both tracks (SWE and LLM) share common presentation infrastructure to ensure consistency and reduce maintenance burden.
+**Key decisions:**
+- **Framework**: Slidev (markdown-native, Vue-based, offline-capable)
+- **Demos**: Launched in separate browser windows, not embedded
+- **Notes**: Speaker notes included for async viewers
+- **Density**: Lighter slides, more speaker notes (per Dr. Vasquez judgment)
+- **Animation**: Reveals only when pedagogically appropriate
+- **Development order**: SWE track first, deep dive
 
 ---
 
@@ -14,41 +20,26 @@ Both tracks (SWE and LLM) share common presentation infrastructure to ensure con
 course/
 ├── README.md                 # Track overview and integration guide
 ├── PLAN.md                   # This file
-├── slides/                   # Shared presentation infrastructure
-│   ├── package.json          # Vite + dependencies
-│   ├── vite.config.ts        # Build configuration
-│   ├── tsconfig.json         # TypeScript configuration
-│   ├── src/
-│   │   ├── core/             # Shared slide engine
-│   │   │   ├── Slide.ts      # Base slide component
-│   │   │   ├── Deck.ts       # Deck navigation/state
-│   │   │   ├── CodeBlock.ts  # Syntax highlighting
-│   │   │   ├── Diagram.ts    # ASCII/SVG diagram rendering
-│   │   │   └── Progress.ts   # Navigation/progress UI
-│   │   ├── themes/           # Visual themes
-│   │   │   ├── misi.css      # Base MISI theme
-│   │   │   └── print.css     # Print/PDF styles
-│   │   └── components/       # Reusable slide components
-│   │       ├── LearningObjectives.ts
-│   │       ├── KeyInsights.ts
-│   │       ├── Exercise.ts
-│   │       ├── ReflectionQuestions.ts
-│   │       └── Quote.ts
-│   └── public/               # Static assets
-│       └── images/
-├── swe/                      # SWE track (existing markdown)
-│   ├── slides/               # Generated/authored slide decks
-│   │   ├── 00-environment/
-│   │   ├── 01-source-code/
-│   │   └── ...
-│   └── *.md                  # Source markdown
-└── llm/                      # LLM track (existing markdown)
-    ├── slides/               # Generated/authored slide decks
-    │   ├── 00-machine-intelligence/
-    │   ├── 01-how-llms-work/
-    │   └── ...
-    └── *.md                  # Source markdown
+├── swe/
+│   ├── *.md                  # Source curriculum (reference)
+│   ├── deck/                 # Slidev presentation
+│   │   ├── package.json      # Slidev + dependencies
+│   │   ├── slides.md         # Module selector / index
+│   │   ├── modules/          # Individual module decks
+│   │   │   ├── 00-environment.md
+│   │   │   ├── 01-source-code.md
+│   │   │   └── ...
+│   │   ├── components/       # Custom Vue components
+│   │   ├── styles/           # Theme customization
+│   │   └── public/           # Static assets
+│   └── *.html                # Interactive demos (existing)
+└── llm/
+    ├── *.md                  # Source curriculum (reference)
+    └── deck/                 # Slidev presentation (future)
+        └── ...
 ```
+
+Each module deck works in isolation AND can be accessed from a master selector page.
 
 ---
 
