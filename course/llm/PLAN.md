@@ -109,29 +109,29 @@ Embed 30-45 minute sessions as teams encounter relevant needs:
 
 | # | Module | Time | Delivery | Status |
 |---|--------|------|----------|--------|
-| 05 | Reading AI-Generated Code | 30 min | Front-loaded | Not started |
-| 06 | Prompting Fundamentals | 35 min | Front-loaded | Not started |
-| 07 | Multi-Modal Models | 25 min | Front-loaded | Not started |
-| 08 | Reasoning Models | 25 min | Front-loaded | Not started |
-| 09 | Context & Memory | 20 min | Just-in-time | Not started |
+| 05 | Reading AI-Generated Code | 30 min | Front-loaded | **Complete** |
+| 06 | Prompting Fundamentals | 35 min | Front-loaded | **Complete** |
+| 07 | Multi-Modal Models | 25 min | Front-loaded | **Complete** |
+| 08 | Reasoning Models | 25 min | Front-loaded | **Complete** |
+| 09 | Context & Memory | 20 min | Just-in-time | **Complete** |
 
 ### Tier 3: Agentic Development (Just-in-time)
 
 | # | Module | Time | Delivery | Status |
 |---|--------|------|----------|--------|
-| 10 | Prompt Injection & AI Security | 40 min | Just-in-time (REQUIRED) | Not started |
-| 11 | Agentic Loops | 30 min | Just-in-time | Not started |
-| 12 | Developer Workflows | 25 min | Just-in-time | Not started |
-| 13 | The Human-AI Partnership | 30 min | Just-in-time | Not started |
-| 14 | Iterating with AI | 25 min | Just-in-time | Not started |
+| 10 | Prompt Injection & AI Security | 40 min | Just-in-time (REQUIRED) | **Complete** |
+| 11 | Agentic Loops | 30 min | Just-in-time | **Complete** |
+| 12 | Developer Workflows | 25 min | Just-in-time | **Complete** |
+| 13 | The Human-AI Partnership | 30 min | Just-in-time | **Complete** |
+| 14 | Iterating with AI | 25 min | Just-in-time | **Complete** |
 
 ### Tier 4: Judgment & Ethics (Woven + Capstone)
 
 | # | Module | Time | Delivery | Status |
 |---|--------|------|----------|--------|
-| 15 | Bias & Fairness | 30 min | Capstone | Not started |
-| 16 | Privacy & Data | 25 min | Capstone | Not started |
-| 17 | The Future of Work | 30 min | Capstone | Not started |
+| 15 | Bias & Fairness | 30 min | Capstone | **Complete** |
+| 16 | Privacy & Data | 25 min | Capstone | **Complete** |
+| 17 | The Future of Work | 30 min | Capstone | **Complete** |
 
 ---
 
@@ -184,15 +184,15 @@ Referenced in Module 14.
 - [x] Record stakeholder decisions (security depth, tool choices, etc.)
 
 ### In Progress
-- [x] Develop Module 00: What Is Machine Intelligence? — **Complete**
-- [x] Develop Module 01: How LLMs Work (Conceptually) — **Complete**
-- [x] Develop Module 02: The Capability Inflection Point — **Complete**
-- [x] Develop Module 03: Capabilities & Limitations — **Complete**
-- [x] Develop Module 04: Your First Conversation — **Complete** ← TIER 1 COMPLETE
-- [ ] Develop Module 05: Reading AI-Generated Code
+- [x] Develop Tier 1: Foundations (Modules 00-04) — **Complete**
+- [x] Develop Tier 2: Practical Skills (Modules 05-09) — **Complete**
+- [x] Develop Tier 3: Agentic Development (Modules 10-14) — **Complete**
+- [x] Develop Tier 4: Judgment & Ethics (Modules 15-17) — **Complete**
+
+**All 18 modules complete.**
 
 ### Remaining
-- [ ] Complete all 18 modules
+- [x] Complete all 18 modules — **DONE**
 - [ ] Design hands-on exercises for each module
 - [ ] Build interactive demos (prompt injection sandbox, etc.)
 - [ ] Create security exercise environment (controlled prompt injection)
