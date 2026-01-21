@@ -169,3 +169,9 @@ that was really nice, let's advance to tier 3.
 ## 2026-01-20T23:58:23Z
 
 please write your persona prompt to the file personas/CURRICULUM_DESIGNER.md
+
+---
+
+## 2026-01-21T00:09:07Z
+
+please review the modules and update the README.md to reference them.  make an estimated amount of time for each module 
