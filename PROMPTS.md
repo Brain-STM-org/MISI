@@ -327,3 +327,9 @@ Update this documentation, ask any questions, then we might proceed
 8. deep dive in one track
 
 to start you can use the folder course/swe/deck to hold the presentation and all the tracks can go in there.  there can be a master module selector page for the track, but also each module should be able to work in isolation.
+
+---
+
+## 2026-01-21T16:48:13Z
+
+personas, introduce yourselves and your agentic loop in personas/README.md, including links to your files.
