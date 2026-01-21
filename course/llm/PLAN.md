@@ -100,7 +100,7 @@ Embed 30-45 minute sessions as teams encounter relevant needs:
 | # | Module | Time | Status |
 |---|--------|------|--------|
 | 00 | What Is Machine Intelligence? | 25 min | **Complete** |
-| 01 | How LLMs Work (Conceptually) | 30 min | Not started |
+| 01 | How LLMs Work (Conceptually) | 30 min | **Complete** |
 | 02 | The Capability Inflection Point | 20 min | Not started |
 | 03 | Capabilities & Limitations | 25 min | Not started |
 | 04 | Your First Conversation | 35 min | Not started |
@@ -185,7 +185,8 @@ Referenced in Module 14.
 
 ### In Progress
 - [x] Develop Module 00: What Is Machine Intelligence? — **Complete**
-- [ ] Develop Module 01: How LLMs Work (Conceptually)
+- [x] Develop Module 01: How LLMs Work (Conceptually) — **Complete**
+- [ ] Develop Module 02: The Capability Inflection Point
 
 ### Remaining
 - [ ] Complete all 18 modules

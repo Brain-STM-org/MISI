@@ -185,8 +185,8 @@ When resuming curriculum development:
 
 **Last Updated**: January 21, 2026
 **Current Focus**: Sequential module development
-**Last Iteration**: 5 (Elena) — Module 00 complete
-**Next Action**: Develop Module 01: How LLMs Work (Conceptually)
+**Last Iteration**: 5 (Elena) — Module 01 complete
+**Next Action**: Develop Module 02: The Capability Inflection Point
 
 ---
 
