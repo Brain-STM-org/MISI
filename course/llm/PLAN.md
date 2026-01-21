@@ -101,9 +101,9 @@ Embed 30-45 minute sessions as teams encounter relevant needs:
 |---|--------|------|--------|
 | 00 | What Is Machine Intelligence? | 25 min | **Complete** |
 | 01 | How LLMs Work (Conceptually) | 30 min | **Complete** |
-| 02 | The Capability Inflection Point | 20 min | Not started |
-| 03 | Capabilities & Limitations | 25 min | Not started |
-| 04 | Your First Conversation | 35 min | Not started |
+| 02 | The Capability Inflection Point | 20 min | **Complete** |
+| 03 | Capabilities & Limitations | 25 min | **Complete** |
+| 04 | Your First Conversation | 35 min | **Complete** |
 
 ### Tier 2: Practical Skills (Front-loaded + Just-in-time)
 
@@ -186,7 +186,10 @@ Referenced in Module 14.
 ### In Progress
 - [x] Develop Module 00: What Is Machine Intelligence? — **Complete**
 - [x] Develop Module 01: How LLMs Work (Conceptually) — **Complete**
-- [ ] Develop Module 02: The Capability Inflection Point
+- [x] Develop Module 02: The Capability Inflection Point — **Complete**
+- [x] Develop Module 03: Capabilities & Limitations — **Complete**
+- [x] Develop Module 04: Your First Conversation — **Complete** ← TIER 1 COMPLETE
+- [ ] Develop Module 05: Reading AI-Generated Code
 
 ### Remaining
 - [ ] Complete all 18 modules
