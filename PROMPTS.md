@@ -212,3 +212,9 @@ regarding the multi-user aspect, it's more of a social issue than a technology i
 ## 2026-01-21T03:08:27Z
 
 work through the course/swe modules and review how they must change per the 4-week update
+
+---
+
+## 2026-01-21T03:20:48Z
+
+update the content in docs/ to reflect a 4-week schedule
