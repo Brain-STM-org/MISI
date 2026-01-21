@@ -1,0 +1,83 @@
+version: '3'
+
+vars:
+  SWE_DECK_DIR: course/swe/deck
+  LLM_DECK_DIR: course/llm/deck
+  PUBLIC_DIR: public_html
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list
+
+  swe:deps:
+    desc: Install dependencies for swe slide deck
+    dir: '{{.SWE_DECK_DIR}}'
+    cmds:
+      - npm ci
+    sources:
+      - package.json
+      - package-lock.json
+    generates:
+      - node_modules/**/*
+
+  swe:dev-slides:
+    desc: Start the slide dev server
+    dir: '{{.SWE_DECK_DIR}}'
+    deps: [swe:deps]
+    cmds:
+      - npm run dev
+
+  swe:build-slides:
+    desc: Build all slide modules
+    dir: '{{.SWE_DECK_DIR}}'
+    deps: [swe:deps]
+    cmds:
+      - npm run build:all
+
+  llm:deps:
+    desc: Install dependencies for llm slide deck
+    dir: '{{.LLM_DECK_DIR}}'
+    cmds:
+      - npm ci
+    sources:
+      - package.json
+      - package-lock.json
+    generates:
+      - node_modules/**/*
+
+  llm:dev-slides:
+    desc: Start the LLM slide dev server
+    dir: '{{.LLM_DECK_DIR}}'
+    deps: [llm:deps]
+    cmds:
+      - npm run dev
+
+  llm:build-slides:
+    desc: Build all LLM slide modules
+    dir: '{{.LLM_DECK_DIR}}'
+    deps: [llm:deps]
+    cmds:
+      - npm run build:all
+
+  prepare:site:
+    desc: Prepare the public_html directory for deployment
+    cmds:
+      - rm -rf {{.PUBLIC_DIR}}
+      - mkdir -p {{.PUBLIC_DIR}}
+      - cp -aL ./docs/. {{.PUBLIC_DIR}}/
+      - mkdir -p {{.PUBLIC_DIR}}/course/swe
+      - cp -a {{.SWE_DECK_DIR}}/??-*.md {{.SWE_DECK_DIR}}/*.html {{.SWE_DECK_DIR}}/README.md {{.SWE_DECK_DIR}}/SCHEDULE.md {{.PUBLIC_DIR}}/course/swe
+  deploy:local:
+    desc: Build slides and prepare site for deployment
+    cmds:
+      - task: swe:build-slides
+      - task: prepare:site
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -rf {{.PUBLIC_DIR}}
+      - rm -rf {{.SWE_DECK_DIR}}/dist
+      - rm -rf {{.LLM_DECK_DIR}}/dist

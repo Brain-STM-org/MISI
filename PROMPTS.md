@@ -333,3 +333,15 @@ to start you can use the folder course/swe/deck to hold the presentation and all
 ## 2026-01-21T16:48:13Z
 
 personas, introduce yourselves and your agentic loop in personas/README.md, including links to your files.
+
+---
+
+## 2026-01-21T22:34:05Z
+
+we are working to deploy this well now.  create a taskfile.yml in the root of the directory.  we will use it to test our deploy action.  I have some updates in the deploy.yml that can be handled by a task, refactor to use tasks in that as well. then test to see if the slides are properly created
+
+---
+
+## 2026-01-21T23:00:51Z
+
+while i work on deployment end-to-end, the team is back together working on the LLM deck.  Create it in a similar fashion to the SWE deck, in folder course/llm/deck 
