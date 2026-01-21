@@ -242,3 +242,31 @@ make the same change on docs/index.html
 ## 2026-01-21T03:37:54Z
 
 review the docs folder for mobile compatibility
+
+---
+
+## 2026-01-21T11:04:29Z
+
+we are now creating the curriculum for the LLM module.  Re-evaluate all the AGENTS.md in this project to understand what we are doing, especially in the courses/llm folder.  You have two personas available in personas/   One is the primary curriculum creator, but the other is an LLM expert (especially if they lean on Simon for cutting edge work).   You will alternate between personas to develop the curriculum in a two-persona agentic loop.  Whenever either persona realizes that it needs help from the human stakeholder, it may pause the loop to ask for assistance or clarity.  You will also always stop after 6 or 7 iterations, depending on how well things are going.
+As an initial step, update courses/llm/AGENTS.md with relevant information and a higher quality prompt scaffolding for this dual-persona agentic loop process.   After I review that, we will start looping
+
+---
+
+## 2026-01-21T11:14:56Z
+
+in their kickoff meeting, Vasquez and the Willisons realize that so much has changed in the last 3 months that they should consult Simon's work.  They look at his prolific website https://simonwillison.net/ , these have reference to news as well as many projects on GitHub.  They also explore his HackerNews comments as username simonw.   Prior to any course development, they take all their findings and put it in course/llm/MEMORY.md and also amend PLAN.md and AGENTS.md as appropriate.   Use your dual-persona agentic loop to conduct this kick-off meeting.
+
+---
+
+## 2026-01-21T11:27:56Z
+
+1. we can bring it up in ethics, but not dwell on it.  the tech is here and we can't control the oligarchy but we can leverage their product to improve the world
+2. you can include hands-on exercises. 
+3. i personally have not used Simon's llm although I appreciate it.  If it helps advance the coursework (e.g. used for quick examples or demos), then that is great.  the barrier to entry is low, but it is not necessarily and massively used tool compared to Claude Code or VSCode adaptations
+4. work sequentially. 
+
+---
+
+## 2026-01-21T11:40:26Z
+
+create a course/llm/PLAN.md that scopes significant llm course planning there.  you can amend the main PLAN.md to reflect that.  we do the same for course/swe

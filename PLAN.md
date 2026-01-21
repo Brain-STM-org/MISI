@@ -16,11 +16,22 @@
 
 #### Curriculum Development
 
-- [ ] Prepare onboarding materials for AI-assisted development tools
-- [ ] Develop software engineering principles curriculum (version control, testing, code review)
-- [ ] Create project scaffolding templates with CI/CD pre-configured
+Detailed curriculum planning lives in course-specific PLAN.md files:
+
+**Software Engineering Track** → See `course/swe/PLAN.md`
+- 16 modules complete, ~8-10 hours total content
+- Remaining: hands-on exercises, assessment materials, instructor guides
+
+**LLM-Assisted Development Track** → See `course/llm/PLAN.md`
+- 18 modules defined, ~13-15 hours total content
+- Research phase complete (Simon Willison, Jan 2026)
+- Module development in progress (sequential from Module 00)
+
+**Cross-Track Integration**
+- [ ] Create unified bootcamp schedule weaving both tracks
+- [ ] Cross-reference SWE testing with LLM verification practices
 - [ ] Design workshop materials for Claude Code and AntiGravity
-- [ ] Prepare examples of effective AI prompting and iteration patterns
+- [ ] Create project scaffolding templates with CI/CD pre-configured
 
 ### Week 1: Foundation & Team Formation
 
