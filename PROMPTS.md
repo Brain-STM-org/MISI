@@ -294,3 +294,21 @@ keep rolling team!
 ## 2026-01-21T12:39:55Z
 
 yolo then next tier, i will review afterward.  you may continue for 20 iterations if you need to
+
+---
+
+## 2026-01-21T13:02:08Z
+
+i have not reviewed this yet.  before i do, i want the team to review the entire LLM course for consistency and safety
+
+---
+
+## 2026-01-21T14:18:37Z
+
+thank you for your service, team.   I am leaving the curriculum content unedited for now as I want to advance other concepts; from skim it seems great but certainly needs human deep review.  Also, FYI, we will test this live with a pre-group to see how well it works and incorporate feedback.   Add that to the main PLAN.md.
+
+Create a README.md in course/ which presents the two tracks and describes how they can be woven in the practical bootcamp context.
+
+I want you to continue in this dual-persona agent loop, but we are going to convert the markdown into slide presentations that are in HTML+Typescript built with Vite and deployed with the GitHub actions.  You will create course/PLAN.md for this covering both tracks.  The slidedeck-oriented scaffolding might be shared between the two so we want to ensure commonality is lifted to the course folder. 
+
+Update this documentation, ask any questions, then we might proceed

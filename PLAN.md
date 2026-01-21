@@ -23,9 +23,14 @@ Detailed curriculum planning lives in course-specific PLAN.md files:
 - Remaining: hands-on exercises, assessment materials, instructor guides
 
 **LLM-Assisted Development Track** → See `course/llm/PLAN.md`
-- 18 modules defined, ~13-15 hours total content
+- 18 modules complete, ~13-15 hours total content
 - Research phase complete (Simon Willison, Jan 2026)
-- Module development in progress (sequential from Module 00)
+- All modules developed; pending human deep review
+
+**Curriculum Validation**
+- [ ] Live test with pre-group cohort before main program launch
+- [ ] Incorporate feedback from pre-group testing
+- [ ] Convert markdown modules to slide presentations (see `course/PLAN.md`)
 
 **Cross-Track Integration**
 - [ ] Create unified bootcamp schedule weaving both tracks
