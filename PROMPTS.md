@@ -163,3 +163,9 @@ Sure I like the idea of a Module 0.  It also introduces 0-based indexing ;)
 ## 2026-01-20T23:24:48Z
 
 that was really nice, let's advance to tier 3.
+
+---
+
+## 2026-01-20T23:58:23Z
+
+please write your persona prompt to the file personas/CURRICULUM_DESIGNER.md
