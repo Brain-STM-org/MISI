@@ -207,6 +207,12 @@
             font-size: 0.9rem;
             opacity: 0.9;
             transition: opacity 0.2s;
+            margin-left: 1.5rem;
+        }
+
+        .top-nav a:first-child {
+            margin-left: 0;
+            float: left;
         }
 
         .top-nav a:hover {
@@ -223,23 +229,45 @@
         }
 
         @media (max-width: 600px) {
+            .top-nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.75rem 1rem;
+            }
+            .top-nav a {
+                margin-left: 0;
+                float: none;
+                font-size: 0.8rem;
+            }
+            .hero {
+                padding: 3rem 1rem;
+            }
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
             .hero .tagline {
-                font-size: 1.1rem;
+                font-size: 1rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            section {
+                padding: 2.5rem 0;
+            }
+            h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <nav class="top-nav">
+        <a href="../index.html">← MISI Home</a>
         <a href="stakeholders.html">Information for Parents &amp; Educators</a>
     </nav>
 
     <header class="hero">
-        <p class="program-name">Machine Intelligence Senior Internship</p>
-        <h1>MISI</h1>
+        <h1>Machine Intelligence Senior Internship (MISI)</h1>
         <p class="tagline">Build Real Software with AI in 4 Weeks</p>
         <a href="#apply" class="cta">I'm Interested</a>
     </header>

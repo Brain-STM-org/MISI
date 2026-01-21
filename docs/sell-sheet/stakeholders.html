@@ -75,6 +75,12 @@
             font-size: 0.9rem;
             opacity: 0.9;
             transition: opacity 0.2s;
+            margin-left: 1.5rem;
+        }
+
+        .top-nav a:first-child {
+            margin-left: 0;
+            float: left;
         }
 
         .top-nav a:hover {
@@ -300,29 +306,66 @@
         }
 
         @media (max-width: 600px) {
+            .top-nav {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.75rem 1rem;
+            }
+            .top-nav a {
+                margin-left: 0;
+                float: none;
+                font-size: 0.8rem;
+            }
+            header {
+                padding: 2rem 1rem;
+            }
             header .container {
                 flex-direction: column;
                 text-align: center;
+            }
+            header h1 {
+                font-size: 1.25rem;
             }
             nav {
                 margin-top: 1rem;
             }
             nav a {
-                margin: 0 0.75rem;
+                margin: 0 0.5rem;
+                font-size: 0.85rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            section {
+                padding: 2rem 0;
+            }
+            .intro {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            th, td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="top-nav">
+        <a href="../index.html">← MISI Home</a>
         <a href="students.html">Student Information Page</a>
     </div>
 
     <header>
         <div class="container">
             <div>
-                <h1>Machine Intelligence Senior Internship</h1>
-                <p>Information for Parents &amp; School Administrators</p>
+                <h1>Machine Intelligence Senior Internship (MISI)</h1>
+                <p style="opacity: 1; color: #bfdbfe;">Information for Parents &amp; School Administrators</p>
             </div>
             <nav>
                 <a href="#overview">Overview</a>

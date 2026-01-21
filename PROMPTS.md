@@ -218,3 +218,27 @@ work through the course/swe modules and review how they must change per the 4-we
 ## 2026-01-21T03:20:48Z
 
 update the content in docs/ to reflect a 4-week schedule
+
+---
+
+## 2026-01-21T03:28:48Z
+
+there's no way back to the main MISI page from the sell-sheets, add links in the upper right corner
+
+---
+
+## 2026-01-21T03:34:38Z
+
+on the stakeholders sheet, the "information for parent & school adminstrators" at the top is low contrast compared to the blue background. it needs to be lighter.  also the acronym "(MISI)" can be added to the title line.  on the student sheet, also make the acronym and title should be on the same line
+
+---
+
+## 2026-01-21T03:36:41Z
+
+make the same change on docs/index.html
+
+---
+
+## 2026-01-21T03:37:54Z
+
+review the docs folder for mobile compatibility
