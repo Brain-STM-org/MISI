@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 01: What is Source Code?"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 01: What is Source Code?

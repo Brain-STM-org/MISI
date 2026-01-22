@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 04: Your First Commit"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 04: Your First Commit

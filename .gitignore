@@ -4,9 +4,10 @@
 .DS_Store
 
 # Build files
+.task
 node_modules/
 dist/
-.task
+public_html/
 
 # Temporary files
 *~

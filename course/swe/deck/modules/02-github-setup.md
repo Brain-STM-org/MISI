@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 02: GitHub Setup Guide"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 02: GitHub Setup Guide

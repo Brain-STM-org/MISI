@@ -1,8 +1,8 @@
 version: '3'
 
 vars:
-  SWE_DECK_DIR: course/swe/deck
-  LLM_DECK_DIR: course/llm/deck
+  SWE_DIR: course/swe
+  LLM_DIR: course/llm
   PUBLIC_DIR: public_html
 
 tasks:
@@ -13,7 +13,7 @@ tasks:
 
   swe:deps:
     desc: Install dependencies for swe slide deck
-    dir: '{{.SWE_DECK_DIR}}'
+    dir: '{{.SWE_DIR}}/deck'
     cmds:
       - npm ci
     sources:
@@ -24,21 +24,21 @@ tasks:
 
   swe:dev-slides:
     desc: Start the slide dev server
-    dir: '{{.SWE_DECK_DIR}}'
+    dir: '{{.SWE_DIR}}/deck'
     deps: [swe:deps]
     cmds:
       - npm run dev
 
   swe:build-slides:
     desc: Build all slide modules
-    dir: '{{.SWE_DECK_DIR}}'
+    dir: '{{.SWE_DIR}}/deck'
     deps: [swe:deps]
     cmds:
       - npm run build:all
 
   llm:deps:
     desc: Install dependencies for llm slide deck
-    dir: '{{.LLM_DECK_DIR}}'
+    dir: '{{.LLM_DIR}}/deck'
     cmds:
       - npm ci
     sources:
@@ -49,14 +49,14 @@ tasks:
 
   llm:dev-slides:
     desc: Start the LLM slide dev server
-    dir: '{{.LLM_DECK_DIR}}'
+    dir: '{{.LLM_DIR}}/deck'
     deps: [llm:deps]
     cmds:
       - npm run dev
 
   llm:build-slides:
     desc: Build all LLM slide modules
-    dir: '{{.LLM_DECK_DIR}}'
+    dir: '{{.LLM_DIR}}/deck'
     deps: [llm:deps]
     cmds:
       - npm run build:all
@@ -67,17 +67,24 @@ tasks:
       - rm -rf {{.PUBLIC_DIR}}
       - mkdir -p {{.PUBLIC_DIR}}
       - cp -aL ./docs/. {{.PUBLIC_DIR}}/
-      - mkdir -p {{.PUBLIC_DIR}}/course/swe
-      - cp -a {{.SWE_DECK_DIR}}/??-*.md {{.SWE_DECK_DIR}}/*.html {{.SWE_DECK_DIR}}/README.md {{.SWE_DECK_DIR}}/SCHEDULE.md {{.PUBLIC_DIR}}/course/swe
+      - mkdir -p {{.PUBLIC_DIR}}/course/swe/deck
+      - cp -aL {{.SWE_DIR}}/??-*.md {{.SWE_DIR}}/*.html {{.SWE_DIR}}/README.md {{.SWE_DIR}}/SCHEDULE.md {{.PUBLIC_DIR}}/course/swe
+      - cp -aL {{.SWE_DIR}}/deck/dist/* {{.PUBLIC_DIR}}/course/swe/deck
+
   deploy:local:
     desc: Build slides and prepare site for deployment
     cmds:
       - task: swe:build-slides
       - task: prepare:site
 
+  serve:local:
+    desc: Serves the complete web site locally
+    cmds:
+      - npx serve -p 8081 public_html   
+
   clean:
     desc: Clean build artifacts
     cmds:
       - rm -rf {{.PUBLIC_DIR}}
-      - rm -rf {{.SWE_DECK_DIR}}/dist
-      - rm -rf {{.LLM_DECK_DIR}}/dist
+      - rm -rf {{.SWE_DIR}}/deck/dist
+      - rm -rf {{.LLM_DIR}}/deck/dist

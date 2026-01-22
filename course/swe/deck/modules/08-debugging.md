@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 08: Debugging Techniques"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 08: Debugging Techniques

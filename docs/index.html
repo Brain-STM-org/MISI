@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <title>MISI - Machine Intelligence Senior Internship</title>
     <style>
         :root {
@@ -149,14 +153,7 @@
             font-weight: 600;
         }
 
-        .repo-link {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .repo-link a {
+        .resource-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -169,13 +166,13 @@
             transition: background 0.2s, border-color 0.2s;
         }
 
-        .repo-link a:hover {
+        .resource-link:hover {
             background: white;
             border-color: var(--primary);
             color: var(--primary);
         }
 
-        .repo-link svg {
+        .resource-link svg {
             width: 20px;
             height: 20px;
         }
@@ -259,13 +256,34 @@
                     <span class="arrow">View full details &rarr;</span>
                 </a>
             </div>
+        </section>
 
-            <div class="repo-link">
-                <a href="https://github.com/Brain-STM-org/MISI/blob/main/README.md">
+        <section class="synopsis" style="margin-top: 3rem;">
+            <h2>Building in the Open</h2>
+            <p>
+                We're developing MISI openly, using the same knowledge, tools, and workflows that students will use in the program. The curriculum is written with AI-assisted development, version-controlled on GitHub, and continuously improved based on real-world feedback.
+            </p>
+            <p>
+                This isn't just transparency—it's practicing what we teach. Explore the source, see how it's made, and follow along as we build.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; justify-content: center;">
+                <a href="https://github.com/Brain-STM-org/MISI" class="resource-link">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                     </svg>
-                    View Project on GitHub
+                    GitHub Repository
+                </a>
+                <a href="course/swe/deck/" class="resource-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                    </svg>
+                    SWE Curriculum
+                </a>
+                <a href="course/llm/deck/" class="resource-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+                    </svg>
+                    LLM Curriculum
                 </a>
             </div>
         </section>
@@ -273,7 +291,7 @@
 
     <footer>
         <p>Machine Intelligence Senior Internship (MISI)</p>
-        <p style="margin-top: 0.5rem;">An open-source program for the future of software education</p>
+        <p style="margin-top: 0.5rem;">An open-source program for the future of computing education</p>
         <p style="margin-top: 1.5rem; font-size: 0.8rem;">Copyright (c) 2026 Evan Wies</p>
     </footer>
 </body>

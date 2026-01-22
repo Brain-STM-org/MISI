@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 00: Your Development Environment"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 00: Your Development Environment

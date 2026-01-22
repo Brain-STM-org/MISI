@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 03: Understanding Diffs"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 03: Understanding Diffs

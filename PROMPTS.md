@@ -345,3 +345,76 @@ we are working to deploy this well now.  create a taskfile.yml in the root of th
 ## 2026-01-21T23:00:51Z
 
 while i work on deployment end-to-end, the team is back together working on the LLM deck.  Create it in a similar fashion to the SWE deck, in folder course/llm/deck 
+
+---
+
+## 2026-01-22T14:51:38Z
+
+i have placed a favicon at the root of this this folder.  given how we structure our project with various websites with their own roots, what is the best way to incorporate this common file across the sites?
+
+---
+
+## 2026-01-22T14:56:50Z
+
+please move it to docs and update the relevant files to use it
+
+---
+
+## 2026-01-22T15:37:37Z
+
+i want PNG with ICO fallback, and also have an apple-touch icon.   it's clear we can do that with HTML we control.  can we do that easily with slidev?  if not we can just use PNG for the slides
+
+---
+
+## 2026-01-22T15:44:06Z
+
+i have moved all the images into docs/images.  go ahead and make relevant source code changes
+
+---
+
+## 2026-01-22T15:51:54Z
+
+i'm working on the CI of that now, let's work on the marketing conten tsome
+
+---
+
+## 2026-01-22T15:55:08Z
+
+i'm working on the CI of that now, let's work on the main marketing website content.   at the bottom, let's change the tagline to "An open-source program for the future of computing education".   
+After "Learn More", let's put a section that describes that we are creating the program openly using the same knowledge, tools, and workflows we will be using in the program.   In addition to the GitHub link, have links to the SWE and LLM modules.
+
+---
+
+## 2026-01-22T16:18:02Z
+
+when serving this with npm serve, i am having problems with the nested deck URLs and also when refreshing a deck once it has advanced, having a slide number in the window bar.  it is curious how the use the URL to maintain local state.   can you please investigate this?
+
+---
+
+## 2026-01-22T16:19:58Z
+
+yes use hash router mode
+
+---
+
+## 2026-01-22T16:27:44Z
+
+can you verify that all of the deck modules have that routing settings?
+
+---
+
+## 2026-01-22T16:32:16Z
+
+can you look at swe slides.md and verify what the links in there should look like.  it's not working for me
+
+---
+
+## 2026-01-22T16:35:59Z
+
+on the rendered slides.md, the link from the markdown handling is including a hash: http://192.168.9.63:8081/course/swe/deck/#/00/
+
+---
+
+## 2026-01-22T16:38:04Z
+
+that work great, please go ahead and apply it to the llm track

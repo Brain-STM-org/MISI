@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 07: Testing Fundamentals"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 07: Testing Fundamentals

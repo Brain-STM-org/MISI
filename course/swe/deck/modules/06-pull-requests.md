@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 06: Pull Requests"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 06: Pull Requests

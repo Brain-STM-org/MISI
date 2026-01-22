@@ -1,6 +1,7 @@
 ---
 theme: default
 title: "Module 05: Branches and Merging"
+routerMode: hash
 info: |
   SWE Fundamentals - MISI
   Module 05: Branches and Merging
