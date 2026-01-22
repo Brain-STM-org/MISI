@@ -418,3 +418,9 @@ on the rendered slides.md, the link from the markdown handling is including a ha
 ## 2026-01-22T16:38:04Z
 
 that work great, please go ahead and apply it to the llm track
+
+---
+
+## 2026-01-22T17:14:35Z
+
+since we made the sell sheets and marketing, we clarified that we had two distinct tracks (swe, llm) that were front-loaded then weaved through the weeks.  ensure that we inform the importance of these foundations, combined with LLM-assistance and inquiry-based learning project focus.   update all relevant marketing material and readmes

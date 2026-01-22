@@ -104,6 +104,6 @@ This is one of two parallel content tracks:
 
 ## Related
 
+- `/course/llm/` — LLM Fundamentals track (companion curriculum)
 - `/docs/sell-sheet/` — Program overview materials
-- `/personas/CURRICULUM_DESIGNER.md` — Persona used to develop this curriculum
-- LLM-Assisted Development track (TBD)
+- `/personas/` — Personas used to develop this curriculum
