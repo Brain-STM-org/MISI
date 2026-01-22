@@ -4,20 +4,63 @@
  * Pedagogical basis: Desirable difficulties (Bjork)
  * Some struggle during learning improves retention
  * Hints available but hidden to encourage initial attempt
+ *
+ * Usage in MDX:
+ * <TryBlock>
+ *   <div slot="exercise">Try running git status in your terminal.</div>
+ *   <div slot="hint">Make sure you're in a git repository first.</div>
+ * </TryBlock>
  */
 
-import { useState } from 'react';
+import { useState, type ReactNode, Children, isValidElement } from 'react';
 
 interface TryBlockProps {
-  children: React.ReactNode;
-  hint?: React.ReactNode;
+  children?: ReactNode;
+  hint?: ReactNode;
+  hasHint?: string | boolean;
 }
 
-export function TryBlock({ children, hint }: TryBlockProps) {
+/**
+ * Extract slotted content from children
+ */
+function extractSlots(children: ReactNode): { exercise: ReactNode; hint: ReactNode } {
+  let exercise: ReactNode = null;
+  let hint: ReactNode = null;
+  const otherChildren: ReactNode[] = [];
+
+  Children.forEach(children, (child) => {
+    if (isValidElement(child)) {
+      const slot = child.props?.slot;
+      if (slot === 'exercise') {
+        exercise = child.props.children || child;
+      } else if (slot === 'hint') {
+        hint = child.props.children || child;
+      } else {
+        otherChildren.push(child);
+      }
+    } else {
+      otherChildren.push(child);
+    }
+  });
+
+  // If no exercise slot found, treat all children as exercise content
+  if (!exercise && otherChildren.length > 0) {
+    exercise = otherChildren;
+  }
+
+  return { exercise, hint };
+}
+
+export function TryBlock({ children, hint: hintProp, hasHint }: TryBlockProps) {
   const [showHint, setShowHint] = useState(false);
 
+  // Extract exercise and hint from children or props
+  const { exercise, hint: slotHint } = extractSlots(children);
+  const hint = hintProp || slotHint;
+  const hasHintContent = hint || hasHint === 'true' || hasHint === true;
+
   return (
-    <div className="my-6 border-l-4 border-exercise-border bg-exercise-light dark:bg-exercise-dark rounded-r-lg overflow-hidden">
+    <div className="my-6 border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-900/20 rounded-r-lg overflow-hidden">
       <div className="p-4">
         <div className="flex items-center gap-2 text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,10 +71,10 @@ export function TryBlock({ children, hint }: TryBlockProps) {
         </div>
 
         <div className="text-gray-800 dark:text-gray-200 prose prose-sm dark:prose-invert max-w-none">
-          {children}
+          {exercise || children}
         </div>
 
-        {hint && (
+        {hasHintContent && hint && (
           <div className="mt-4">
             {!showHint ? (
               <button
@@ -41,9 +84,9 @@ export function TryBlock({ children, hint }: TryBlockProps) {
                 💡 Need a hint?
               </button>
             ) : (
-              <div className="p-3 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
+              <div className="p-3 bg-purple-100 dark:bg-purple-800/30 rounded-lg">
                 <div className="text-xs text-purple-600 dark:text-purple-400 mb-1 font-medium">Hint:</div>
-                <div className="text-sm text-gray-700 dark:text-gray-300">
+                <div className="text-sm text-gray-700 dark:text-gray-300 prose prose-sm dark:prose-invert max-w-none">
                   {hint}
                 </div>
               </div>

@@ -4,6 +4,15 @@
  * Pedagogical basis: Metacognition (Flavell)
  * Learners who monitor their own understanding learn better
  * Confidence ratings encourage honest self-reflection
+ *
+ * Usage in MDX:
+ * <Checkpoint id="ch1" chapterSlug="00-your-development-environment" items='["I understand X", "I can do Y"]' />
+ *
+ * Or with markdown syntax that gets transformed:
+ * :::checkpoint{#ch1}
+ * - [ ] I understand X
+ * - [ ] I can do Y
+ * :::
  */
 
 import { useState, useEffect } from 'react';
@@ -13,7 +22,7 @@ import { progressStore, updateCheckpoint } from '../lib/progress';
 interface CheckpointProps {
   id: string;
   chapterSlug: string;
-  items: string[];
+  items: string | string[]; // Can be JSON string or array
 }
 
 const confidenceLevels = [
@@ -24,8 +33,14 @@ const confidenceLevels = [
   { value: 5, label: 'Very confident', color: 'bg-green-500' },
 ];
 
-export function Checkpoint({ id, chapterSlug, items }: CheckpointProps) {
+export function Checkpoint({ id, chapterSlug, items: itemsProp }: CheckpointProps) {
   const progress = useStore(progressStore);
+
+  // Parse items from JSON string if needed
+  const items: string[] = typeof itemsProp === 'string'
+    ? JSON.parse(itemsProp)
+    : itemsProp;
+
   const [checkedItems, setCheckedItems] = useState<boolean[]>(items.map(() => false));
   const [confidence, setConfidence] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -61,8 +76,12 @@ export function Checkpoint({ id, chapterSlug, items }: CheckpointProps) {
   const checkedCount = checkedItems.filter(Boolean).length;
   const allChecked = checkedCount === items.length;
 
+  if (items.length === 0) {
+    return null; // Don't render empty checkpoints
+  }
+
   return (
-    <div className="my-6 border-l-4 border-checkpoint-border bg-checkpoint-light dark:bg-checkpoint-dark rounded-r-lg overflow-hidden">
+    <div className="my-6 border-l-4 border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 rounded-r-lg overflow-hidden">
       <div className="p-4">
         <div className="flex items-center gap-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-4">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

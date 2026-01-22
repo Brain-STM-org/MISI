@@ -33,20 +33,22 @@ Core infrastructure and basic pedagogical features.
 
 ### v1.1 — Content Integration
 
-**Status: Not Started**
+**Status: Complete**
 
 Wire markdown content to pedagogical components.
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| Remark plugin for :::concept | ⬜ Todo | Parse custom syntax |
-| Remark plugin for :::question | ⬜ Todo | Parse question/reveal blocks |
-| Remark plugin for :::checkpoint | ⬜ Todo | Parse checklist items |
-| Remark plugin for :::try | ⬜ Todo | Parse exercise/hint blocks |
-| Content collection from ../book/ | ⬜ Todo | Symlink or copy strategy |
-| Proper MDX rendering | ⬜ Todo | Full markdown support |
-| Code syntax highlighting | ⬜ Todo | Shiki integration |
-| Table of contents per chapter | ⬜ Todo | Auto-generated from headings |
+| Remark plugin for :::concept | ✅ Done | `remark-pedagogical.ts` transforms directives |
+| Remark plugin for :::question | ✅ Done | Handles question/reveal blocks |
+| Remark plugin for :::checkpoint | ✅ Done | Extracts checklist items to JSON |
+| Remark plugin for :::try | ✅ Done | Handles exercise/hint blocks |
+| Content collection from ../book/ | ✅ Done | Sync script copies and adds frontmatter |
+| Proper MDX rendering | ✅ Done | Components passed to Content renderer |
+| Code syntax highlighting | ✅ Done | Shiki with github-dark theme |
+| Table of contents per chapter | ✅ Done | `rehype-toc.ts` extracts headings |
+| Callout component | ✅ Done | Info/warning/danger/success/tip variants |
+| Sync script | ✅ Done | `npm run sync` copies book content |
 
 ---
 
@@ -149,16 +151,23 @@ Frontmatter optional — metadata derived from filename:
 
 ## Open Questions
 
-1. **Symlink vs copy for content?**
-   - Symlink: Single source of truth, but build complexity
-   - Copy: Simpler builds, but sync issues
+1. ~~**Symlink vs copy for content?**~~ **Resolved: Copy**
+   - Using `npm run sync` script to copy and transform content
+   - Adds frontmatter and MDX imports automatically
+   - Runs automatically before dev/build
 
 2. **How to handle chapter updates?**
    - Need strategy for content changes affecting progress data
+   - Current approach: Progress keyed by chapter slug (stable)
 
 3. **Should checkpoints be required for completion?**
    - Currently completion is manual/scroll-based
    - Could require checkpoint confidence ≥3
+
+4. **Directive syntax vs direct components?**
+   - Currently using direct JSX components in MDX
+   - Remark plugin exists for :::directive syntax
+   - Need to decide which to use in book content
 
 ---
 

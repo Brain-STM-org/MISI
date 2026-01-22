@@ -1,89 +1,138 @@
 ---
 /**
- * Dynamic chapter page
- * Reads markdown from ../../../book/ and renders with pedagogical components
+ * Dynamic chapter page using Astro Content Collections
+ *
+ * Renders MDX content with pedagogical components
  */
-import { readFile, readdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BookLayout from '../../layouts/BookLayout.astro';
-import { getChapter, chapters } from '../../lib/chapters';
+import { getChapter, getNextChapter, getPrevChapter } from '../../lib/chapters';
+import TableOfContents from '../../components/TableOfContents.astro';
+import type { TocEntry } from '../../lib/rehype-toc';
 
-// Generate static paths for all chapters
+// MDX Components
+import ConceptCard from '../../components/ConceptCard';
+import QuestionBlock from '../../components/QuestionBlock';
+import Checkpoint from '../../components/Checkpoint';
+import TryBlock from '../../components/TryBlock';
+import Callout from '../../components/Callout';
+
+// Generate static paths from content collection
 export async function getStaticPaths() {
+  const chapters = await getCollection('chapters');
   return chapters.map((chapter) => ({
     params: { slug: chapter.slug },
+    props: { chapter },
   }));
 }
 
+interface Props {
+  chapter: CollectionEntry<'chapters'>;
+}
+
+const { chapter } = Astro.props;
 const { slug } = Astro.params;
-const chapter = getChapter(slug);
 
-if (!chapter) {
-  return Astro.redirect('/404');
-}
+// Get chapter metadata
+const chapterMeta = getChapter(slug);
+const nextChapter = getNextChapter(slug);
+const prevChapter = getPrevChapter(slug);
 
-// Read markdown content from book folder
-const bookPath = join(process.cwd(), '..', 'book', `${slug}.md`);
-let content = '';
-try {
-  content = await readFile(bookPath, 'utf-8');
-} catch (e) {
-  console.error(`Failed to read chapter: ${bookPath}`, e);
-}
+// Render the MDX content
+const { Content, remarkPluginFrontmatter } = await chapter.render();
 
-// Simple markdown-to-HTML (in production, use proper remark/rehype pipeline)
-// For now, we'll use Astro's built-in markdown rendering via a content collection
-// This is a placeholder that shows the raw content
+// Get TOC from the rendered file (if available)
+const toc: TocEntry[] = (Astro.props.chapter as any).data?.toc || [];
+
+// Use frontmatter title or fallback to metadata
+const title = chapter.data.title || chapterMeta?.title || 'Chapter';
+const tier = chapter.data.tier || chapterMeta?.tier || 1;
+const estimatedMinutes = chapter.data.estimatedMinutes || chapterMeta?.estimatedMinutes || 20;
 ---
 
-<BookLayout title={chapter.title} chapterSlug={slug}>
-  <article class="prose prose-lg dark:prose-invert max-w-none animate-fade-in">
-    <!-- Chapter header -->
-    <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
-      <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
-        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs font-medium">
-          Tier {chapter.tier}
-        </span>
-        <span>•</span>
-        <span>Chapter {chapter.number}</span>
+<BookLayout title={title} chapterSlug={slug}>
+  <div class="flex gap-8">
+    <!-- Main content -->
+    <article class="flex-1 min-w-0">
+      <!-- Chapter header -->
+      <header class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
+          <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs font-medium">
+            Tier {tier}
+          </span>
+          <span>•</span>
+          <span>Chapter {chapterMeta?.number || '??'}</span>
+          <span>•</span>
+          <span>{estimatedMinutes} min read</span>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+          {title}
+        </h1>
+      </header>
+
+      <!-- MDX Content with components -->
+      <div class="prose prose-lg dark:prose-invert max-w-none
+        prose-headings:scroll-mt-20
+        prose-a:text-blue-600 dark:prose-a:text-blue-400
+        prose-code:text-gray-800 dark:prose-code:text-gray-200
+        prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950">
+        <Content
+          components={{
+            ConceptCard,
+            QuestionBlock,
+            Checkpoint,
+            TryBlock,
+            Callout,
+          }}
+        />
       </div>
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-        {chapter.title}
-      </h1>
-      <p class="text-gray-600 dark:text-gray-400">
-        Estimated reading time: {chapter.estimatedMinutes} minutes
-      </p>
-    </div>
 
-    <!-- Content area - will be replaced with proper MDX rendering -->
-    <div class="chapter-content" set:html={content ? `<pre class="whitespace-pre-wrap text-sm">${content.substring(0, 500)}...</pre><p class="text-gray-500 mt-4">Note: Full markdown rendering will be available after running npm install and building with content collections.</p>` : '<p>Content not found</p>'} />
+      <!-- Chapter navigation -->
+      <nav class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+        {prevChapter ? (
+          <a
+            href={`/chapters/${prevChapter.slug}`}
+            class="group flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+            <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span class="text-sm">
+              <span class="block text-xs text-gray-400">Previous</span>
+              {prevChapter.title}
+            </span>
+          </a>
+        ) : <div />}
 
-    <!-- Placeholder for pedagogical components -->
-    <div class="not-prose mt-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl">
-      <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-        Chapter Features
-      </h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-        This chapter will include interactive pedagogical components:
-      </p>
-      <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-        <li class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-          Key Concept cards for important ideas
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
-          Reflection Questions with reveal answers
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
-          Self-Assessment Checkpoints
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
-          Try It Yourself exercises
-        </li>
-      </ul>
-    </div>
-  </article>
+        {nextChapter ? (
+          <a
+            href={`/chapters/${nextChapter.slug}`}
+            class="group flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-right"
+          >
+            <span class="text-sm">
+              <span class="block text-xs text-gray-400">Next</span>
+              {nextChapter.title}
+            </span>
+            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ) : <div />}
+      </nav>
+    </article>
+
+    <!-- Table of Contents sidebar (desktop only) -->
+    <aside class="hidden xl:block w-64 flex-shrink-0">
+      <div class="sticky top-24">
+        <TableOfContents entries={toc} />
+      </div>
+    </aside>
+  </div>
 </BookLayout>
+
+<script define:vars={{ chapterSlug: slug }}>
+  // Initialize chapter tracking on page load
+  import('../../../lib/progress').then(({ startChapter }) => {
+    startChapter(chapterSlug);
+  });
+</script>

@@ -8,6 +8,10 @@
 node_modules/
 dist/
 public_html/
+.astro/
+
+# Generated content (created by sync script)
+course/swe/book-viewer/src/content/chapters/
 
 # Temporary files
 *~

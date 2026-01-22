@@ -2,11 +2,14 @@
 /**
  * Main layout for the book viewer
  * Includes sidebar navigation, header, and content area
+ *
+ * Note: Chapter prev/next navigation is handled by the chapter page itself,
+ * not the layout, to avoid duplication and allow page-specific context.
  */
 import '../styles/global.css';
 import Sidebar from '../components/Sidebar.astro';
 import Header from '../components/Header.astro';
-import { getChapter, getNextChapter, getPrevChapter } from '../lib/chapters';
+import { getChapter } from '../lib/chapters';
 
 interface Props {
   title: string;
@@ -15,8 +18,6 @@ interface Props {
 
 const { title, chapterSlug } = Astro.props;
 const chapter = chapterSlug ? getChapter(chapterSlug) : undefined;
-const nextChapter = chapterSlug ? getNextChapter(chapterSlug) : undefined;
-const prevChapter = chapterSlug ? getPrevChapter(chapterSlug) : undefined;
 ---
 
 <!DOCTYPE html>
@@ -49,41 +50,6 @@ const prevChapter = chapterSlug ? getPrevChapter(chapterSlug) : undefined;
 
         <main class="flex-1 px-4 py-8 lg:px-8 max-w-4xl mx-auto w-full">
           <slot />
-
-          <!-- Chapter navigation -->
-          {(prevChapter || nextChapter) && (
-            <nav class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
-              {prevChapter ? (
-                <a
-                  href={`/chapters/${prevChapter.slug}`}
-                  class="group flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
-                >
-                  <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                  </svg>
-                  <span class="text-sm">
-                    <span class="block text-xs text-gray-400">Previous</span>
-                    {prevChapter.title}
-                  </span>
-                </a>
-              ) : <div />}
-
-              {nextChapter ? (
-                <a
-                  href={`/chapters/${nextChapter.slug}`}
-                  class="group flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 text-right"
-                >
-                  <span class="text-sm">
-                    <span class="block text-xs text-gray-400">Next</span>
-                    {nextChapter.title}
-                  </span>
-                  <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              ) : <div />}
-            </nav>
-          )}
         </main>
 
         <!-- Footer -->
