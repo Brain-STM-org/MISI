@@ -454,3 +454,16 @@ i summon the personas alvin and theodore.   we can going to work on the textbook
 
   we will focus on the SWE book first.   as a preliminary restructure, all of the markdown module content in course/swe
   will be moved to course/swe/book with the folder's readme's updated about the structure.
+
+---
+
+## 2026-01-22T20:59:11Z
+
+we invite dr vasquez for additional consultation in 8 loops.  in for the whereas in the deck, each module had its own website, the book is a single website for all the modules.   The book will be stored in Markdown as it is so individuals may easily peruse and fork it from GitHub.  
+But we want to make a book viewer that helps expouse the information.  We will implement it in TypeScript and can use practical libraries.  Establish an intial version that incorporates features optimal learning using the latest pedagological research
+
+---
+
+## 2026-01-22T21:31:15Z
+
+can you add theodores feature table to the README?

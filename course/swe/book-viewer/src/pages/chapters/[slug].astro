@@ -1,0 +1,89 @@
+---
+/**
+ * Dynamic chapter page
+ * Reads markdown from ../../../book/ and renders with pedagogical components
+ */
+import { readFile, readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+import BookLayout from '../../layouts/BookLayout.astro';
+import { getChapter, chapters } from '../../lib/chapters';
+
+// Generate static paths for all chapters
+export async function getStaticPaths() {
+  return chapters.map((chapter) => ({
+    params: { slug: chapter.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const chapter = getChapter(slug);
+
+if (!chapter) {
+  return Astro.redirect('/404');
+}
+
+// Read markdown content from book folder
+const bookPath = join(process.cwd(), '..', 'book', `${slug}.md`);
+let content = '';
+try {
+  content = await readFile(bookPath, 'utf-8');
+} catch (e) {
+  console.error(`Failed to read chapter: ${bookPath}`, e);
+}
+
+// Simple markdown-to-HTML (in production, use proper remark/rehype pipeline)
+// For now, we'll use Astro's built-in markdown rendering via a content collection
+// This is a placeholder that shows the raw content
+---
+
+<BookLayout title={chapter.title} chapterSlug={slug}>
+  <article class="prose prose-lg dark:prose-invert max-w-none animate-fade-in">
+    <!-- Chapter header -->
+    <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
+        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs font-medium">
+          Tier {chapter.tier}
+        </span>
+        <span>•</span>
+        <span>Chapter {chapter.number}</span>
+      </div>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        {chapter.title}
+      </h1>
+      <p class="text-gray-600 dark:text-gray-400">
+        Estimated reading time: {chapter.estimatedMinutes} minutes
+      </p>
+    </div>
+
+    <!-- Content area - will be replaced with proper MDX rendering -->
+    <div class="chapter-content" set:html={content ? `<pre class="whitespace-pre-wrap text-sm">${content.substring(0, 500)}...</pre><p class="text-gray-500 mt-4">Note: Full markdown rendering will be available after running npm install and building with content collections.</p>` : '<p>Content not found</p>'} />
+
+    <!-- Placeholder for pedagogical components -->
+    <div class="not-prose mt-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        Chapter Features
+      </h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+        This chapter will include interactive pedagogical components:
+      </p>
+      <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+        <li class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+          Key Concept cards for important ideas
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+          Reflection Questions with reveal answers
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+          Self-Assessment Checkpoints
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+          Try It Yourself exercises
+        </li>
+      </ul>
+    </div>
+  </article>
+</BookLayout>

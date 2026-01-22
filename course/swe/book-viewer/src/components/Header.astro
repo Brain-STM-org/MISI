@@ -1,0 +1,136 @@
+---
+/**
+ * Header component with chapter info and reading progress
+ */
+import type { ChapterMeta } from '../lib/types';
+import { tierDescriptions } from '../lib/chapters';
+
+interface Props {
+  title: string;
+  chapter?: ChapterMeta;
+}
+
+const { title, chapter } = Astro.props;
+---
+
+<header class="sticky top-0 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+  <div class="px-4 lg:px-8 py-4 max-w-4xl mx-auto">
+    <div class="flex items-center justify-between">
+      <div>
+        {chapter && (
+          <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-1">
+            <span class="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-medium">
+              Tier {chapter.tier}
+            </span>
+            <span>•</span>
+            <span>Chapter {chapter.number}</span>
+            <span>•</span>
+            <span>{chapter.estimatedMinutes} min read</span>
+          </div>
+        )}
+        <h1 class="text-xl font-semibold text-gray-900 dark:text-white">{title}</h1>
+      </div>
+
+      {chapter && (
+        <div class="hidden sm:flex items-center gap-4">
+          <!-- Mark as complete button -->
+          <button
+            id="mark-complete-btn"
+            data-chapter-slug={chapter.slug}
+            class="px-3 py-1.5 text-sm font-medium text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg transition-colors"
+          >
+            <span class="complete-text">Mark complete</span>
+            <span class="completed-text hidden">✓ Completed</span>
+          </button>
+        </div>
+      )}
+    </div>
+
+    <!-- Reading progress bar -->
+    {chapter && (
+      <div class="mt-3">
+        <div class="h-1 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+          <div
+            id="reading-progress"
+            class="h-full bg-blue-500 rounded-full transition-all duration-150"
+            style="width: 0%"
+          ></div>
+        </div>
+      </div>
+    )}
+  </div>
+</header>
+
+<script>
+  import { progressStore, startChapter, completeChapter, updateReadProgress } from '../lib/progress';
+
+  const btn = document.getElementById('mark-complete-btn') as HTMLButtonElement;
+  const progressBar = document.getElementById('reading-progress');
+  const chapterSlug = btn?.dataset.chapterSlug;
+
+  if (chapterSlug) {
+    // Mark chapter as started
+    startChapter(chapterSlug);
+
+    // Update button state based on current progress
+    function updateButtonState() {
+      const progress = progressStore.get();
+      const isComplete = progress.chapters[chapterSlug]?.completed;
+
+      if (btn) {
+        const completeText = btn.querySelector('.complete-text');
+        const completedText = btn.querySelector('.completed-text');
+
+        if (isComplete) {
+          completeText?.classList.add('hidden');
+          completedText?.classList.remove('hidden');
+          btn.disabled = true;
+          btn.classList.add('cursor-default');
+        }
+      }
+    }
+
+    progressStore.subscribe(updateButtonState);
+    updateButtonState();
+
+    // Handle mark complete click
+    btn?.addEventListener('click', () => {
+      completeChapter(chapterSlug);
+    });
+
+    // Track scroll progress
+    function updateScrollProgress() {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = scrollHeight > 0 ? Math.round((scrolled / scrollHeight) * 100) : 0;
+
+      if (progressBar) {
+        progressBar.style.width = `${progress}%`;
+      }
+
+      // Update stored progress (debounced via the scroll handler)
+      updateReadProgress(chapterSlug, progress);
+    }
+
+    // Debounced scroll handler
+    let scrollTimeout: number;
+    window.addEventListener('scroll', () => {
+      if (progressBar) {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = window.scrollY;
+        const progress = scrollHeight > 0 ? Math.round((scrolled / scrollHeight) * 100) : 0;
+        progressBar.style.width = `${progress}%`;
+      }
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateScrollProgress, 200) as unknown as number;
+    });
+
+    // Initial progress from stored state
+    const stored = progressStore.get();
+    const storedProgress = stored.chapters[chapterSlug]?.readProgress || 0;
+    if (progressBar && storedProgress > 0) {
+      progressBar.style.width = `${storedProgress}%`;
+    }
+  }
+</script>
