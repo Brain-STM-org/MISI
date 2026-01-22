@@ -467,3 +467,9 @@ But we want to make a book viewer that helps expouse the information.  We will i
 ## 2026-01-22T21:31:15Z
 
 can you add theodores feature table to the README?
+
+---
+
+## 2026-01-22T21:35:53Z
+
+also create a plan file scoped to this book foldefr
