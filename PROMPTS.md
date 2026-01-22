@@ -424,3 +424,17 @@ that work great, please go ahead and apply it to the llm track
 ## 2026-01-22T17:14:35Z
 
 since we made the sell sheets and marketing, we clarified that we had two distinct tracks (swe, llm) that were front-loaded then weaved through the weeks.  ensure that we inform the importance of these foundations, combined with LLM-assistance and inquiry-based learning project focus.   update all relevant marketing material and readmes
+
+---
+
+## 2026-01-22T18:25:47Z
+
+I updated the GitHub action to use the task and that's all deployed.  Thank you for your service Claude.
+
+I hereby summon Dr Vasquez and Alvin and Theodore to work on the curriculum in agentic loops.
+
+---
+
+## 2026-01-22T18:27:02Z
+
+sorry I was imprecise... i want you to work you *YOUR* agentic loop fashion.   Now that we have a stable content delpoyment foundation, your next task is to generate the rest of the SWE deck
