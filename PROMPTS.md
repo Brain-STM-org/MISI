@@ -438,3 +438,9 @@ I hereby summon Dr Vasquez and Alvin and Theodore to work on the curriculum in a
 ## 2026-01-22T18:27:02Z
 
 sorry I was imprecise... i want you to work you *YOUR* agentic loop fashion.   Now that we have a stable content delpoyment foundation, your next task is to generate the rest of the SWE deck
+
+---
+
+## 2026-01-22T18:58:58Z
+
+now go ahead and create the llm slides.  for each slide, i want you to perfor 5 loop iterations passing content between the Curriculum Designer and LLM Influencer personas to develop it.
