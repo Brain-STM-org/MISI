@@ -2,6 +2,20 @@
 
 This folder contains curriculum materials for teaching software engineering principles to MISI participants.
 
+## Folder Structure
+
+```
+swe/
+├── book/           # Textbook chapters (readable markdown)
+├── deck/           # Slide presentations (Slidev format)
+├── README.md       # This file - course overview
+├── PLAN.md         # Curriculum development roadmap
+├── SCHEDULE.md     # Detailed session timing
+├── AGENTS.md       # AI assistant guidance
+├── diffs-demo.html # Interactive diff exploration
+└── branches-demo.html # Interactive branch visualization
+```
+
 ## Audience
 
 - High school seniors with strong STEM backgrounds
@@ -42,11 +56,11 @@ This is one of two parallel content tracks:
 
 | # | Module | Time | Description |
 |---|--------|------|-------------|
-| 00 | [Your Development Environment](00-your-development-environment.md) | 20 min | Terminal basics, VS Code, GUI vs CLI |
-| 01 | [What is Source Code?](01-what-is-source-code.md) | 20 min | Code as text, transformation to execution, code as communication |
-| 02 | [GitHub Setup Guide](02-github-setup-guide.md) | 30 min | Account creation, 2FA, tools installation, first clone |
-| 03 | [Understanding Diffs](03-understanding-diffs.md) | 25 min | Reading diffs, the essential skill for AI-assisted work |
-| 04 | [Your First Commit](04-your-first-commit.md) | 30 min | The edit → stage → commit → push cycle |
+| 00 | [Your Development Environment](book/00-your-development-environment.md) | 20 min | Terminal basics, VS Code, GUI vs CLI |
+| 01 | [What is Source Code?](book/01-what-is-source-code.md) | 20 min | Code as text, transformation to execution, code as communication |
+| 02 | [GitHub Setup Guide](book/02-github-setup-guide.md) | 30 min | Account creation, 2FA, tools installation, first clone |
+| 03 | [Understanding Diffs](book/03-understanding-diffs.md) | 25 min | Reading diffs, the essential skill for AI-assisted work |
+| 04 | [Your First Commit](book/04-your-first-commit.md) | 30 min | The edit → stage → commit → push cycle |
 
 **Interactive demos:**
 - [diffs-demo.html](diffs-demo.html) — Explore diffs visually with multiple examples
@@ -59,11 +73,11 @@ This is one of two parallel content tracks:
 
 | # | Module | Time | Delivery | Description |
 |---|--------|------|----------|-------------|
-| 05 | [Branches and Merging](05-branches-and-merging.md) | 30 min | Day 2 | Parallel timelines, isolation, merging |
-| 06 | [Pull Requests](06-pull-requests.md) | 30 min | Day 2 | The collaboration workflow, code review |
-| 07 | [Testing Fundamentals](07-testing-fundamentals.md) | 25 min | Just-in-time | Why test, types of tests, the testing mindset |
-| 08 | [Debugging Techniques](08-debugging-techniques.md) | 25 min | Day 2 | Reading errors, systematic debugging, using AI to help |
-| 09 | [Dependencies & Packages](09-dependencies-packages.md) | 20 min | Just-in-time | npm, pip, evaluating when to add dependencies |
+| 05 | [Branches and Merging](book/05-branches-and-merging.md) | 30 min | Day 2 | Parallel timelines, isolation, merging |
+| 06 | [Pull Requests](book/06-pull-requests.md) | 30 min | Day 2 | The collaboration workflow, code review |
+| 07 | [Testing Fundamentals](book/07-testing-fundamentals.md) | 25 min | Just-in-time | Why test, types of tests, the testing mindset |
+| 08 | [Debugging Techniques](book/08-debugging-techniques.md) | 25 min | Day 2 | Reading errors, systematic debugging, using AI to help |
+| 09 | [Dependencies & Packages](book/09-dependencies-packages.md) | 20 min | Just-in-time | npm, pip, evaluating when to add dependencies |
 
 **Interactive demos:**
 - [branches-demo.html](branches-demo.html) — Visualize branch creation, commits, and merging
@@ -76,12 +90,12 @@ This is one of two parallel content tracks:
 
 | # | Module | Time | Delivery | Description |
 |---|--------|------|----------|-------------|
-| 10 | [Build Pipelines](10-build-pipelines.md) | 20 min | Just-in-time | Automated verification, CI/CD concepts |
-| 11 | [O11y: Understanding Your Code](11-o11y-understanding-your-code.md) | 25 min | Just-in-time | Logs, metrics, dashboards, Grafana basics |
-| 12 | [Iterative Design](12-iterative-design.md) | 20 min | Day 2 | MVPs, shipping early, fighting perfectionism |
-| 13 | [Timeless Principles](13-timeless-principles.md) | 25 min | Just-in-time | KISS, DRY, GIGO, YAGNI, Fail Fast |
-| 14 | [Communication](14-communication.md) | 20 min | Just-in-time | READMEs, commit messages, comments |
-| 15 | [Ethics in Software](15-ethics-in-software.md) | 45 min | Capstone | Discussion guide: bias, privacy, accessibility, dark patterns |
+| 10 | [Build Pipelines](book/10-build-pipelines.md) | 20 min | Just-in-time | Automated verification, CI/CD concepts |
+| 11 | [O11y: Understanding Your Code](book/11-o11y-understanding-your-code.md) | 25 min | Just-in-time | Logs, metrics, dashboards, Grafana basics |
+| 12 | [Iterative Design](book/12-iterative-design.md) | 20 min | Day 2 | MVPs, shipping early, fighting perfectionism |
+| 13 | [Timeless Principles](book/13-timeless-principles.md) | 25 min | Just-in-time | KISS, DRY, GIGO, YAGNI, Fail Fast |
+| 14 | [Communication](book/14-communication.md) | 20 min | Just-in-time | READMEs, commit messages, comments |
+| 15 | [Ethics in Software](book/15-ethics-in-software.md) | 45 min | Capstone | Discussion guide: bias, privacy, accessibility, dark patterns |
 
 ---
 
@@ -97,7 +111,10 @@ This is one of two parallel content tracks:
 
 | File | Purpose |
 |------|---------|
+| [book/](book/) | Textbook chapters (readable markdown) |
+| [deck/](deck/) | Slide presentations (Slidev format) |
 | [PLAN.md](PLAN.md) | Curriculum development roadmap and status |
+| [SCHEDULE.md](SCHEDULE.md) | Detailed session timing |
 | [AGENTS.md](AGENTS.md) | AI assistant guidance for working in this folder |
 | [diffs-demo.html](diffs-demo.html) | Interactive diff exploration tool |
 | [branches-demo.html](branches-demo.html) | Interactive branch visualization |

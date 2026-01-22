@@ -444,3 +444,13 @@ sorry I was imprecise... i want you to work you *YOUR* agentic loop fashion.   N
 ## 2026-01-22T18:58:58Z
 
 now go ahead and create the llm slides.  for each slide, i want you to perfor 5 loop iterations passing content between the Curriculum Designer and LLM Influencer personas to develop it.
+
+---
+
+## 2026-01-22T20:31:46Z
+
+i summon the personas alvin and theodore.   we can going to work on the textbook.  we are leaving Dr Vasquez out for
+  now as this is more application development right now, but she will review later.
+
+  we will focus on the SWE book first.   as a preliminary restructure, all of the markdown module content in course/swe
+  will be moved to course/swe/book with the folder's readme's updated about the structure.
