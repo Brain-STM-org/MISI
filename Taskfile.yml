@@ -177,6 +177,10 @@ tasks:
       # SWE book
       - task: _book:copy
         vars: { COURSE: swe }
+      # LLM slides
+      - mkdir -p {{.PUBLIC_DIR}}/course/llm/deck
+      - cp -aL {{.LLM_DIR}}/??-*.md {{.LLM_DIR}}/*.html {{.LLM_DIR}}/README.md {{.PUBLIC_DIR}}/course/llm
+      - cp -aL {{.LLM_DIR}}/deck/dist/* {{.PUBLIC_DIR}}/course/llm/deck
       # LLM book
       - task: _book:copy
         vars: { COURSE: llm }
@@ -185,6 +189,7 @@ tasks:
     desc: Build all content and prepare site for deployment
     cmds:
       - task: swe:build-slides
+      - task: llm:build-slides
       - task: swe:book:build
       - task: llm:book:build
       - task: prepare:site

@@ -788,3 +788,9 @@ summon dr vasquez and the twins again from the personas directory.  we will crea
 ## 2026-01-23T03:36:02Z
 
 great first draft of structure, validate the git staging and check the deploy.yml
+
+---
+
+## 2026-01-23T03:39:58Z
+
+it looks like we are missing building the llm slides in the taskfile
