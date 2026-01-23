@@ -1,0 +1,117 @@
+---
+/**
+ * Main layout for the book viewer
+ * Includes sidebar navigation, header, and content area
+ */
+import '../styles/global.css';
+import Sidebar from '../components/Sidebar.astro';
+import Header from '../components/Header.astro';
+import { getChapter } from '../lib/chapters';
+
+interface Props {
+  title: string;
+  chapterSlug?: string;
+}
+
+const { title, chapterSlug } = Astro.props;
+const chapter = chapterSlug ? getChapter(chapterSlug) : undefined;
+
+// Get base path for data attribute
+const basePath = import.meta.env.BASE_URL || '/';
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-base-path={basePath}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LLM Fundamentals - A practical guide to AI-assisted development" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | LLM Fundamentals</title>
+
+    <!-- Initialize theme before page renders to prevent flash -->
+    <script is:inline>
+      const theme = localStorage.getItem('llm-book-progress');
+      const settings = theme ? JSON.parse(theme).settings : {};
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = settings.theme === 'dark' || (settings.theme !== 'light' && prefersDark);
+      if (isDark) document.documentElement.classList.add('dark');
+    </script>
+  </head>
+
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Skip links for keyboard navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#sidebar-nav" class="skip-link">Skip to navigation</a>
+
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <Sidebar currentSlug={chapterSlug} />
+
+      <!-- Main content area -->
+      <div class="flex-1 flex flex-col content-with-sidebar">
+        <Header title={chapter?.title || title} chapter={chapter} />
+
+        <main id="main-content" class="flex-1 px-4 py-8 lg:px-8 max-w-4xl mx-auto w-full" tabindex="-1">
+          <slot />
+        </main>
+
+        <!-- Footer -->
+        <footer class="px-4 py-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800">
+          <p>LLM Fundamentals &mdash; MISI Program</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Exit focus mode button (visible only in focus mode) -->
+    <button
+      id="exit-focus-mode"
+      class="focus-mode-exit fixed bottom-4 left-4 z-50 items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 rounded-full shadow-lg hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors focus-ring"
+      aria-label="Exit focus mode"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      <span class="text-sm font-medium">Exit Focus</span>
+    </button>
+
+    <!-- Initialize progress tracking and settings -->
+    <script>
+      import { initProgress, progressStore, updateSettings, announce, initUrl } from '@repo/book-viewer/lib';
+
+      // Initialize URL helper with base path
+      const basePath = document.documentElement.dataset.basePath || '/';
+      initUrl(basePath);
+
+      // Initialize progress with course ID
+      initProgress('llm');
+
+      // Apply initial settings to body
+      function applySettings() {
+        const settings = progressStore.get().settings;
+
+        // Apply font size
+        document.body.classList.remove('font-size-sm', 'font-size-md', 'font-size-lg');
+        document.body.classList.add(`font-size-${settings.fontSize}`);
+
+        // Apply focus mode
+        if (settings.focusMode) {
+          document.body.classList.add('focus-mode');
+        } else {
+          document.body.classList.remove('focus-mode');
+        }
+      }
+
+      // Apply on load and subscribe to changes
+      applySettings();
+      progressStore.subscribe(applySettings);
+
+      // Exit focus mode button
+      const exitFocusBtn = document.getElementById('exit-focus-mode');
+      exitFocusBtn?.addEventListener('click', () => {
+        updateSettings({ focusMode: false });
+        announce('Focus mode disabled');
+      });
+    </script>
+  </body>
+</html>

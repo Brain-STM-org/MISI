@@ -139,7 +139,7 @@ tasks:
       - node scripts/sync-content.mjs
 
   # =============================================================================
-  # LLM Book Tasks (for future use)
+  # LLM Book Tasks
   # =============================================================================
 
   llm:book:dev:
@@ -153,6 +153,12 @@ tasks:
     cmds:
       - task: _book:build
         vars: { COURSE: llm }
+
+  llm:book:sync:
+    desc: Sync LLM book content from course/llm to src/content/chapters
+    dir: 'course/llm/book'
+    cmds:
+      - node scripts/sync-content.mjs
 
   # =============================================================================
   # Deployment Tasks
@@ -171,12 +177,16 @@ tasks:
       # SWE book
       - task: _book:copy
         vars: { COURSE: swe }
+      # LLM book
+      - task: _book:copy
+        vars: { COURSE: llm }
 
   deploy:local:
     desc: Build all content and prepare site for deployment
     cmds:
       - task: swe:build-slides
       - task: swe:book:build
+      - task: llm:book:build
       - task: prepare:site
 
   serve:local:
