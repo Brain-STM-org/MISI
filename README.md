@@ -6,14 +6,15 @@ A 4-week internship program for graduating high school seniors to explore the fu
 
 Many high schools require either a Senior Project or an Internship experience to graduate, typically occurring during the last few weeks of school in May and early June. Software engineering is in an LLM-assisted renaissance, where ideas become working code faster than ever before. But speed without understanding produces poor results—Garbage In, Garbage Out is more relevant than ever.
 
-MISI addresses this by combining **two foundational curriculum tracks** with **hands-on project work**:
+MISI addresses this by combining **three foundational curriculum tracks** with **hands-on project work**:
 
 | Track | Focus | Purpose |
 |-------|-------|---------|
 | **[SWE Fundamentals](course/swe/)** | Software engineering principles, tools, practices | Ensures students can collaborate professionally and maintain code quality |
 | **[LLM Fundamentals](course/llm/)** | Effective use of AI coding assistants | Teaches students to direct AI tools with judgment and accountability |
+| **[Sustainable Developer](course/mbs/)** | Mind-body practices for sustainable performance | Builds physical and mental foundation for intensive cognitive work |
 
-These tracks are **front-loaded during a 2-day bootcamp** in Week 1, then **woven through Weeks 2-4** as just-in-time learning while students build real projects.
+The SWE and LLM tracks are **front-loaded during a 2-day bootcamp** in Week 1, then **woven through Weeks 2-4** as just-in-time learning. The Sustainable Developer practices are **integrated into the daily rhythm** throughout the program—breath resets, movement breaks, and work structure that supports sustained high performance.
 
 ## Program Structure
 
@@ -27,28 +28,33 @@ These tracks are **front-loaded during a 2-day bootcamp** in Week 1, then **wove
 
 | Week | Focus | Curriculum Delivery |
 |------|-------|---------------------|
-| **Week 1** | Bootcamp + Team Formation | Front-loaded: SWE & LLM foundations (Days 1-2), then project selection |
-| **Week 2** | Build & Iterate | Just-in-time: modules delivered as teams encounter needs |
-| **Week 3** | Feature Expansion | Just-in-time: advanced topics woven into project work |
+| **Week 1** | Bootcamp + Team Formation | Front-loaded: SWE & LLM foundations (Days 1-2), MBS practices introduced, then project selection |
+| **Week 2** | Build & Iterate | Just-in-time: modules delivered as teams encounter needs; daily MBS rhythm |
+| **Week 3** | Feature Expansion | Just-in-time: advanced topics woven into project work; MBS practices sustained |
 | **Week 4** | Polish & Present | Capstone: ethics discussions, Demo Day, retrospective |
 
 ## Approach
 
 This program combines **inquiry-based learning** and **cohort empowerment** inspired by the Greenwich High School [Honors Science Research (HSR)](https://www.amazon.com/Class-Life-Changing-World-Changing-Inventive-Classroom/dp/0399181849) program.
 
-### The Three Pillars
+### The Four Pillars
 
 1. **Foundational Knowledge** (SWE + LLM Tracks)
-   - Two complementary curriculum tracks establish shared vocabulary and skills
+   - Two complementary technical tracks establish shared vocabulary and skills
    - Front-loaded bootcamp ensures all students start from common ground
    - Just-in-time delivery reinforces learning when it's most relevant
 
-2. **AI-Assisted Development**
+2. **Sustainable Performance** (MBS Track)
+   - Mind-body practices integrated into daily rhythm
+   - Ergonomic setup, breath techniques, movement breaks, work structure
+   - Physical and mental foundation for intensive cognitive work
+
+3. **AI-Assisted Development**
    - Students use tools like Claude Code from day one
    - Emphasis on directing AI with intent, not just accepting output
    - Critical evaluation and verification of AI-generated code
 
-3. **Inquiry-Based Project Focus**
+4. **Inquiry-Based Project Focus**
    - Students select and scope their own projects
    - Self-directed teams with mentor guidance
    - Full lifecycle from idea to deployed product
@@ -63,11 +69,12 @@ We embrace the thesis that AI tools enable a new form of development where most 
 
 ## Goals
 
-1. Establish foundational knowledge through two complementary curriculum tracks
+1. Establish foundational knowledge through three complementary curriculum tracks
 2. Teach students to apply AI technologies effectively and responsibly
-3. Foster individual growth through team-based project work
-4. Enable students to build and ship real software projects
-5. Openly document progress so others may learn from this approach
+3. Build sustainable practices that support long-term performance and wellbeing
+4. Foster individual growth through team-based project work
+5. Enable students to build and ship real software projects
+6. Openly document progress so others may learn from this approach
 
 ## Documentation
 

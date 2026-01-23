@@ -903,3 +903,27 @@ create tasks for building the book and update deploy.yml for github pages public
 ## 2026-01-23T18:42:05Z
 
 we're going to rename the mind-body folder and related infrastructure to mbs (mind-body-spirit and it matches the other three-letter acronyms)
+
+---
+
+## 2026-01-23T18:57:15Z
+
+Elena and Tomi, please construct the corresponding markdown files for the mbs directory
+
+---
+
+## 2026-01-23T18:58:54Z
+
+continue down , updating course/ and then the main /
+
+---
+
+## 2026-01-23T19:02:26Z
+
+the mbs book does not flow on the page the same as trhe SWE book, it is underneath the side panel some
+
+---
+
+## 2026-01-23T19:05:36Z
+
+update the main README.md with this mbs aspect of the program

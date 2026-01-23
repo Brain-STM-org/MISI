@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <title>Sustainable Developer - MISI</title>
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --secondary: #4f46e5;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            width: 100%;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .section h3 {
+            color: var(--dark);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .section p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section strong {
+            color: var(--dark);
+        }
+
+        .section ul {
+            color: var(--gray);
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tier-card {
+            padding: 1.25rem;
+            border-radius: 8px;
+            background: var(--light);
+            border-left: 4px solid var(--accent);
+        }
+
+        .tier-card h4 {
+            font-size: 0.875rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tier-card p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .tier-card ul {
+            font-size: 0.85rem;
+            margin: 0.5rem 0 0 1.25rem;
+        }
+
+        .tier-card li {
+            margin-bottom: 0.25rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid var(--accent);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(16, 185, 129, 0.2);
+            border-color: var(--primary);
+        }
+
+        .resource-card .icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .resource-card .icon svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        .resource-card h3 {
+            font-size: 1.25rem;
+            margin: 0 0 0.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .resource-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin: 0;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .resource-card .arrow {
+            margin-top: 1.25rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-card:hover .arrow {
+            gap: 0.75rem;
+        }
+
+        .parallel-note {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1.5rem;
+        }
+
+        .parallel-note p {
+            margin: 0;
+            color: #14532d;
+        }
+
+        .parallel-note a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .time-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            main {
+                padding: 2rem 1rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+            .tier-grid {
+                grid-template-columns: 1fr;
+            }
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="breadcrumb">
+            <a href="/">MISI</a> / Sustainable Developer
+        </div>
+        <h1>The Sustainable Developer</h1>
+        <p class="subtitle">Mind-body practices for sustainable high performance</p>
+    </header>
+
+    <main>
+        <section class="section">
+            <h2>About This Curriculum</h2>
+            <p>
+                The work is mental, but it happens in a body. You'll sit for hours, stare at screens, type thousands of keystrokes, and process the stress of learning, debugging, and deadlines. If you ignore all of this—if you treat your body as a mere vehicle for your mind—you will pay a price.
+            </p>
+            <p>
+                This is not a wellness program. It's a <strong>capability program</strong>. The practices here directly support your ability to do the work: ergonomic setup prevents strain, breath techniques give you a manual override for stress, movement clears mental fog, and structured rhythms sustain performance across long days.
+            </p>
+            <p>
+                The students who thrive aren't the ones who push hardest. <strong>They're the ones who sustain.</strong>
+            </p>
+            <div class="parallel-note">
+                <p>
+                    <strong>Foundation for technical learning.</strong> This curriculum supports the <a href="/course/swe/">Software Engineering</a> and <a href="/course/llm/">Machine Intelligence</a> tracks. The practices here create the physical and mental foundation that lets you learn faster, focus longer, and collaborate better.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Curriculum Structure</h2>
+            <p>
+                The curriculum is organized into <strong>two tiers</strong>. Tier 1 establishes essential foundations during bootcamp week—physical setup, breath, movement, and work rhythms. Tier 2 covers integration practices for collaboration and facilitation.
+            </p>
+
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <h4>Tier 1: Essential Foundations</h4>
+                    <span class="time-badge">~54 minutes</span>
+                    <p>Physical and mental infrastructure</p>
+                    <ul>
+                        <li>Your Physical Setup (ergonomics)</li>
+                        <li>The Breath as Tool (pranayama)</li>
+                        <li>Movement for the Mind (desk asana)</li>
+                        <li>Rhythm of Deep Work (ultradian cycles, sleep)</li>
+                    </ul>
+                </div>
+                <div class="tier-card">
+                    <h4>Tier 2: Integration & Practice</h4>
+                    <span class="time-badge">~27 minutes</span>
+                    <p>Collaboration and teaching</p>
+                    <ul>
+                        <li>Presence in Collaboration (mindful communication)</li>
+                        <li>Facilitator's Guide (for mentors)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Learning Materials</h2>
+            <p>
+                The <strong>interactive book</strong> provides in-depth instruction with practice sequences, troubleshooting guides, and quick reference cards. Each module can be read independently or followed as a complete program.
+            </p>
+
+            <div class="resource-grid">
+                <a href="book/" class="resource-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Interactive Book</h3>
+                    <p>Complete curriculum with practice sequences, troubleshooting, and quick reference guides for daily use.</p>
+                    <span class="arrow">Read the book &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Key Practices</h2>
+            <h3>The 5-Minute Desk Flow</h3>
+            <p>
+                A seated movement sequence you can do at your desk, in work clothes, without anyone knowing. Cat-cow for the spine, neck releases, shoulder openers, seated twists, wrist care, and hip stretches. Do this every 90 minutes of focused work.
+            </p>
+
+            <h3>Box Breathing (Sama Vritti)</h3>
+            <p>
+                Four equal parts: inhale for 4 counts, hold for 4, exhale for 4, hold for 4. This gives you a manual override for your stress response. Use it before difficult conversations, when stuck on problems, or whenever you notice tension building.
+            </p>
+
+            <h3>The 90-Minute Rhythm</h3>
+            <p>
+                Your brain naturally cycles through peaks and troughs every 90-120 minutes. Work with this rhythm: 90 minutes of focused work, then a real break with movement and visual rest. Fighting this rhythm doesn't produce more work—it produces worse work and exhaustion.
+            </p>
+
+            <h3>Sleep as Infrastructure</h3>
+            <p>
+                Everything else in this curriculum is undermined by insufficient sleep. 7-9 hours, consistent schedule, screen curfew, wind-down ritual. Sleep deprivation impairs cognitive performance as much as alcohol intoxication. It's never worth sacrificing.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>The Core Insight</h2>
+            <p>
+                <strong>Your capacity is not fixed. It's cultivated.</strong>
+            </p>
+            <p>
+                The developers who build great things over long careers aren't superhuman. They've learned to maintain themselves—to work with their biology instead of against it, to recover as deliberately as they focus, to treat their physical and mental health as infrastructure rather than afterthought.
+            </p>
+            <p>
+                Start now, when the habits are easy to build. Your future self will thank you.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Sustainable Developer - <a href="/">MISI Program</a></p>
+        <p style="margin-top: 0.5rem;">Mind-body practices for the Machine Intelligence Senior Internship</p>
+    </footer>
+</body>
+</html>
