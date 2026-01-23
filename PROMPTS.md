@@ -826,3 +826,9 @@ i see th following error (among other _astro 404's):
 ## 2026-01-23T13:11:50Z
 
 is having the SITE_URL critical?  can everything just be relative to the served root?  or that's not how astro works?
+
+---
+
+## 2026-01-23T13:20:47Z
+
+in deploy, you should use https://github.com/go-task/setup-task instead of arduino/setup-task
