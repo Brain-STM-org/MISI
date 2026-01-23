@@ -5,13 +5,10 @@ import tailwind from '@astrojs/tailwind';
 import remarkDirective from 'remark-directive';
 import { remarkPedagogical, rehypeToc } from '@repo/book-viewer/lib';
 
-// GitHub Pages configuration
-// Set via environment variables or defaults for local development
-const site = process.env.SITE_URL || 'https://brain-stm-org.github.io';
-const base = process.env.BASE_PATH || '/MISI/course/llm/book';
+// Base path for deployment (set via BASE_PATH env var or default for local dev)
+const base = process.env.BASE_PATH || '/course/llm/book';
 
 export default defineConfig({
-  site,
   base,
   integrations: [
     mdx(),

@@ -812,3 +812,17 @@ compare the course/swe/deck and course/llm/deck directories.  i think the llm di
 ## 2026-01-23T12:40:07Z
 
 i like the swe structure, so please clean up the organization of the llm folder.   we will only deploy the built books.  we can include links to the raw markdown for those who need it (not everywhere, just some reference in the documentation.
+
+---
+
+## 2026-01-23T13:05:09Z
+
+when i navigate to https://misi.brain-stm.org/course/llm/book/index.html
+i see th following error (among other _astro 404's):
+[Error] Failed to load resource: the server responded with a status of 404 () (bookmarks.BMzPWGYf.css, line 0)
+
+---
+
+## 2026-01-23T13:11:50Z
+
+is having the SITE_URL critical?  can everything just be relative to the served root?  or that's not how astro works?

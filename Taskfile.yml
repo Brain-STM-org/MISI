@@ -4,8 +4,6 @@ vars:
   SWE_DIR: course/swe
   LLM_DIR: course/llm
   PUBLIC_DIR: public_html
-  SITE_URL: https://brain-stm-org.github.io
-  BASE_URL: /MISI
 
 tasks:
   default:
@@ -104,8 +102,7 @@ tasks:
     dir: 'course/{{.COURSE}}/book'
     deps: [install]
     env:
-      SITE_URL: '{{.SITE_URL}}'
-      BASE_PATH: '{{.BASE_URL}}/course/{{.COURSE}}/book'
+      BASE_PATH: '/course/{{.COURSE}}/book'
     cmds:
       - npm run build
 
