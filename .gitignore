@@ -10,9 +10,9 @@ dist/
 public_html/
 .astro/
 
-# Generated content (created by sync script)
-course/swe/book-viewer/src/content/chapters/
-course/swe/book-viewer/public/search-index.json
+# Generated content (created by sync scripts)
+course/*/book/src/content/chapters/
+course/*/book/public/
 
 # Temporary files
 *~

@@ -1,0 +1,8 @@
+{
+  "name": "senior-internship",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "course/*/book"
+  ]
+}

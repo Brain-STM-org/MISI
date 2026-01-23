@@ -1,0 +1,30 @@
+{
+  "name": "@repo/book-viewer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared book viewer components and utilities for pedagogical textbooks",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts",
+    "./lib": "./src/lib/index.ts",
+    "./styles": "./src/styles/global.css"
+  },
+  "dependencies": {
+    "nanostores": "^0.11.0",
+    "@nanostores/react": "^0.8.0",
+    "unist-util-visit": "^5.0.0",
+    "hast-util-to-string": "^3.0.0",
+    "github-slugger": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@types/hast": "^3.0.0",
+    "@types/mdast": "^4.0.0",
+    "typescript": "^5.5.0"
+  }
+}

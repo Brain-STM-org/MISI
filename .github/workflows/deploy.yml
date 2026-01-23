@@ -27,7 +27,9 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: course/swe/deck/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            course/swe/deck/package-lock.json
 
       - name: Install Task
         uses: arduino/setup-task@v2

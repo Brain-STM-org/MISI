@@ -4,12 +4,34 @@ vars:
   SWE_DIR: course/swe
   LLM_DIR: course/llm
   PUBLIC_DIR: public_html
+  SITE_URL: https://brain-stm-org.github.io
+  BASE_URL: /MISI
 
 tasks:
   default:
     desc: Show available tasks
     cmds:
       - task --list
+
+  # =============================================================================
+  # Root Workspace Tasks
+  # =============================================================================
+
+  install:
+    desc: Install all workspace dependencies
+    cmds:
+      - npm install
+    sources:
+      - package.json
+      - package-lock.json
+      - packages/*/package.json
+      - course/*/book/package.json
+    generates:
+      - node_modules/**/*
+
+  # =============================================================================
+  # Slide Deck Tasks
+  # =============================================================================
 
   swe:deps:
     desc: Install dependencies for swe slide deck
@@ -61,26 +83,106 @@ tasks:
     cmds:
       - npm run build:all
 
+  # =============================================================================
+  # Book Template Tasks (internal - use course-specific tasks below)
+  # =============================================================================
+  # These tasks are parameterized by COURSE (swe, llm)
+  # Source: course/{{COURSE}}/book (imports shared package from packages/book-viewer)
+  # Deploy: {{BASE_URL}}/course/{{COURSE}}/book
+
+  _book:dev:
+    internal: true
+    desc: Start the book dev server
+    dir: 'course/{{.COURSE}}/book'
+    deps: [install]
+    cmds:
+      - npm run dev
+
+  _book:build:
+    internal: true
+    desc: Build the book for production
+    dir: 'course/{{.COURSE}}/book'
+    deps: [install]
+    env:
+      SITE_URL: '{{.SITE_URL}}'
+      BASE_PATH: '{{.BASE_URL}}/course/{{.COURSE}}/book'
+    cmds:
+      - npm run build
+
+  _book:copy:
+    internal: true
+    desc: Copy built book to public directory
+    cmds:
+      - mkdir -p {{.PUBLIC_DIR}}/course/{{.COURSE}}/book
+      - cp -aL course/{{.COURSE}}/book/dist/* {{.PUBLIC_DIR}}/course/{{.COURSE}}/book
+
+  # =============================================================================
+  # SWE Book Tasks
+  # =============================================================================
+
+  swe:book:dev:
+    desc: Start the SWE book dev server
+    cmds:
+      - task: _book:dev
+        vars: { COURSE: swe }
+
+  swe:book:build:
+    desc: Build the SWE book for production
+    cmds:
+      - task: _book:build
+        vars: { COURSE: swe }
+
+  swe:book:sync:
+    desc: Sync SWE book content from ../book to src/content/chapters
+    dir: 'course/swe/book'
+    cmds:
+      - node scripts/sync-content.mjs
+
+  # =============================================================================
+  # LLM Book Tasks (for future use)
+  # =============================================================================
+
+  llm:book:dev:
+    desc: Start the LLM book dev server
+    cmds:
+      - task: _book:dev
+        vars: { COURSE: llm }
+
+  llm:book:build:
+    desc: Build the LLM book for production
+    cmds:
+      - task: _book:build
+        vars: { COURSE: llm }
+
+  # =============================================================================
+  # Deployment Tasks
+  # =============================================================================
+
   prepare:site:
     desc: Prepare the public_html directory for deployment
     cmds:
       - rm -rf {{.PUBLIC_DIR}}
       - mkdir -p {{.PUBLIC_DIR}}
       - cp -aL ./docs/. {{.PUBLIC_DIR}}/
+      # SWE slides
       - mkdir -p {{.PUBLIC_DIR}}/course/swe/deck
       - cp -aL {{.SWE_DIR}}/??-*.md {{.SWE_DIR}}/*.html {{.SWE_DIR}}/README.md {{.SWE_DIR}}/SCHEDULE.md {{.PUBLIC_DIR}}/course/swe
       - cp -aL {{.SWE_DIR}}/deck/dist/* {{.PUBLIC_DIR}}/course/swe/deck
+      # SWE book
+      - task: _book:copy
+        vars: { COURSE: swe }
 
   deploy:local:
-    desc: Build slides and prepare site for deployment
+    desc: Build all content and prepare site for deployment
     cmds:
       - task: swe:build-slides
+      - task: swe:book:build
       - task: prepare:site
 
   serve:local:
     desc: Serves the complete web site locally
     cmds:
-      - npx serve -p 8081 public_html   
+      - npx serve -p 8081 public_html
 
   clean:
     desc: Clean build artifacts
@@ -88,3 +190,8 @@ tasks:
       - rm -rf {{.PUBLIC_DIR}}
       - rm -rf {{.SWE_DIR}}/deck/dist
       - rm -rf {{.LLM_DIR}}/deck/dist
+      - rm -rf {{.SWE_DIR}}/book/dist
+      - rm -rf {{.LLM_DIR}}/book/dist
+      - rm -rf node_modules
+      - rm -rf packages/*/node_modules
+      - rm -rf course/*/book/node_modules
