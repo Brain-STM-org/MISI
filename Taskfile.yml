@@ -167,12 +167,18 @@ tasks:
       - rm -rf {{.PUBLIC_DIR}}
       - mkdir -p {{.PUBLIC_DIR}}
       - cp -aL ./docs/. {{.PUBLIC_DIR}}/
+      # SWE course intro and resources
+      - mkdir -p {{.PUBLIC_DIR}}/course/swe
+      - cp {{.SWE_DIR}}/index.html {{.PUBLIC_DIR}}/course/swe/
       # SWE slides
       - mkdir -p {{.PUBLIC_DIR}}/course/swe/deck
       - cp -aL {{.SWE_DIR}}/deck/dist/* {{.PUBLIC_DIR}}/course/swe/deck
       # SWE book (built)
       - task: _book:copy
         vars: { COURSE: swe }
+      # LLM course intro and resources
+      - mkdir -p {{.PUBLIC_DIR}}/course/llm
+      - cp {{.LLM_DIR}}/index.html {{.PUBLIC_DIR}}/course/llm/
       # LLM slides
       - mkdir -p {{.PUBLIC_DIR}}/course/llm/deck
       - cp -aL {{.LLM_DIR}}/deck/dist/* {{.PUBLIC_DIR}}/course/llm/deck

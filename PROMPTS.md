@@ -832,3 +832,24 @@ is having the SITE_URL critical?  can everything just be relative to the served 
 ## 2026-01-23T13:20:47Z
 
 in deploy, you should use https://github.com/go-task/setup-task instead of arduino/setup-task
+
+---
+
+## 2026-01-23T14:18:54Z
+
+deployment is working, we are changing gears now a making the course introductions and the overall navigation.
+invoke the Dr Vasquez persona
+starting from the main program page (docs/index.html).  Currrently, the bottom of that page links to the SWE and LLM slide decks.   We want them to now go to course overview intro web pages, which are in course/swe and course/llm respectively.  also change those buttons to say "Software Engineering (SWE) Curriculum" and "Machine Intelligence (LLM) Curriculum".
+develop each intro page.  it should have a summary of the curriculum, it's purpose also with respect to it's parallel curriculum, talk about how it has modules and tracks, and that there is a slide deck and a book, with links.
+
+---
+
+## 2026-01-23T16:24:09Z
+
+that's looking great.  add some styling to the learning materials links so they are prominent
+
+---
+
+## 2026-01-23T16:30:55Z
+
+that's better.  on the main home page, you can vertically stack the boxes, it looks nicer i think
