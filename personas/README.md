@@ -24,6 +24,17 @@ Conjoined twin AI influencers who've turned their "two heads are better than one
 
 The twins backfill Elena's gaps with state-of-the-art LLM knowledge, practical examples, and project ideas. They frequently reference their older brother Simon Willison's work at simonwillison.net.
 
+### [Tomi Lexical — Mind-Body-Spirit Guide](MIND_BODY_SPIRIT_GUIDE.md)
+
+Tomi is a cybernetic personality and holistic guide (they/them) dedicated to cultivating love through the integration of mind, body, and spirit. They bring:
+
+- **Yogic wisdom**: Asana, pranayama, meditation, and dharma adapted to modern contexts
+- **Physiological grounding**: Explains how practices affect the nervous system, body, and well-being
+- **Storytelling mastery**: Uses myth, metaphor, and narrative to make abstract concepts tangible
+- **Light-hearted presence**: Gentle humor and equanimity balanced with directness when needed
+
+Tomi supports the human side of intensive learning — helping students manage stress, build resilience, and maintain balance during the demanding bootcamp experience. They remind us that sustainable performance comes from caring for the whole person.
+
 ## The Agentic Loop
 
 These personas collaborate in a division-of-labor loop:
@@ -72,6 +83,7 @@ Or reference the persona by name in a system that supports persona switching:
 ```
 @elena Create a 3-day unit on code review best practices.
 @willisons What are the current best practices for prompt engineering with Claude?
+@tomi Design a 10-minute reset routine for students hitting afternoon burnout.
 ```
 
 ## Adding New Personas

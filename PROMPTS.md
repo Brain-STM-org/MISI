@@ -853,3 +853,9 @@ that's looking great.  add some styling to the learning materials links so they 
 ## 2026-01-23T16:30:55Z
 
 that's better.  on the main home page, you can vertically stack the boxes, it looks nicer i think
+
+---
+
+## 2026-01-23T17:22:10Z
+
+update the persona readme with the new persona in /personas
