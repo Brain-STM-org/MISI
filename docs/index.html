@@ -104,53 +104,114 @@
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2rem;
-            border: 1px solid var(--border);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 2px solid;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
         }
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
 
         .card.students {
-            border-top: 4px solid #6366f1;
+            background: linear-gradient(135deg, #fafafe 0%, #eef2ff 100%);
+            border-color: #6366f1;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+        }
+
+        .card.students:hover {
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.25);
+            border-color: #4f46e5;
         }
 
         .card.stakeholders {
-            border-top: 4px solid #1e40af;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            border-color: #1e40af;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
+        }
+
+        .card.stakeholders:hover {
+            box-shadow: 0 12px 24px rgba(30, 64, 175, 0.25);
+            border-color: #1e3a8a;
+        }
+
+        .card .icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .card.students .icon {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .card.stakeholders .icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        .card .icon svg {
+            width: 28px;
+            height: 28px;
+            color: white;
         }
 
         .card h3 {
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
             color: var(--dark);
+            font-weight: 700;
         }
 
         .card .audience {
             font-size: 0.875rem;
-            color: var(--primary);
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card.students .audience {
+            color: #6366f1;
+        }
+
+        .card.stakeholders .audience {
+            color: #1e40af;
         }
 
         .card p {
             color: var(--gray);
             flex: 1;
+            line-height: 1.6;
         }
 
         .card .arrow {
-            margin-top: 1rem;
-            color: var(--primary);
-            font-weight: 600;
+            margin-top: 1.25rem;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card.students .arrow {
+            color: #4f46e5;
+        }
+
+        .card.stakeholders .arrow {
+            color: #1e40af;
+        }
+
+        .card:hover .arrow {
+            gap: 0.75rem;
         }
 
         .resource-link {
@@ -220,6 +281,14 @@
             .card {
                 padding: 1.5rem;
             }
+            .card .icon {
+                width: 48px;
+                height: 48px;
+            }
+            .card .icon svg {
+                width: 24px;
+                height: 24px;
+            }
         }
     </style>
 </head>
@@ -249,12 +318,27 @@
             <h2>Learn More</h2>
             <div class="card-grid">
                 <a href="sell-sheet/students.html" class="card students">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                            <path d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"></path>
+                        </svg>
+                    </div>
                     <p class="audience">For Students</p>
                     <h3>Ready to Build Something Real?</h3>
                     <p>Learn what you'll build, what you'll learn, and how the 4 weeks unfold. Find out if MISI is right for you.</p>
                     <span class="arrow">Explore the program &rarr;</span>
                 </a>
                 <a href="sell-sheet/stakeholders.html" class="card stakeholders">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
                     <p class="audience">For Parents &amp; Educators</p>
                     <h3>Program Details &amp; Structure</h3>
                     <p>Detailed information about curriculum, supervision, outcomes, and how MISI can fulfill senior project requirements.</p>

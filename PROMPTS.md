@@ -927,3 +927,9 @@ the mbs book does not flow on the page the same as trhe SWE book, it is undernea
 ## 2026-01-23T19:05:36Z
 
 update the main README.md with this mbs aspect of the program
+
+---
+
+## 2026-01-23T19:09:27Z
+
+on the main index.html, give the Learn More section buttons prominent styling like you did to the course pages a few prompts ago
