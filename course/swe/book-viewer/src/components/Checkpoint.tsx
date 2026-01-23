@@ -33,18 +33,17 @@ export function Checkpoint({ id, chapterSlug, items: itemsProp }: CheckpointProp
     >
       <div className="p-4">
         <div className="flex items-center gap-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-4">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span>Understanding Checkpoint</span>
         </div>
 
-        <p className="text-gray-700 dark:text-gray-300 mb-4 text-sm">
-          Check each item you feel confident you understand:
-        </p>
-
-        {/* Checklist items */}
-        <div className="checkpoint-items space-y-2 mb-6">
+        {/* Checklist items in fieldset */}
+        <fieldset className="checkpoint-items space-y-2 mb-6">
+          <legend className="text-gray-700 dark:text-gray-300 mb-4 text-sm">
+            Check each item you feel confident you understand:
+          </legend>
           {items.map((item, index) => (
             <label
               key={index}
@@ -60,35 +59,41 @@ export function Checkpoint({ id, chapterSlug, items: itemsProp }: CheckpointProp
               </span>
             </label>
           ))}
-        </div>
+        </fieldset>
 
-        {/* Progress indicator */}
+        {/* Progress indicator with progressbar role */}
         <div className="mb-4">
           <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
-            <span className="checkpoint-count">0 of {items.length} checked</span>
+            <span className="checkpoint-count" id={`checkpoint-progress-label-${id}`}>0 of {items.length} checked</span>
             <span className="checkpoint-complete-msg hidden text-emerald-600 dark:text-emerald-400">All items checked!</span>
           </div>
           <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
             <div
               className="checkpoint-progress h-full bg-emerald-500 rounded-full transition-all duration-300"
               style={{ width: '0%' }}
+              role="progressbar"
+              aria-valuenow={0}
+              aria-valuemin={0}
+              aria-valuemax={items.length}
+              aria-labelledby={`checkpoint-progress-label-${id}`}
             />
           </div>
         </div>
 
-        {/* Confidence rating */}
+        {/* Confidence rating as radiogroup */}
         <div className="mb-4">
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            Overall confidence in this section:
-          </p>
-          <div className="checkpoint-confidence flex gap-2">
-            <button data-confidence="1" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all" title="Not confident" />
-            <button data-confidence="2" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all" title="Slightly confident" />
-            <button data-confidence="3" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all" title="Somewhat confident" />
-            <button data-confidence="4" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all" title="Confident" />
-            <button data-confidence="5" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all" title="Very confident" />
+          <div
+            className="checkpoint-confidence flex gap-2"
+            role="radiogroup"
+            aria-label="Confidence level in this section"
+          >
+            <button data-confidence="1" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all focus-ring" role="radio" aria-checked="false" aria-label="Not confident" tabIndex={0} />
+            <button data-confidence="2" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all focus-ring" role="radio" aria-checked="false" aria-label="Slightly confident" tabIndex={-1} />
+            <button data-confidence="3" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all focus-ring" role="radio" aria-checked="false" aria-label="Somewhat confident" tabIndex={-1} />
+            <button data-confidence="4" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all focus-ring" role="radio" aria-checked="false" aria-label="Confident" tabIndex={-1} />
+            <button data-confidence="5" className="confidence-btn flex-1 h-8 rounded bg-gray-200 dark:bg-gray-700 opacity-50 hover:opacity-75 transition-all focus-ring" role="radio" aria-checked="false" aria-label="Very confident" tabIndex={-1} />
           </div>
-          <p className="checkpoint-confidence-label text-xs text-gray-500 dark:text-gray-400 mt-1 text-center hidden"></p>
+          <p className="checkpoint-confidence-label text-xs text-gray-500 dark:text-gray-400 mt-1 text-center hidden" aria-live="polite"></p>
         </div>
 
         {/* Submit button */}

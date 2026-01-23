@@ -73,6 +73,7 @@ export interface CheckpointProgress {
 export interface UserSettings {
   theme: 'light' | 'dark' | 'system';
   fontSize: 'sm' | 'md' | 'lg';
+  focusMode: boolean;
   showReadingTime: boolean;
   enableReviewPrompts: boolean;
 }

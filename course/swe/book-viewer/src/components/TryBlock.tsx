@@ -69,11 +69,17 @@ export function TryBlock({ children, hint: hintProp, hasHint }: TryBlockProps) {
         {hasHintContent && hint && (
           <div className="try-hint-section mt-4">
             <button
-              className="try-hint-btn text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+              className="try-hint-btn text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors focus-ring"
+              aria-expanded="false"
+              aria-controls="try-hint-content"
             >
-              💡 Need a hint?
+              <span aria-hidden="true">💡 </span>Need a hint?
             </button>
-            <div className="try-hint hidden p-3 bg-purple-100 dark:bg-purple-800/30 rounded-lg mt-2">
+            <div
+              id="try-hint-content"
+              className="try-hint hidden p-3 bg-purple-100 dark:bg-purple-800/30 rounded-lg mt-2"
+              aria-hidden="true"
+            >
               <div className="text-xs text-purple-600 dark:text-purple-400 mb-1 font-medium">Hint:</div>
               <div className="text-sm text-gray-700 dark:text-gray-300 prose prose-sm dark:prose-invert max-w-none">
                 {hint}

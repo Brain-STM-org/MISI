@@ -30,8 +30,9 @@ export function ConceptCard({ id, chapterSlug, children }: ConceptCardProps) {
             <span>Key Concept</span>
           </div>
           <button
-            className="concept-review-btn text-xs px-2 py-1 rounded transition-colors bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600"
+            className="concept-review-btn text-xs px-2 py-1 rounded transition-colors bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring"
             title="Mark as reviewed for spaced repetition"
+            aria-pressed="false"
           >
             Mark reviewed
           </button>

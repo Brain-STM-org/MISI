@@ -7,6 +7,7 @@ import { useStore } from '@nanostores/react';
 import { progressStore, reviewConcept } from '../lib/progress';
 import { isConceptDue, getNextInterval, calculateRetentionStrength } from '../lib/spaced-repetition';
 import { chapters } from '../lib/chapters';
+import { announce } from '../lib/a11y';
 
 interface ReviewItem {
   chapterSlug: string;
@@ -81,8 +82,10 @@ export default function ReviewSession() {
     if (currentIndex < dueItems.length - 1) {
       setCurrentIndex(i => i + 1);
       setShowAnswer(false);
+      announce(`Concept reviewed. Moving to concept ${currentIndex + 2} of ${dueItems.length}`);
     } else {
       setSessionComplete(true);
+      announce('Review session complete');
     }
   };
 
@@ -90,8 +93,10 @@ export default function ReviewSession() {
     if (currentIndex < dueItems.length - 1) {
       setCurrentIndex(i => i + 1);
       setShowAnswer(false);
+      announce(`Skipped. Moving to concept ${currentIndex + 2} of ${dueItems.length}`);
     } else {
       setSessionComplete(true);
+      announce('Review session complete');
     }
   };
 
@@ -156,16 +161,21 @@ export default function ReviewSession() {
 
   return (
     <div>
-      {/* Progress indicator */}
+      {/* Progress indicator with live region */}
       <div className="mb-6">
         <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
-          <span>Progress</span>
-          <span>{currentIndex + 1} of {dueItems.length}</span>
+          <span id="review-progress-label">Progress</span>
+          <span aria-live="polite">{currentIndex + 1} of {dueItems.length}</span>
         </div>
         <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
           <div
             className="h-full bg-purple-500 transition-all duration-300"
             style={{ width: `${((currentIndex) / dueItems.length) * 100}%` }}
+            role="progressbar"
+            aria-valuenow={currentIndex}
+            aria-valuemin={0}
+            aria-valuemax={dueItems.length}
+            aria-labelledby="review-progress-label"
           />
         </div>
       </div>

@@ -73,17 +73,17 @@ export default function BookmarksList() {
             </div>
 
             {/* Bookmarks in chapter */}
-            <div className="divide-y divide-gray-100 dark:divide-gray-700">
+            <ul className="divide-y divide-gray-100 dark:divide-gray-700" role="list" aria-label={`Bookmarks in ${chapter?.title || chapterSlug}`}>
               {chapterBookmarks.map((bookmark) => (
-                <div
+                <li
                   key={`${bookmark.chapterSlug}-${bookmark.headingSlug}`}
                   className="px-4 py-3 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50"
                 >
                   <a
                     href={`/chapters/${bookmark.chapterSlug}#${bookmark.headingSlug}`}
-                    className="flex-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                    className="flex-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus-ring rounded"
                   >
-                    <span className="text-gray-400 mr-2">#</span>
+                    <span className="text-gray-400 mr-2" aria-hidden="true">#</span>
                     {bookmark.headingText}
                   </a>
                   <div className="flex items-center gap-3">
@@ -92,17 +92,17 @@ export default function BookmarksList() {
                     </span>
                     <button
                       onClick={() => removeBookmark(bookmark.chapterSlug, bookmark.headingSlug)}
-                      className="text-gray-400 hover:text-red-500 transition-colors"
-                      title="Remove bookmark"
+                      className="text-gray-400 hover:text-red-500 transition-colors focus-ring rounded"
+                      aria-label={`Remove bookmark for ${bookmark.headingText}`}
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         );
       })}

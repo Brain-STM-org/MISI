@@ -12,6 +12,7 @@ const STORAGE_KEY = 'swe-book-progress';
 const defaultSettings: UserSettings = {
   theme: 'system',
   fontSize: 'md',
+  focusMode: false,
   showReadingTime: true,
   enableReviewPrompts: true,
 };

@@ -3,6 +3,7 @@
  * Opens with Cmd/Ctrl+K, searches across all chapters
  */
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { createFocusTrap, announce } from '../lib/a11y';
 
 interface SearchResult {
   slug: string;
@@ -36,6 +37,8 @@ export default function SearchModal({ isOpen, onClose }: Props) {
   const [loading, setLoading] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const cleanupFocusTrapRef = useRef<(() => void) | null>(null);
 
   // Load search index
   useEffect(() => {
@@ -51,13 +54,26 @@ export default function SearchModal({ isOpen, onClose }: Props) {
       });
   }, []);
 
-  // Focus input when modal opens
+  // Focus trap and input focus when modal opens
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
+    if (isOpen) {
       setQuery('');
       setResults([]);
       setSelectedIndex(0);
+
+      // Set up focus trap after a brief delay to ensure modal is rendered
+      const timer = setTimeout(() => {
+        if (modalRef.current) {
+          cleanupFocusTrapRef.current = createFocusTrap(modalRef.current);
+        }
+        inputRef.current?.focus();
+      }, 10);
+
+      return () => {
+        clearTimeout(timer);
+        cleanupFocusTrapRef.current?.();
+        cleanupFocusTrapRef.current = null;
+      };
     }
   }, [isOpen]);
 
@@ -117,8 +133,16 @@ export default function SearchModal({ isOpen, onClose }: Props) {
       }
     }
 
-    setResults(found.slice(0, 10)); // Limit to 10 results
+    const limitedResults = found.slice(0, 10); // Limit to 10 results
+    setResults(limitedResults);
     setSelectedIndex(0);
+
+    // Announce result count to screen readers
+    if (limitedResults.length === 0) {
+      announce(`No results found for ${q}`);
+    } else {
+      announce(`${limitedResults.length} result${limitedResults.length === 1 ? '' : 's'} found`);
+    }
   }, [searchIndex]);
 
   // Debounced search
@@ -179,16 +203,25 @@ export default function SearchModal({ isOpen, onClose }: Props) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Search chapters"
+    >
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
+        aria-hidden="true"
       />
 
       {/* Modal */}
       <div className="relative min-h-screen flex items-start justify-center pt-[15vh] px-4">
-        <div className="relative w-full max-w-xl bg-white dark:bg-gray-800 rounded-xl shadow-2xl">
+        <div
+          ref={modalRef}
+          className="relative w-full max-w-xl bg-white dark:bg-gray-800 rounded-xl shadow-2xl"
+        >
           {/* Search input */}
           <div className="flex items-center px-4 border-b border-gray-200 dark:border-gray-700">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,9 +241,14 @@ export default function SearchModal({ isOpen, onClose }: Props) {
           </div>
 
           {/* Results */}
-          <div ref={resultsRef} className="max-h-96 overflow-y-auto">
+          <div
+            ref={resultsRef}
+            className="max-h-96 overflow-y-auto"
+            role={results.length > 0 ? 'listbox' : undefined}
+            aria-label={results.length > 0 ? 'Search results' : undefined}
+          >
             {loading ? (
-              <div className="px-4 py-8 text-center text-gray-500">
+              <div className="px-4 py-8 text-center text-gray-500" role="status">
                 Loading search index...
               </div>
             ) : query.length < 2 ? (
@@ -218,7 +256,7 @@ export default function SearchModal({ isOpen, onClose }: Props) {
                 Type at least 2 characters to search
               </div>
             ) : results.length === 0 ? (
-              <div className="px-4 py-8 text-center text-gray-500">
+              <div className="px-4 py-8 text-center text-gray-500" role="status">
                 No results found for "{query}"
               </div>
             ) : (
@@ -226,6 +264,8 @@ export default function SearchModal({ isOpen, onClose }: Props) {
                 <button
                   key={`${result.slug}-${result.headingSlug || 'main'}`}
                   onClick={() => navigateToResult(result)}
+                  role="option"
+                  aria-selected={index === selectedIndex}
                   className={`w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
                     index === selectedIndex ? 'bg-blue-50 dark:bg-blue-900/30' : ''
                   }`}

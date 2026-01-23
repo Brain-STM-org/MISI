@@ -84,12 +84,18 @@ export function QuestionBlock({
                 Take a moment to think about your answer before revealing...
               </p>
               <button
-                className="question-reveal-btn px-4 py-2 bg-amber-100 dark:bg-amber-800/50 text-amber-700 dark:text-amber-300 rounded-lg hover:bg-amber-200 dark:hover:bg-amber-700/50 transition-colors text-sm font-medium"
+                className="question-reveal-btn px-4 py-2 bg-amber-100 dark:bg-amber-800/50 text-amber-700 dark:text-amber-300 rounded-lg hover:bg-amber-200 dark:hover:bg-amber-700/50 transition-colors text-sm font-medium focus-ring"
+                aria-expanded="false"
+                aria-controls={`question-answer-${id}`}
               >
                 Reveal Answer
               </button>
             </div>
-            <div className="question-answer hidden pt-3 border-t border-amber-200 dark:border-amber-700/50">
+            <div
+              id={`question-answer-${id}`}
+              className="question-answer hidden pt-3 border-t border-amber-200 dark:border-amber-700/50"
+              aria-hidden="true"
+            >
               <div className="text-sm text-amber-600 dark:text-amber-400 mb-2 font-medium">Answer:</div>
               <div className="text-gray-700 dark:text-gray-300 prose prose-sm dark:prose-invert max-w-none">
                 {answer}

@@ -40,6 +40,10 @@ const chapter = chapterSlug ? getChapter(chapterSlug) : undefined;
   </head>
 
   <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Skip links for keyboard navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#sidebar-nav" class="skip-link">Skip to navigation</a>
+
     <div class="flex min-h-screen">
       <!-- Sidebar -->
       <Sidebar currentSlug={chapterSlug} />
@@ -48,7 +52,7 @@ const chapter = chapterSlug ? getChapter(chapterSlug) : undefined;
       <div class="flex-1 flex flex-col lg:ml-72">
         <Header title={chapter?.title || title} chapter={chapter} />
 
-        <main class="flex-1 px-4 py-8 lg:px-8 max-w-4xl mx-auto w-full">
+        <main id="main-content" class="flex-1 px-4 py-8 lg:px-8 max-w-4xl mx-auto w-full" tabindex="-1">
           <slot />
         </main>
 
@@ -59,10 +63,51 @@ const chapter = chapterSlug ? getChapter(chapterSlug) : undefined;
       </div>
     </div>
 
-    <!-- Initialize progress tracking -->
+    <!-- Exit focus mode button (visible only in focus mode) -->
+    <button
+      id="exit-focus-mode"
+      class="focus-mode-exit fixed bottom-4 left-4 z-50 items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 rounded-full shadow-lg hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors focus-ring"
+      aria-label="Exit focus mode"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      <span class="text-sm font-medium">Exit Focus</span>
+    </button>
+
+    <!-- Initialize progress tracking and settings -->
     <script>
-      import { initProgress } from '../lib/progress';
+      import { initProgress, progressStore, updateSettings } from '../lib/progress';
+      import { announce } from '../lib/a11y';
+
       initProgress();
+
+      // Apply initial settings to body
+      function applySettings() {
+        const settings = progressStore.get().settings;
+
+        // Apply font size
+        document.body.classList.remove('font-size-sm', 'font-size-md', 'font-size-lg');
+        document.body.classList.add(`font-size-${settings.fontSize}`);
+
+        // Apply focus mode
+        if (settings.focusMode) {
+          document.body.classList.add('focus-mode');
+        } else {
+          document.body.classList.remove('focus-mode');
+        }
+      }
+
+      // Apply on load and subscribe to changes
+      applySettings();
+      progressStore.subscribe(applySettings);
+
+      // Exit focus mode button
+      const exitFocusBtn = document.getElementById('exit-focus-mode');
+      exitFocusBtn?.addEventListener('click', () => {
+        updateSettings({ focusMode: false });
+        announce('Focus mode disabled');
+      });
     </script>
   </body>
 </html>

@@ -5,6 +5,7 @@
 import { useState, useEffect } from 'react';
 import { useStore } from '@nanostores/react';
 import { progressStore, addBookmark, removeBookmark } from '../lib/progress';
+import { announce } from '../lib/a11y';
 
 interface Props {
   chapterSlug: string;
@@ -27,21 +28,24 @@ export default function BookmarkButton({ chapterSlug, headingSlug, headingText }
   const handleToggle = () => {
     if (isBookmarked) {
       removeBookmark(chapterSlug, headingSlug);
+      announce('Bookmark removed');
     } else {
       addBookmark(chapterSlug, headingSlug, headingText);
+      announce('Bookmark added');
     }
   };
 
   return (
     <button
       onClick={handleToggle}
-      className={`ml-2 p-1 rounded transition-colors ${
+      className={`ml-2 p-1 rounded transition-colors focus-ring ${
         isBookmarked
           ? 'text-yellow-500 hover:text-yellow-600'
           : 'text-gray-300 hover:text-gray-400 dark:text-gray-600 dark:hover:text-gray-500'
       }`}
       title={isBookmarked ? 'Remove bookmark' : 'Bookmark this section'}
-      aria-label={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
+      aria-label={isBookmarked ? `Remove bookmark from ${headingText}` : `Bookmark ${headingText}`}
+      aria-pressed={isBookmarked}
     >
       <svg
         className="w-5 h-5"

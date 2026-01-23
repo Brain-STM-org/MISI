@@ -71,16 +71,16 @@ Spaced repetition and review system.
 
 ### v1.3 — Polish & Accessibility
 
-**Status: Not Started**
+**Status: In Progress**
 
 Refinements and accessibility compliance.
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| Keyboard navigation | ⬜ Todo | Full keyboard support |
-| Screen reader support | ⬜ Todo | ARIA labels, semantic HTML |
-| Focus mode | ⬜ Todo | Hide navigation while reading |
-| Font size settings | ⬜ Todo | sm/md/lg options |
+| Keyboard navigation | ✅ Done | Tab navigation, skip links, roving tabindex, Escape to close |
+| Screen reader support | ✅ Done | ARIA labels, live regions, semantic HTML, announcements |
+| Focus mode | ✅ Done | F key or button toggle, hides sidebar/concept panel |
+| Font size settings | ✅ Done | sm/md/lg with mobile-responsive scaling |
 | Print stylesheet | ⬜ Todo | Clean printing |
 | Export/import progress | ⬜ Todo | JSON backup/restore |
 | Offline support (PWA) | ⬜ Todo | Service worker caching |

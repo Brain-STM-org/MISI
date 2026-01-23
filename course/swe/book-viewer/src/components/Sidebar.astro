@@ -49,7 +49,7 @@ const { currentSlug } = Astro.props;
     </div>
 
     <!-- Navigation -->
-    <nav class="flex-1 overflow-y-auto p-4">
+    <nav id="sidebar-nav" class="flex-1 overflow-y-auto p-4" aria-label="Chapter navigation">
       {tableOfContents.tiers.map((tier) => (
         <div class="mb-6">
           <h2 class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">
@@ -86,6 +86,31 @@ const { currentSlug } = Astro.props;
         </div>
       ))}
     </nav>
+
+    <!-- Font size (mobile) -->
+    <div class="p-4 border-t border-gray-200 dark:border-gray-700 lg:hidden">
+      <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Text Size</p>
+      <div class="flex gap-2" role="group" aria-label="Font size">
+        <button
+          id="mobile-font-sm"
+          class="mobile-font-btn flex-1 py-2 text-xs rounded-lg transition-colors text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring"
+          aria-label="Small font size"
+          aria-pressed="false"
+        >Small</button>
+        <button
+          id="mobile-font-md"
+          class="mobile-font-btn flex-1 py-2 text-sm rounded-lg transition-colors text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring"
+          aria-label="Medium font size"
+          aria-pressed="true"
+        >Medium</button>
+        <button
+          id="mobile-font-lg"
+          class="mobile-font-btn flex-1 py-2 text-base rounded-lg transition-colors text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring"
+          aria-label="Large font size"
+          aria-pressed="false"
+        >Large</button>
+      </div>
+    </div>
 
     <!-- Quick links -->
     <div class="p-4 border-t border-gray-200 dark:border-gray-700 space-y-1">
@@ -128,8 +153,10 @@ const { currentSlug } = Astro.props;
 <!-- Mobile sidebar toggle button -->
 <button
   id="sidebar-toggle"
-  class="fixed bottom-4 left-4 z-50 lg:hidden w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center"
-  aria-label="Toggle navigation"
+  class="fixed bottom-4 left-4 z-50 lg:hidden w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center focus-ring"
+  aria-label="Open navigation menu"
+  aria-expanded="false"
+  aria-controls="sidebar"
 >
   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -143,7 +170,8 @@ const { currentSlug } = Astro.props;
 ></div>
 
 <script>
-  import { progressStore, chaptersCompleted, courseProgress } from '../lib/progress';
+  import { progressStore, chaptersCompleted, courseProgress, updateSettings } from '../lib/progress';
+  import { announce } from '../lib/a11y';
 
   // Update progress display
   function updateProgressDisplay() {
@@ -204,13 +232,71 @@ const { currentSlug } = Astro.props;
   const overlay = document.getElementById('sidebar-overlay');
   const toggle = document.getElementById('sidebar-toggle');
 
-  toggle?.addEventListener('click', () => {
-    sidebar?.classList.toggle('-translate-x-full');
-    overlay?.classList.toggle('hidden');
-  });
+  function openSidebar() {
+    sidebar?.classList.remove('-translate-x-full');
+    overlay?.classList.remove('hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    toggle?.setAttribute('aria-label', 'Close navigation menu');
+  }
 
-  overlay?.addEventListener('click', () => {
+  function closeSidebar() {
     sidebar?.classList.add('-translate-x-full');
     overlay?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open navigation menu');
+    toggle?.focus();
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
   });
+
+  overlay?.addEventListener('click', closeSidebar);
+
+  // Close sidebar with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeSidebar();
+    }
+  });
+
+  // Mobile font size controls
+  const mobileFontBtns = document.querySelectorAll('.mobile-font-btn');
+  const fontLabels = { sm: 'Small', md: 'Medium', lg: 'Large' };
+
+  function updateMobileFontUI(size: 'sm' | 'md' | 'lg') {
+    mobileFontBtns.forEach((btn) => {
+      const btnSize = btn.id.replace('mobile-font-', '') as 'sm' | 'md' | 'lg';
+      const isActive = btnSize === size;
+      btn.setAttribute('aria-pressed', String(isActive));
+      if (isActive) {
+        btn.classList.add('bg-blue-100', 'dark:bg-blue-900/50', 'text-blue-700', 'dark:text-blue-300');
+        btn.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-400');
+      } else {
+        btn.classList.remove('bg-blue-100', 'dark:bg-blue-900/50', 'text-blue-700', 'dark:text-blue-300');
+        btn.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-400');
+      }
+    });
+  }
+
+  mobileFontBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const size = btn.id.replace('mobile-font-', '') as 'sm' | 'md' | 'lg';
+      updateSettings({ fontSize: size });
+      announce(`Font size: ${fontLabels[size]}`);
+    });
+  });
+
+  // Subscribe to settings changes for mobile font UI
+  progressStore.subscribe((progress) => {
+    updateMobileFontUI(progress.settings.fontSize);
+  });
+
+  // Initial state
+  updateMobileFontUI(progressStore.get().settings.fontSize);
 </script>

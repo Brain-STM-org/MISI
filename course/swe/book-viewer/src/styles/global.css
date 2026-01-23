@@ -135,6 +135,102 @@
 }
 
 @layer utilities {
+  /* Screen reader only - visually hidden but accessible */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Skip link - hidden until focused */
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9999;
+    width: auto;
+    height: auto;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    @apply bg-blue-600 text-white font-medium rounded-lg shadow-lg;
+  }
+
+  /* Focus visible ring for keyboard navigation */
+  .focus-ring {
+    @apply focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900;
+  }
+
+  /* Font size utilities - responsive with mobile consideration */
+  .font-size-sm {
+    --prose-font-size: 0.9375rem;    /* 15px */
+    --prose-line-height: 1.7;
+  }
+
+  .font-size-md {
+    --prose-font-size: 1.0625rem;    /* 17px - slightly larger than default for readability */
+    --prose-line-height: 1.75;
+  }
+
+  .font-size-lg {
+    --prose-font-size: 1.1875rem;    /* 19px */
+    --prose-line-height: 1.8;
+  }
+
+  /* Apply font size to prose content */
+  .font-size-sm .prose,
+  .font-size-md .prose,
+  .font-size-lg .prose {
+    font-size: var(--prose-font-size);
+    line-height: var(--prose-line-height);
+  }
+
+  /* Mobile: slightly smaller base but maintain ratios */
+  @media (max-width: 640px) {
+    .font-size-sm { --prose-font-size: 0.875rem; }    /* 14px */
+    .font-size-md { --prose-font-size: 1rem; }         /* 16px */
+    .font-size-lg { --prose-font-size: 1.125rem; }     /* 18px */
+  }
+
+  /* Focus mode - hide navigation elements */
+  .focus-mode #sidebar {
+    @apply -translate-x-full;
+  }
+
+  .focus-mode #sidebar-toggle {
+    @apply hidden;
+  }
+
+  .focus-mode .concept-review-sidebar {
+    @apply hidden;
+  }
+
+  /* Focus mode: expand content area */
+  .focus-mode .lg\:ml-72 {
+    margin-left: 0;
+  }
+
+  /* Focus mode: show exit button */
+  .focus-mode-exit {
+    @apply hidden;
+  }
+
+  .focus-mode .focus-mode-exit {
+    @apply flex;
+  }
+
   /* Animation utilities */
   .animate-fade-in {
     animation: fade-in 0.3s ease-out;

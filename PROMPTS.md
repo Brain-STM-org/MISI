@@ -567,3 +567,146 @@ do A and B
 ## 2026-01-23T00:35:17Z
 
 i staged it, go ahead and do one more review of the staging and untaged
+
+---
+
+## 2026-01-23T00:38:01Z
+
+i want to remove the inproperly committed .astro file as we have not pushed this yet.  can you remove them by rewriting git history?  
+
+---
+
+## 2026-01-23T00:51:10Z
+
+scan our plan and suggest the next aspect to work for this book
+
+---
+
+## 2026-01-23T00:51:52Z
+
+yes, thank your for suggesting a11y
+
+---
+
+## 2026-01-23T00:56:42Z
+
+Implement the following plan:
+
+# Accessibility (a11y) Implementation Plan
+
+## Overview
+Add keyboard navigation and screen reader support to the book-viewer (v1.3 milestone).
+
+## Implementation Phases
+
+### Phase 1: Foundation
+1. **Create `/src/lib/a11y.ts`** - Shared utilities
+   - `getFocusableElements(container)` - Get focusable children
+   - `createFocusTrap(container)` - Focus trap for modals
+   - `useRovingTabindex(container, selector)` - Arrow key navigation
+   - `announce(message)` - Screen reader announcements via live region
+
+2. **Add skip links** in `BookLayout.astro`
+   - "Skip to main content" and "Skip to navigation"
+   - Add `id="main-content"` to `<main>`, `id="sidebar-nav"` to `<nav>`
+
+3. **Add CSS utilities** to `global.css`
+   - `.sr-only` - Screen reader only class
+   - `.skip-link` - Skip link styling (hidden until focused)
+
+### Phase 2: Modal & Navigation
+4. **SearchModal.tsx**
+   - Add `role="dialog"`, `aria-modal="true"`, `aria-label`
+   - Add focus trap using `createFocusTrap()`
+   - Add `role="listbox"` on results, `role="option"` + `aria-selected` on items
+   - Announce result count to screen readers
+
+5. **Sidebar.astro**
+   - Add `aria-expanded` to mobile toggle button
+   - Add Escape key to close mobile sidebar
+   - Add `aria-label` to nav element
+
+### Phase 3: Interactive Components
+6. **QuestionBlock.tsx** + event handler in `[slug].astro`
+   - Add `aria-expanded` to reveal button
+   - Add `aria-hidden` to answer section, toggle on reveal
+   - Announce "Answer revealed"
+
+7. **TryBlock.tsx** + event handler in `[slug].astro`
+   - Add `aria-expanded` to hint button
+   - Add `aria-hidden` to hint section, toggle on reveal
+
+8. **Checkpoint.tsx** + event handler in `[slug].astro`
+   - Wrap checklist in `<fieldset>` with `<legend>`
+   - Add `role="progressbar"` with `aria-valuenow/min/max`
+   - Convert confidence buttons to `role="radiogroup"` with `role="radio"`
+   - Add roving tabindex for arrow key navigation
+   - Add `aria-label` to each confidence level
+
+9. **ConceptCard.tsx**
+   - Add `aria-pressed` to review button
+
+### Phase 4: Secondary Components
+10. **ConceptReviewSidebar.tsx**
+    - Change container to `<aside>` with `aria-label`
+    - Add `aria-expanded` to toggle button
+    - Add Escape key to close
+    - Add proper accordion pattern for concept list
+
+11. **BookmarkButton.tsx**
+    - Add `aria-pressed` state
+    - Add `focus-visible` ring styling
+    - Announce bookmark add/remove
+
+12. **ReviewSession.tsx**
+    - Add `role="progressbar"` to progress indicator
+    - Add live region for card transitions
+
+13. **BookmarksList.tsx**
+    - Add `role="list"` structure
+    - Improve remove button labels with context
+
+## Files to Modify
+
+| File | Changes |
+|------|---------|
+| `src/lib/a11y.ts` | NEW - accessibility utilities |
+| `src/styles/global.css` | Add `.sr-only`, `.skip-link` |
+| `src/layouts/BookLayout.astro` | Skip links, landmark IDs |
+| `src/components/SearchModal.tsx` | Dialog ARIA, focus trap, listbox |
+| `src/components/Sidebar.astro` | Mobile toggle a11y, escape key |
+| `src/components/QuestionBlock.tsx` | aria-expanded, aria-hidden |
+| `src/components/TryBlock.tsx` | aria-expanded, aria-hidden |
+| `src/components/Checkpoint.tsx` | Fieldset, radiogroup, progressbar |
+| `src/components/ConceptCard.tsx` | aria-pressed |
+| `src/components/ConceptReviewSidebar.tsx` | Aside, accordion pattern |
+| `src/components/BookmarkButton.tsx` | aria-pressed, focus ring |
+| `src/components/ReviewSession.tsx` | Progressbar, live region |
+| `src/components/BookmarksList.tsx` | List roles, button labels |
+| `src/pages/chapters/[slug].astro` | Update event handlers (lines 240-382) |
+
+## Verification
+
+### Manual Testing
+1. **Keyboard**: Tab through page, all elements reachable, logical order
+2. **Skip links**: Visible on focus, jump to correct targets
+3. **Search modal**: Focus trapped, Escape closes, arrows navigate results
+4. **Sidebar**: Mobile toggle works with keyboard, Escape closes
+5. **Interactive blocks**: Enter/Space activates, states announced
+
+### Screen Reader Testing (VoiceOver)
+1. Landmarks announced (main, nav, complementary)
+2. Button states announced (expanded, pressed, checked)
+3. Progress bars announce values
+4. Live regions announce dynamic changes
+
+### Automated Testing
+```bash
+npm run dev
+# Then in browser devtools:
+# - Run Lighthouse accessibility audit
+# - Install axe DevTools extension and scan
+```
+
+
+If you need specific details from before exiting plan mode (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/evan/.claude/projects/-Users-evan-brainstm-senior-internship/712ac4e8-5591-4022-9430-e0cc9f9584f6.jsonl

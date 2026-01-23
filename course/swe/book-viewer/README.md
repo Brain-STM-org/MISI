@@ -58,7 +58,8 @@ book-viewer/
 │   │   ├── types.ts
 │   │   ├── progress.ts   # localStorage-based progress tracking
 │   │   ├── chapters.ts   # Chapter metadata
-│   │   └── spaced-repetition.ts
+│   │   ├── spaced-repetition.ts
+│   │   └── a11y.ts       # Accessibility utilities
 │   ├── pages/            # Route pages
 │   │   ├── index.astro
 │   │   └── chapters/[slug].astro
@@ -106,6 +107,104 @@ Open your terminal and run `git status`. What do you see?
 You need to be in a git repository for this command to work.
 :::
 ```
+
+## Accessibility
+
+The viewer is designed to be accessible to all users, including those using keyboards and screen readers.
+
+### Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Move focus to next interactive element |
+| `Shift+Tab` | Move focus to previous element |
+| `Enter` / `Space` | Activate buttons, reveal answers |
+| `Escape` | Close modals and sidebars |
+| `Arrow keys` | Navigate within groups (search results, confidence ratings) |
+| `Cmd/Ctrl+K` | Open search |
+| `F` | Toggle focus mode |
+
+### Skip Links
+
+Press `Tab` at the top of any page to reveal skip links:
+- **Skip to main content** - Jump to the chapter content
+- **Skip to navigation** - Jump to the sidebar navigation
+
+### Screen Reader Support
+
+- **Landmarks**: Main content, navigation, and complementary regions are properly labeled
+- **Live regions**: Dynamic changes (answers revealed, bookmarks added, progress updates) are announced
+- **Button states**: Toggle buttons announce their current state (pressed, expanded, checked)
+- **Focus management**: Modals trap focus and restore it when closed
+
+### Component Accessibility
+
+| Component | Features |
+|-----------|----------|
+| `SearchModal` | Focus trap, listbox pattern, result announcements |
+| `QuestionBlock` | aria-expanded, answer announcements |
+| `TryBlock` | aria-expanded for hints |
+| `Checkpoint` | Fieldset/legend, radiogroup for confidence, progressbar |
+| `ConceptCard` | aria-pressed on review button |
+| `BookmarkButton` | aria-pressed, add/remove announcements |
+| `ConceptReviewSidebar` | Accordion pattern with aria-expanded |
+| `Sidebar` | Mobile toggle with aria-expanded, Escape to close |
+
+### Utilities
+
+The `src/lib/a11y.ts` module provides shared accessibility utilities:
+
+```typescript
+// Get all focusable elements within a container
+getFocusableElements(container: HTMLElement): HTMLElement[]
+
+// Create a focus trap for modals (returns cleanup function)
+createFocusTrap(container: HTMLElement): () => void
+
+// Set up arrow key navigation for element groups
+useRovingTabindex(container: HTMLElement, selector: string, options?): () => void
+
+// Announce messages to screen readers via live region
+announce(message: string, priority?: 'polite' | 'assertive'): void
+```
+
+### CSS Utilities
+
+```css
+.sr-only     /* Visually hidden but accessible to screen readers */
+.skip-link   /* Hidden until focused, for skip navigation */
+.focus-ring  /* Visible focus indicator for keyboard users */
+```
+
+## Reading Customization
+
+### Focus Mode
+
+Focus mode removes distractions for deep reading:
+- Hides the sidebar navigation
+- Hides the concept review panel
+- Expands content to full width
+
+**How to activate:**
+- Click the eye icon in the header
+- Press `F` on keyboard (when not in a text field)
+- Click "Exit Focus" button to return to normal view
+
+### Font Size
+
+Three font size options optimized for readability:
+
+| Size | Desktop | Mobile |
+|------|---------|--------|
+| Small | 15px | 14px |
+| Medium (default) | 17px | 16px |
+| Large | 19px | 18px |
+
+**How to change:**
+- Desktop: Click A buttons in the header (small/medium/large)
+- Mobile: Open sidebar, use "Text Size" buttons
+
+Settings persist across sessions via localStorage.
 
 ## Technology Stack
 
