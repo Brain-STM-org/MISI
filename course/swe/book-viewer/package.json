@@ -8,8 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "sync": "node scripts/sync-content.mjs",
-    "prebuild": "npm run sync",
-    "predev": "npm run sync"
+    "search-index": "node scripts/generate-search-index.mjs",
+    "prebuild": "npm run sync && npm run search-index",
+    "predev": "npm run sync && npm run search-index"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",

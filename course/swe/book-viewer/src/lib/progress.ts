@@ -4,7 +4,7 @@
  */
 
 import { atom, computed } from 'nanostores';
-import type { UserProgress, ChapterProgress, UserSettings, CheckpointProgress } from './types';
+import type { UserProgress, ChapterProgress, UserSettings, CheckpointProgress, Bookmark } from './types';
 
 const STORAGE_KEY = 'swe-book-progress';
 
@@ -19,6 +19,7 @@ const defaultSettings: UserSettings = {
 // Default progress state
 const defaultProgress: UserProgress = {
   chapters: {},
+  bookmarks: [],
   settings: defaultSettings,
 };
 
@@ -35,6 +36,7 @@ function loadProgress(): UserProgress {
       return {
         ...defaultProgress,
         ...parsed,
+        bookmarks: parsed.bookmarks || [],
         settings: { ...defaultSettings, ...parsed.settings },
       };
     }
@@ -210,6 +212,73 @@ export function updateSettings(updates: Partial<UserSettings>): void {
       ...updates,
     },
   });
+}
+
+/**
+ * Add a bookmark
+ */
+export function addBookmark(
+  chapterSlug: string,
+  headingSlug: string,
+  headingText: string,
+  note?: string
+): void {
+  const current = progressStore.get();
+  const bookmarks = current.bookmarks || [];
+
+  // Check if already bookmarked
+  const exists = bookmarks.some(
+    b => b.chapterSlug === chapterSlug && b.headingSlug === headingSlug
+  );
+  if (exists) return;
+
+  progressStore.set({
+    ...current,
+    bookmarks: [
+      ...bookmarks,
+      {
+        chapterSlug,
+        headingSlug,
+        headingText,
+        createdAt: new Date().toISOString(),
+        note,
+      },
+    ],
+  });
+}
+
+/**
+ * Remove a bookmark
+ */
+export function removeBookmark(chapterSlug: string, headingSlug: string): void {
+  const current = progressStore.get();
+  const bookmarks = current.bookmarks || [];
+
+  progressStore.set({
+    ...current,
+    bookmarks: bookmarks.filter(
+      b => !(b.chapterSlug === chapterSlug && b.headingSlug === headingSlug)
+    ),
+  });
+}
+
+/**
+ * Check if a section is bookmarked
+ */
+export function isBookmarked(chapterSlug: string, headingSlug: string): boolean {
+  const current = progressStore.get();
+  const bookmarks = current.bookmarks || [];
+  return bookmarks.some(
+    b => b.chapterSlug === chapterSlug && b.headingSlug === headingSlug
+  );
+}
+
+/**
+ * Get all bookmarks
+ */
+export function getBookmarks(): Bookmark[] {
+  const current = progressStore.get();
+  return current.bookmarks || [];
 }
 
 /**

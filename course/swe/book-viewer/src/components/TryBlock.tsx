@@ -3,16 +3,12 @@
  *
  * Pedagogical basis: Desirable difficulties (Bjork)
  * Some struggle during learning improves retention
- * Hints available but hidden to encourage initial attempt
  *
- * Usage in MDX:
- * <TryBlock>
- *   <div slot="exercise">Try running git status in your terminal.</div>
- *   <div slot="hint">Make sure you're in a git repository first.</div>
- * </TryBlock>
+ * Note: This component is rendered through MDX Content in Astro, so it
+ * cannot use React hooks directly. Interactivity is added via client-side script.
  */
 
-import { useState, type ReactNode, Children, isValidElement } from 'react';
+import { type ReactNode, Children, isValidElement } from 'react';
 
 interface TryBlockProps {
   children?: ReactNode;
@@ -43,7 +39,6 @@ function extractSlots(children: ReactNode): { exercise: ReactNode; hint: ReactNo
     }
   });
 
-  // If no exercise slot found, treat all children as exercise content
   if (!exercise && otherChildren.length > 0) {
     exercise = otherChildren;
   }
@@ -52,15 +47,12 @@ function extractSlots(children: ReactNode): { exercise: ReactNode; hint: ReactNo
 }
 
 export function TryBlock({ children, hint: hintProp, hasHint }: TryBlockProps) {
-  const [showHint, setShowHint] = useState(false);
-
-  // Extract exercise and hint from children or props
   const { exercise, hint: slotHint } = extractSlots(children);
   const hint = hintProp || slotHint;
   const hasHintContent = hint || hasHint === 'true' || hasHint === true;
 
   return (
-    <div className="my-6 border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-900/20 rounded-r-lg overflow-hidden">
+    <div className="try-block my-6 border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-900/20 rounded-r-lg overflow-hidden">
       <div className="p-4">
         <div className="flex items-center gap-2 text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,22 +67,18 @@ export function TryBlock({ children, hint: hintProp, hasHint }: TryBlockProps) {
         </div>
 
         {hasHintContent && hint && (
-          <div className="mt-4">
-            {!showHint ? (
-              <button
-                onClick={() => setShowHint(true)}
-                className="text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
-              >
-                💡 Need a hint?
-              </button>
-            ) : (
-              <div className="p-3 bg-purple-100 dark:bg-purple-800/30 rounded-lg">
-                <div className="text-xs text-purple-600 dark:text-purple-400 mb-1 font-medium">Hint:</div>
-                <div className="text-sm text-gray-700 dark:text-gray-300 prose prose-sm dark:prose-invert max-w-none">
-                  {hint}
-                </div>
+          <div className="try-hint-section mt-4">
+            <button
+              className="try-hint-btn text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+            >
+              💡 Need a hint?
+            </button>
+            <div className="try-hint hidden p-3 bg-purple-100 dark:bg-purple-800/30 rounded-lg mt-2">
+              <div className="text-xs text-purple-600 dark:text-purple-400 mb-1 font-medium">Hint:</div>
+              <div className="text-sm text-gray-700 dark:text-gray-300 prose prose-sm dark:prose-invert max-w-none">
+                {hint}
               </div>
-            )}
+            </div>
           </div>
         )}
       </div>

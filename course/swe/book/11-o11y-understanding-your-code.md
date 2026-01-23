@@ -64,7 +64,7 @@ Each line tells you:
 
 | Level | When to Use | Example |
 |-------|-------------|---------|
-| **DEBUG** | Detailed diagnostic info | "Query parameters: {user_id: 123}" |
+| **DEBUG** | Detailed diagnostic info | `"Query parameters: {user_id: 123}"` |
 | **INFO** | Normal operations | "User logged in" |
 | **WARN** | Potential problems | "Response time exceeding threshold" |
 | **ERROR** | Something failed | "Database connection lost" |

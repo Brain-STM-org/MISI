@@ -503,3 +503,67 @@ scan one more time
 ## 2026-01-22T22:06:06Z
 
 unstage and update .gitignore
+
+---
+
+## 2026-01-22T22:08:47Z
+
+let's start to work on v1.2   start with removing "A pedagogically-optimized" from the title, it sounds self-important.  Alvin, it's OK to speak up about aspects like that.  You are the social chair and think differently than theo and dr vasquez.   then continue through v1.2
+
+---
+
+## 2026-01-22T22:18:30Z
+
+let's start to work on v1.2   start with removing "A pedagogically-optimized" from the title, it sounds self-important.  Alvin, it's OK to speak up about aspects like that.  You are the social chair and think differently than theo and dr vasquez.   then continue through v1.2
+
+---
+
+## 2026-01-22T22:25:20Z
+
+let's start to work on v1.2   start with removing "A pedagogically-optimized" from the title, it sounds self-important.  Alvin, it's OK to speak up about aspects like that.  You are the social chair and think differently than theo and dr vasquez.   then continue through v1.2
+
+---
+
+## 2026-01-22T22:35:46Z
+
+npm run dev is failing 7:35:17 [200] /chapters/03-understanding-diffs 326ms
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+
+---
+
+## 2026-01-22T22:43:52Z
+
+I'm still seeing the issue?  is there any pre-flight compile and linting and static analysis we can do?
+
+---
+
+## 2026-01-22T23:52:38Z
+
+i'm still seeing react hook error 18:13:51 [200] /chapters/03-understanding-diffs 462ms
+Warning: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.   please review the code for react correctness
+
+---
+
+## 2026-01-23T00:30:07Z
+
+that fixed it, good job.  check for any files that are improperly staged or unstaged
+
+---
+
+## 2026-01-23T00:32:40Z
+
+do A and B
+
+---
+
+## 2026-01-23T00:35:17Z
+
+i staged it, go ahead and do one more review of the staging and untaged

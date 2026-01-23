@@ -4,6 +4,7 @@
  */
 import type { ChapterMeta } from '../lib/types';
 import { tierDescriptions } from '../lib/chapters';
+import SearchTrigger from './SearchTrigger';
 
 interface Props {
   title: string;
@@ -31,19 +32,22 @@ const { title, chapter } = Astro.props;
         <h1 class="text-xl font-semibold text-gray-900 dark:text-white">{title}</h1>
       </div>
 
-      {chapter && (
-        <div class="hidden sm:flex items-center gap-4">
+      <div class="flex items-center gap-3">
+        <!-- Search -->
+        <SearchTrigger client:only="react" />
+
+        {chapter && (
           <!-- Mark as complete button -->
           <button
             id="mark-complete-btn"
             data-chapter-slug={chapter.slug}
-            class="px-3 py-1.5 text-sm font-medium text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg transition-colors"
+            class="hidden sm:block px-3 py-1.5 text-sm font-medium text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg transition-colors"
           >
             <span class="complete-text">Mark complete</span>
             <span class="completed-text hidden">✓ Completed</span>
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
 
     <!-- Reading progress bar -->

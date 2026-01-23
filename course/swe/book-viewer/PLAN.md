@@ -54,18 +54,18 @@ Wire markdown content to pedagogical components.
 
 ### v1.2 — Enhanced Learning Features
 
-**Status: Not Started**
+**Status: Complete**
 
 Spaced repetition and review system.
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| Concept review sidebar | ⬜ Todo | Shows concepts from current chapter |
-| Spaced repetition prompts | ⬜ Todo | Surface due concepts on homepage |
-| Review session mode | ⬜ Todo | Dedicated review interface |
-| Search functionality | ⬜ Todo | Search across all chapters |
-| Reading time estimates | ⬜ Todo | Per-section estimates |
-| Bookmark/highlight system | ⬜ Todo | Personal annotations |
+| Search functionality | ✅ Done | Cmd/Ctrl+K, searches titles and content |
+| Concept review sidebar | ✅ Done | Floating button shows chapter concepts |
+| Spaced repetition prompts | ✅ Done | Homepage shows due concepts |
+| Review session mode | ✅ Done | `/review` page with flashcard-style interface |
+| Reading time estimates | ✅ Done | Per-chapter (per-section deemed overkill) |
+| Bookmark system | ✅ Done | Bookmark headings, view at `/bookmarks` |
 
 ---
 

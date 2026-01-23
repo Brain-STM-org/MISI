@@ -1,0 +1,23 @@
+---
+/**
+ * Bookmarks Page
+ * View and manage all saved bookmarks
+ */
+import BookLayout from '../layouts/BookLayout.astro';
+import BookmarksList from '../components/BookmarksList';
+---
+
+<BookLayout title="Bookmarks">
+  <div class="max-w-2xl mx-auto">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        Your Bookmarks
+      </h1>
+      <p class="text-gray-600 dark:text-gray-400">
+        Sections you've saved to revisit later
+      </p>
+    </header>
+
+    <BookmarksList client:only="react" />
+  </div>
+</BookLayout>

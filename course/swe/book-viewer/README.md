@@ -1,6 +1,6 @@
 # SWE Fundamentals Book Viewer
 
-A pedagogically-optimized web viewer for the SWE Fundamentals textbook.
+Interactive viewer for the SWE Fundamentals textbook.
 
 ## Pedagogical Features
 

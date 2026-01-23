@@ -4,6 +4,7 @@
  */
 import BookLayout from '../layouts/BookLayout.astro';
 import { tableOfContents, totalReadingTime, tierDescriptions } from '../lib/chapters';
+import ReviewPrompt from '../components/ReviewPrompt';
 ---
 
 <BookLayout title="Welcome">
@@ -14,7 +15,7 @@ import { tableOfContents, totalReadingTime, tierDescriptions } from '../lib/chap
         Software Engineering Fundamentals
       </h1>
       <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-        A pedagogically-optimized textbook for learning professional software engineering practices.
+        Learn the practical skills that make real developers effective.
       </p>
       <div class="mt-6 flex items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400">
         <span>16 chapters</span>
@@ -71,6 +72,9 @@ import { tableOfContents, totalReadingTime, tierDescriptions } from '../lib/chap
         </a>
       </div>
     </div>
+
+    <!-- Review prompt (shown when concepts are due) -->
+    <ReviewPrompt client:only="react" />
 
     <!-- Table of contents by tier -->
     <div class="space-y-8">

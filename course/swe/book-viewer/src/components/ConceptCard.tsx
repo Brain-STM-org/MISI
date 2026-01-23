@@ -3,11 +3,10 @@
  *
  * Pedagogical basis: Dual coding theory, spaced repetition
  * Key concepts are visually distinct and tracked for later review
+ *
+ * Note: This component is rendered through MDX Content in Astro, so it
+ * cannot use React hooks directly. State management is done via DOM/script.
  */
-
-import { useState, useEffect } from 'react';
-import { useStore } from '@nanostores/react';
-import { progressStore, reviewConcept } from '../lib/progress';
 
 interface ConceptCardProps {
   id: string;
@@ -16,20 +15,12 @@ interface ConceptCardProps {
 }
 
 export function ConceptCard({ id, chapterSlug, children }: ConceptCardProps) {
-  const progress = useStore(progressStore);
-  const [isReviewed, setIsReviewed] = useState(false);
-
-  useEffect(() => {
-    const reviews = progress.chapters[chapterSlug]?.conceptsReviewed?.[id];
-    setIsReviewed(reviews && reviews.length > 0);
-  }, [progress, chapterSlug, id]);
-
-  const handleMarkReviewed = () => {
-    reviewConcept(chapterSlug, id);
-  };
-
   return (
-    <div className="my-6 border-l-4 border-concept-border bg-concept-light dark:bg-concept-dark rounded-r-lg overflow-hidden">
+    <div
+      data-concept-id={id}
+      data-chapter-slug={chapterSlug}
+      className="concept-card my-6 border-l-4 border-concept-border bg-concept-light dark:bg-concept-dark rounded-r-lg overflow-hidden"
+    >
       <div className="p-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-300 mb-2">
@@ -39,15 +30,10 @@ export function ConceptCard({ id, chapterSlug, children }: ConceptCardProps) {
             <span>Key Concept</span>
           </div>
           <button
-            onClick={handleMarkReviewed}
-            className={`text-xs px-2 py-1 rounded transition-colors ${
-              isReviewed
-                ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-            title={isReviewed ? 'Reviewed' : 'Mark as reviewed for spaced repetition'}
+            className="concept-review-btn text-xs px-2 py-1 rounded transition-colors bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600"
+            title="Mark as reviewed for spaced repetition"
           >
-            {isReviewed ? '✓ Reviewed' : 'Mark reviewed'}
+            Mark reviewed
           </button>
         </div>
         <div className="text-gray-800 dark:text-gray-200 prose prose-sm dark:prose-invert max-w-none">

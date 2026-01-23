@@ -38,8 +38,17 @@ export interface Checkpoint {
  * User progress tracking
  * Based on spaced repetition and metacognition research
  */
+export interface Bookmark {
+  chapterSlug: string;
+  headingSlug: string;
+  headingText: string;
+  createdAt: string;
+  note?: string;
+}
+
 export interface UserProgress {
   chapters: Record<string, ChapterProgress>;
+  bookmarks: Bookmark[];
   settings: UserSettings;
   lastVisited?: string;
   startedAt?: string;

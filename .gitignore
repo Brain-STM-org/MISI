@@ -12,6 +12,7 @@ public_html/
 
 # Generated content (created by sync script)
 course/swe/book-viewer/src/content/chapters/
+course/swe/book-viewer/public/search-index.json
 
 # Temporary files
 *~
