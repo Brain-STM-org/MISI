@@ -859,3 +859,47 @@ that's better.  on the main home page, you can vertically stack the boxes, it lo
 ## 2026-01-23T17:22:10Z
 
 update the persona readme with the new persona in /personas
+
+---
+
+## 2026-01-23T17:30:00Z
+
+we are ready for another stage.  the princple that we are introducing swe and llm techniques is important, but we must balance our mind/body/spirit as we undertake this communion with the machine intelligence.  long times at the keyboard with intense cognitive load can impair health and capability.  in the yogic framework the limbs of yoga support each other to the goal of self-realization; for example asana and pranayama allows sitting for long mediation sessions.   practically, ergonomics is important; how long to sit, to use standing desk, to take eye breaks, to sleep well.  if we have stronger body we can have stronger mind.  if we can focus our thought, we can crystalize our ideas better and then clarify to the machine intelligence better.  engendering compassionate collaboration with our machine and human peers will advance us in our goals and focus on ethical behavior.   we also need to have practices of self-reflection and self-improvement which will advance our personal missions and will carry forth in our project management and other meta goals related to this program.
+
+with that said, we are going to introduce another "Ergonomic Mindfulness" track that we will lightly interweave with the program, with much for self-study.  however we will incorporate facilitators.  we will use our existing slide and book infrastructure, but for now we focus on the content.
+
+i summon Dr Elena Vazquez and Tomi Lexicalo to come forth and work on this together.  to start with, introduce yourself to each other and get settled. then we will enter an agentic loop where Tomi takes a turn and then Elena takes a turn, extended and improving based on their experience and purpose.   At first you will develop a plan and then you will develop an outline and then you will carefully craft the curriculum to fill outline.  If you both agree it is time to ask Evan (me) for help, you may pause your loop and ask.  Otherwise you may proceed for 50 iterations, then ask me for help
+
+---
+
+## 2026-01-23T17:51:14Z
+
+1. I like "Sustainable Developer" because it plays on the architectural and urban planning concepts of sustainable development, but is human focused.
+2. course/ is exactly correct.  let's do mind-body as the path so course/mind-body/
+3. 2 hours is good, we will support self-study and we will reinforce the ideas throughout the program.  you can include exercises that are easy to return to
+4. we have facilitators.  you can create a final module that is a facilitators guide, teaching to teach these and how to be a good teacher.  that feeds into our collaborative capabilities
+5. honestly the physicality matters the most, hackers often have bad physical habits and we are super-boosting these kids into computing
+
+---
+
+## 2026-01-23T18:00:12Z
+
+this is all great, it is easier to review if we maintain a ground truth so please write your drafts for all work to course/mind-body directory tree for all the appropriate files. you can then produce the rest of the modules.   this just gets the ideas out and as a human i will take time to review that entire draft corpus.  i can also ask others their thoughts.
+
+---
+
+## 2026-01-23T18:11:08Z
+
+ls cou
+
+---
+
+## 2026-01-23T18:12:19Z
+
+create tasks for building the book and update deploy.yml for github pages publication
+
+---
+
+## 2026-01-23T18:42:05Z
+
+we're going to rename the mind-body folder and related infrastructure to mbs (mind-body-spirit and it matches the other three-letter acronyms)

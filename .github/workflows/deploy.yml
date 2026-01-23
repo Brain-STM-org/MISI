@@ -30,6 +30,7 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             course/swe/deck/package-lock.json
+            course/llm/deck/package-lock.json
 
       - name: Install Task
         uses: go-task/setup-task@v1

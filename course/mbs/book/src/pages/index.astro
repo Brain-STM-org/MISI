@@ -1,0 +1,202 @@
+---
+/**
+ * Homepage - Course overview and chapter listing
+ */
+import BookLayout from '../layouts/BookLayout.astro';
+import { tableOfContents, totalReadingTime, tierDescriptions } from '../lib/chapters';
+import { ReviewPrompt } from '@repo/book-viewer/components';
+
+// URL helper for base path
+const base = import.meta.env.BASE_URL || '/';
+const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+const url = (path: string) => `${basePath}${path}`;
+---
+
+<BookLayout title="Welcome">
+  <div class="animate-fade-in">
+    <!-- Hero section -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        The Sustainable Developer
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Mind-body practices for sustainable high performance in intensive cognitive work.
+      </p>
+      <div class="mt-6 flex items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+        <span>7 modules</span>
+        <span>•</span>
+        <span>~{totalReadingTime} minutes total</span>
+        <span>•</span>
+        <span>2 tiers of content</span>
+      </div>
+    </div>
+
+    <!-- Quick start -->
+    <div class="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 mb-12">
+      <h2 class="text-lg font-semibold text-emerald-900 dark:text-emerald-100 mb-2">
+        Why This Matters
+      </h2>
+      <p class="text-emerald-800 dark:text-emerald-200 mb-4">
+        Your capacity is not fixed — it's cultivated. These practices support sustainable performance:
+      </p>
+      <ul class="space-y-2 text-emerald-700 dark:text-emerald-300 text-sm">
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Physical setup</strong> — Prevent strain before it starts</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Breath techniques</strong> — Manual override for your nervous system</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Movement practices</strong> — Clear mental fog and maintain mobility</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Work rhythms</strong> — Structure your day for sustainable focus</span>
+        </li>
+      </ul>
+      <div class="mt-6">
+        <a
+          href={url('/chapters/00-the-sustainable-developer')}
+          class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
+        >
+          Start Reading
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Review prompt (shown when concepts are due) -->
+    <ReviewPrompt client:only="react" />
+
+    <!-- Table of contents by tier -->
+    <div class="space-y-8">
+      {tableOfContents.tiers.map((tier) => (
+        <section>
+          <div class="mb-4">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+              Tier {tier.number}: {tier.title}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              {tierDescriptions[tier.number]}
+            </p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {tier.chapters.map((chapter) => (
+              <a
+                href={url(`/chapters/${chapter.slug}`)}
+                class="group block p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-600 hover:shadow-md transition-all"
+                data-chapter-card={chapter.slug}
+              >
+                <div class="flex items-start justify-between">
+                  <div>
+                    <span class="text-xs text-gray-400 dark:text-gray-500">
+                      Module {chapter.number}
+                    </span>
+                    <h3 class="font-semibold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                      {chapter.title}
+                    </h3>
+                  </div>
+                  <span class="text-xs text-gray-400 whitespace-nowrap ml-2">
+                    {chapter.estimatedMinutes} min
+                  </span>
+                </div>
+                <div class="mt-2 flex items-center gap-2">
+                  <div class="flex-1 h-1 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div
+                      class="h-full bg-emerald-500 rounded-full transition-all duration-300"
+                      data-chapter-progress={chapter.slug}
+                      style="width: 0%"
+                    />
+                  </div>
+                  <span
+                    class="text-xs text-gray-400"
+                    data-chapter-status={chapter.slug}
+                  />
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Core practices quick reference -->
+    <div class="mt-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        Core Practices Quick Reference
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-gray-200 mb-1">2-Minute Breath Reset</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Box breathing (4-4-4-4) for nervous system regulation. Use before work, when stuck, during breaks.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-gray-200 mb-1">5-Minute Desk Flow</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Seated movement sequence for physical maintenance. Do every 90 minutes of seated work.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-gray-200 mb-1">90-Minute Work Blocks</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Focused work followed by real breaks. Work with your biology, not against it.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-medium text-gray-800 dark:text-gray-200 mb-1">7-9 Hours Sleep</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Non-negotiable foundation. Everything else is undermined without adequate rest.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BookLayout>
+
+<script>
+  import { progressStore } from '@repo/book-viewer/lib';
+
+  // Update chapter cards with progress
+  function updateChapterCards() {
+    const progress = progressStore.get();
+
+    document.querySelectorAll('[data-chapter-progress]').forEach((el) => {
+      const slug = el.getAttribute('data-chapter-progress');
+      if (slug) {
+        const chapterProgress = progress.chapters[slug]?.readProgress || 0;
+        (el as HTMLElement).style.width = `${chapterProgress}%`;
+      }
+    });
+
+    document.querySelectorAll('[data-chapter-status]').forEach((el) => {
+      const slug = el.getAttribute('data-chapter-status');
+      if (slug) {
+        const chapter = progress.chapters[slug];
+        if (chapter?.completed) {
+          el.textContent = '✓';
+          el.classList.add('text-green-500');
+        } else if (chapter?.started) {
+          el.textContent = 'In progress';
+        }
+      }
+    });
+  }
+
+  progressStore.subscribe(updateChapterCards);
+  updateChapterCards();
+</script>

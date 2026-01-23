@@ -1,0 +1,310 @@
+---
+/**
+ * Sidebar navigation component
+ * Shows table of contents organized by tier with progress indicators
+ */
+import { tableOfContents, tierDescriptions } from '../lib/chapters';
+
+interface Props {
+  currentSlug?: string;
+}
+
+const { currentSlug } = Astro.props;
+
+// URL helper for base path
+const base = import.meta.env.BASE_URL || '/';
+const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+const url = (path: string) => `${basePath}${path}`;
+---
+
+<aside
+  id="sidebar"
+  class="fixed inset-y-0 left-0 z-40 w-72 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform -translate-x-full lg:translate-x-0 transition-transform duration-200"
+>
+  <div class="flex flex-col h-full">
+    <!-- Logo/Title -->
+    <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+      <a href={url('/')} class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-sm">SWE</span>
+        </div>
+        <div>
+          <h1 class="font-semibold text-gray-900 dark:text-white">SWE Fundamentals</h1>
+          <p class="text-xs text-gray-500 dark:text-gray-400">MISI Program</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Progress overview -->
+    <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex justify-between text-sm mb-2">
+        <span class="text-gray-600 dark:text-gray-400">Progress</span>
+        <span id="progress-percent" class="font-medium text-gray-900 dark:text-white">0%</span>
+      </div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div
+          id="progress-bar"
+          class="h-full bg-blue-600 rounded-full transition-all duration-300"
+          style="width: 0%"
+        ></div>
+      </div>
+      <p id="chapters-count" class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        0 of 16 chapters completed
+      </p>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="sidebar-nav" class="flex-1 overflow-y-auto p-4" aria-label="Chapter navigation">
+      {tableOfContents.tiers.map((tier) => (
+        <div class="mb-6">
+          <h2 class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">
+            Tier {tier.number}: {tier.title}
+          </h2>
+          <ul class="space-y-1">
+            {tier.chapters.map((chapter) => {
+              const isActive = chapter.slug === currentSlug;
+              return (
+                <li>
+                  <a
+                    href={url(`/chapters/${chapter.slug}`)}
+                    class:list={[
+                      'flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors',
+                      isActive
+                        ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700',
+                    ]}
+                    data-chapter-slug={chapter.slug}
+                  >
+                    <span
+                      class="w-5 h-5 flex items-center justify-center rounded-full text-xs font-medium bg-gray-200 dark:bg-gray-700"
+                      data-progress-indicator={chapter.slug}
+                    >
+                      {chapter.number}
+                    </span>
+                    <span class="flex-1 truncate">{chapter.title}</span>
+                    <span class="text-xs text-gray-400">{chapter.estimatedMinutes}m</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </nav>
+
+    <!-- Font size (mobile) -->
+    <div class="p-4 border-t border-gray-200 dark:border-gray-700 lg:hidden">
+      <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Text Size</p>
+      <div class="flex gap-2" role="group" aria-label="Font size">
+        <button
+          id="mobile-font-sm"
+          class="mobile-font-btn flex-1 py-2 text-xs rounded-lg transition-colors text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring"
+          aria-label="Small font size"
+          aria-pressed="false"
+        >Small</button>
+        <button
+          id="mobile-font-md"
+          class="mobile-font-btn flex-1 py-2 text-sm rounded-lg transition-colors text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring"
+          aria-label="Medium font size"
+          aria-pressed="true"
+        >Medium</button>
+        <button
+          id="mobile-font-lg"
+          class="mobile-font-btn flex-1 py-2 text-base rounded-lg transition-colors text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus-ring"
+          aria-label="Large font size"
+          aria-pressed="false"
+        >Large</button>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div class="p-4 border-t border-gray-200 dark:border-gray-700 space-y-1">
+      <a
+        href={url('/review')}
+        class="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Review Session</span>
+      </a>
+      <a
+        href={url('/bookmarks')}
+        class="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+        </svg>
+        <span>Bookmarks</span>
+        <span id="bookmark-count" class="ml-auto text-xs text-gray-400"></span>
+      </a>
+      <button
+        id="theme-toggle"
+        class="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+      >
+        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        <span class="dark:hidden">Dark mode</span>
+        <span class="hidden dark:inline">Light mode</span>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- Mobile sidebar toggle button -->
+<button
+  id="sidebar-toggle"
+  class="fixed bottom-4 left-4 z-50 lg:hidden w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center focus-ring"
+  aria-label="Open navigation menu"
+  aria-expanded="false"
+  aria-controls="sidebar"
+>
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
+
+<!-- Mobile sidebar overlay -->
+<div
+  id="sidebar-overlay"
+  class="fixed inset-0 bg-black/50 z-30 lg:hidden hidden"
+></div>
+
+<script>
+  import { progressStore, chaptersCompleted, createCourseProgress, updateSettings, announce } from '@repo/book-viewer/lib';
+
+  // Create course progress for 16 chapters
+  const courseProgress = createCourseProgress(16);
+
+  // Update progress display
+  function updateProgressDisplay() {
+    const progress = courseProgress.get();
+    const completed = chaptersCompleted.get();
+
+    const percentEl = document.getElementById('progress-percent');
+    const barEl = document.getElementById('progress-bar');
+    const countEl = document.getElementById('chapters-count');
+
+    if (percentEl) percentEl.textContent = `${progress}%`;
+    if (barEl) barEl.style.width = `${progress}%`;
+    if (countEl) countEl.textContent = `${completed} of 16 chapters completed`;
+
+    // Update individual chapter indicators
+    const userProgress = progressStore.get();
+    document.querySelectorAll('[data-progress-indicator]').forEach((el) => {
+      const slug = el.getAttribute('data-progress-indicator');
+      if (slug && userProgress.chapters[slug]?.completed) {
+        el.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+        el.classList.add('bg-green-500', 'text-white');
+        el.innerHTML = '\u2713';
+      }
+    });
+  }
+
+  // Subscribe to progress changes
+  progressStore.subscribe(updateProgressDisplay);
+  courseProgress.subscribe(updateProgressDisplay);
+  updateProgressDisplay();
+
+  // Update bookmark count
+  function updateBookmarkCount() {
+    const progress = progressStore.get();
+    const count = progress.bookmarks?.length || 0;
+    const countEl = document.getElementById('bookmark-count');
+    if (countEl) {
+      countEl.textContent = count > 0 ? String(count) : '';
+    }
+  }
+  progressStore.subscribe(updateBookmarkCount);
+  updateBookmarkCount();
+
+  // Theme toggle
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+
+    // Save to progress store
+    const current = progressStore.get();
+    progressStore.set({
+      ...current,
+      settings: { ...current.settings, theme: isDark ? 'dark' : 'light' },
+    });
+  });
+
+  // Mobile sidebar toggle
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const toggle = document.getElementById('sidebar-toggle');
+
+  function openSidebar() {
+    sidebar?.classList.remove('-translate-x-full');
+    overlay?.classList.remove('hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    toggle?.setAttribute('aria-label', 'Close navigation menu');
+  }
+
+  function closeSidebar() {
+    sidebar?.classList.add('-translate-x-full');
+    overlay?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open navigation menu');
+    toggle?.focus();
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  });
+
+  overlay?.addEventListener('click', closeSidebar);
+
+  // Close sidebar with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeSidebar();
+    }
+  });
+
+  // Mobile font size controls
+  const mobileFontBtns = document.querySelectorAll('.mobile-font-btn');
+  const fontLabels = { sm: 'Small', md: 'Medium', lg: 'Large' };
+
+  function updateMobileFontUI(size: 'sm' | 'md' | 'lg') {
+    mobileFontBtns.forEach((btn) => {
+      const btnSize = btn.id.replace('mobile-font-', '') as 'sm' | 'md' | 'lg';
+      const isActive = btnSize === size;
+      btn.setAttribute('aria-pressed', String(isActive));
+      if (isActive) {
+        btn.classList.add('bg-blue-100', 'dark:bg-blue-900/50', 'text-blue-700', 'dark:text-blue-300');
+        btn.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-400');
+      } else {
+        btn.classList.remove('bg-blue-100', 'dark:bg-blue-900/50', 'text-blue-700', 'dark:text-blue-300');
+        btn.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-400');
+      }
+    });
+  }
+
+  mobileFontBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const size = btn.id.replace('mobile-font-', '') as 'sm' | 'md' | 'lg';
+      updateSettings({ fontSize: size });
+      announce(`Font size: ${fontLabels[size]}`);
+    });
+  });
+
+  // Subscribe to settings changes for mobile font UI
+  progressStore.subscribe((progress) => {
+    updateMobileFontUI(progress.settings.fontSize);
+  });
+
+  // Initial state
+  updateMobileFontUI(progressStore.get().settings.fontSize);
+</script>

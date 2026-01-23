@@ -3,6 +3,7 @@ version: '3'
 vars:
   SWE_DIR: course/swe
   LLM_DIR: course/llm
+  MBS_DIR: course/mbs
   PUBLIC_DIR: public_html
 
 tasks:
@@ -158,6 +159,28 @@ tasks:
       - node scripts/sync-content.mjs
 
   # =============================================================================
+  # Mind-Body Book Tasks
+  # =============================================================================
+
+  mbs:book:dev:
+    desc: Start the Mind-Body book dev server
+    cmds:
+      - task: _book:dev
+        vars: { COURSE: mbs }
+
+  mbs:book:build:
+    desc: Build the Mind-Body book for production
+    cmds:
+      - task: _book:build
+        vars: { COURSE: mbs }
+
+  mbs:book:sync:
+    desc: Sync Mind-Body book content from book/ to src/content/chapters
+    dir: 'course/mbs/book'
+    cmds:
+      - node scripts/sync-content.mjs
+
+  # =============================================================================
   # Deployment Tasks
   # =============================================================================
 
@@ -185,6 +208,12 @@ tasks:
       # LLM book (built)
       - task: _book:copy
         vars: { COURSE: llm }
+      # Mind-Body course intro and resources
+      - mkdir -p {{.PUBLIC_DIR}}/course/mbs
+      - cp {{.MBS_DIR}}/index.html {{.PUBLIC_DIR}}/course/mbs/ || true
+      # Mind-Body book (built)
+      - task: _book:copy
+        vars: { COURSE: mbs }
 
   deploy:local:
     desc: Build all content and prepare site for deployment
@@ -193,6 +222,7 @@ tasks:
       - task: llm:build-slides
       - task: swe:book:build
       - task: llm:book:build
+      - task: mbs:book:build
       - task: prepare:site
 
   serve:local:
@@ -208,6 +238,7 @@ tasks:
       - rm -rf {{.LLM_DIR}}/deck/dist
       - rm -rf {{.SWE_DIR}}/book/dist
       - rm -rf {{.LLM_DIR}}/book/dist
+      - rm -rf {{.MBS_DIR}}/book/dist
       - rm -rf node_modules
       - rm -rf packages/*/node_modules
       - rm -rf course/*/book/node_modules
