@@ -933,3 +933,15 @@ update the main README.md with this mbs aspect of the program
 ## 2026-01-23T19:09:27Z
 
 on the main index.html, give the Learn More section buttons prominent styling like you did to the course pages a few prompts ago
+
+---
+
+## 2026-01-23T19:13:15Z
+
+add to the third paragraph of the "about the program" aspect about self-care of physical and mental to sustainabily advance 
+
+---
+
+## 2026-01-23T19:15:42Z
+
+keep the first sentence the way it was originally, then have a sentence after that contains the idea with one bolded idea
