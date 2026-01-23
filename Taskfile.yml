@@ -172,16 +172,14 @@ tasks:
       - cp -aL ./docs/. {{.PUBLIC_DIR}}/
       # SWE slides
       - mkdir -p {{.PUBLIC_DIR}}/course/swe/deck
-      - cp -aL {{.SWE_DIR}}/??-*.md {{.SWE_DIR}}/*.html {{.SWE_DIR}}/README.md {{.SWE_DIR}}/SCHEDULE.md {{.PUBLIC_DIR}}/course/swe
       - cp -aL {{.SWE_DIR}}/deck/dist/* {{.PUBLIC_DIR}}/course/swe/deck
-      # SWE book
+      # SWE book (built)
       - task: _book:copy
         vars: { COURSE: swe }
       # LLM slides
       - mkdir -p {{.PUBLIC_DIR}}/course/llm/deck
-      - cp -aL {{.LLM_DIR}}/??-*.md {{.LLM_DIR}}/*.html {{.LLM_DIR}}/README.md {{.PUBLIC_DIR}}/course/llm
       - cp -aL {{.LLM_DIR}}/deck/dist/* {{.PUBLIC_DIR}}/course/llm/deck
-      # LLM book
+      # LLM book (built)
       - task: _book:copy
         vars: { COURSE: llm }
 

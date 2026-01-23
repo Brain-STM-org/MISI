@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Sync content from ../ (course/llm/) to src/content/chapters/
+ * Sync content from ../book/ to src/content/chapters/
  *
  * This script:
- * 1. Reads markdown files from the LLM course folder
+ * 1. Reads markdown files from the book folder
  * 2. Adds necessary frontmatter for Astro content collections
  * 3. Renames to .mdx for component support
  * 4. Writes to src/content/chapters/
@@ -15,8 +15,8 @@ import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { join, basename, extname } from 'node:path';
 import { existsSync } from 'node:fs';
 
-// Source is the LLM course folder (parent of this book project)
-const BOOK_DIR = join(process.cwd(), '..');
+// Source is the book folder (sibling to this project)
+const BOOK_DIR = join(process.cwd(), '..', 'book');
 const CONTENT_DIR = join(process.cwd(), 'src', 'content', 'chapters');
 
 // Chapter metadata for LLM Fundamentals

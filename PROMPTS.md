@@ -794,3 +794,21 @@ great first draft of structure, validate the git staging and check the deploy.ym
 ## 2026-01-23T03:39:58Z
 
 it looks like we are missing building the llm slides in the taskfile
+
+---
+
+## 2026-01-23T12:30:04Z
+
+review the task prepare:site  it is not installing the slides correctly
+
+---
+
+## 2026-01-23T12:35:02Z
+
+compare the course/swe/deck and course/llm/deck directories.  i think the llm directory has duplicate markdown files that need cleaned up.  then I think you need to fix the prepare:site task aspect of copying out out course/swe and course/llm for this.  if you disagree, let me know
+
+---
+
+## 2026-01-23T12:40:07Z
+
+i like the swe structure, so please clean up the organization of the llm folder.   we will only deploy the built books.  we can include links to the raw markdown for those who need it (not everywhere, just some reference in the documentation.
